@@ -5,6 +5,19 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "assets.axieinfinity.com",
+      },
+      {
+        protocol: "https",
+        hostname: "axiecdn.axieinfinity.com",
+      },
+    ],
+  },
+};
 
 export default config;
