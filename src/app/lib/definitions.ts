@@ -15,9 +15,11 @@ export type Team = {
   id: string;
   name: string;
   owner: ClientID;
-  fighterIDs: [number, number, number];
+  fighterIDs: FighterIDs;
   index: number;
 };
+
+export type FighterIDs = [number, number, number];
 
 type ClientID = string;
 
@@ -34,7 +36,7 @@ export type Leaderboard = {
   };
 };
 
-type Player = {
+export type Player = {
   clientID: ClientID;
   name: string;
   elo: number;
