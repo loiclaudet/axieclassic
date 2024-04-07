@@ -6,10 +6,12 @@ export type Battle = {
   uuid: string;
   clientID: ClientID;
   winner: ClientID;
-  pvpType: "tournament" | "arena";
+  pvpType: PvpType;
   team: [Team, Team];
   createdAt: string;
 };
+
+export type PvpType = "tournament" | "arena" | "colosseum";
 
 export type Team = {
   id: string;
@@ -41,4 +43,9 @@ export type Player = {
   name: string;
   elo: number;
   rank: number;
+};
+
+export type APIOptions = {
+  limit?: number;
+  offset?: number;
 };

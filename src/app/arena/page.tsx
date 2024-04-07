@@ -3,7 +3,7 @@ import Player from "~/app/ui/player";
 
 async function getLeaderboard() {
   const response = await fetch(
-    `https://axie-classic.skymavis.com/v1/leaderboards?offset=0&limit=10`,
+    `https://axie-classic.skymavis.com/v1/leaderboards?offset=0&limit=50`,
   );
 
   const data = (await response.json()) as Leaderboard;
@@ -16,6 +16,7 @@ export default async function ArenaPage() {
   return (
     <main>
       arena!
+      <hr />
       <hr />
       <div className="flex flex-col">
         {leaderboard._items.map((player) => (
