@@ -1,7 +1,7 @@
-import type { Battle, FighterIDs, PvpType } from "~/app/lib/definitions";
-import Image from "next/image";
+import type { Battle, PvpType } from "~/app/lib/definitions";
 import { getBattles } from "~/app/lib/data";
 import Link from "next/link";
+import { Fighters } from "~/app/ui/fighters";
 
 type BattlesProps = {
   clientID: string;
@@ -11,9 +11,14 @@ export const Battles = async ({ clientID }: BattlesProps) => {
   const battles = await getBattles(clientID, { limit: 10 });
 
   return (
-    <ul className="flex flex-col">
-      {battles.items.map((battle) => (
-        <Battle key={battle.uuid} battle={battle} />
+    <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
+      {battles.items.map((battle, index) => (
+        <li
+          key={battle.uuid}
+          className={`${index % 2 === 0 ? "bg-gray-800" : "bg-gray-950"}`}
+        >
+          <Battle battle={battle} />
+        </li>
       ))}
     </ul>
   );
@@ -33,7 +38,7 @@ async function Battle({ battle }: BattleProps) {
   const durationFromNow = calculateDurationFromNow(createdAt);
 
   return (
-    <li className="flex">
+    <div className="flex">
       <Fighters fighterIDs={playerFighterIDs} />
       <div className="flex flex-col items-center">
         <BattleChip pvpType={pvpType} />
@@ -54,10 +59,10 @@ async function Battle({ battle }: BattleProps) {
         </a>
       </div>
       <Fighters fighterIDs={opponentFighterIDs} />
-      <button className="self-center rounded border border-black p-1">
+      <button className="self-center rounded border border-gray-600 p-1">
         <Link href={`/profile/${opponentID}`}>👀</Link>
       </button>
-    </li>
+    </div>
   );
 }
 
@@ -72,33 +77,6 @@ const Duration = ({ durationFromNow }: { durationFromNow: number }) => (
     )}
     &nbsp;ago
   </span>
-);
-
-type FightersProps = {
-  fighterIDs: FighterIDs;
-};
-
-const Fighters = ({ fighterIDs }: FightersProps) => (
-  <ul className="flex">
-    {fighterIDs.map((fighterID) => (
-      <li key={fighterID}>
-        <a
-          href={`https://app.axieinfinity.com/marketplace/axies/${fighterID}/`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            key={fighterID}
-            width={150}
-            height={100}
-            className="object-contain"
-            alt={`Axie #${fighterID}`}
-            src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
-          />
-        </a>
-      </li>
-    ))}
-  </ul>
 );
 
 type BattleChipProps = {

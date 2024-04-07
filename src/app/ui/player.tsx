@@ -1,9 +1,9 @@
-import Image from "next/image";
 import type { Player } from "~/app/lib/definitions";
 import { Suspense } from "react";
 import Link from "next/link";
 import { TeamSkeleton } from "~/app/ui/skeletons";
 import { getBattles } from "~/app/lib/data";
+import { Fighters } from "./fighters";
 // clientID exemple: 0xbfdc8693192d5b445e30a840a040ec8d87bc2ade
 
 type PlayerProps = {
@@ -14,12 +14,16 @@ export default function Player({ player }: PlayerProps) {
   const { name, elo, rank, clientID } = player;
   return (
     <div className="flex">
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2 p-4">
         <Link href={`/profile/${clientID}`}>
-          <h2>{name}</h2>
+          <h2 className="line-clamp-2 w-72 text-lg leading-6 text-[#EDEDED] hover:underline">
+            {name}
+          </h2>
         </Link>
-        <p>elo: {elo}</p>
-        <p>rank: {rank}</p>
+        <div className="flex gap-4">
+          <span>#{rank}</span>
+          <span>🏆 {elo}</span>
+        </div>
       </div>
       <Suspense fallback={<TeamSkeleton />}>
         <Team clientID={clientID} />
@@ -48,18 +52,5 @@ async function Team({ clientID }: TeamProps) {
     return <p>no team</p>;
   }
 
-  return (
-    <div className="flex">
-      {lastBattleFighterIDs.map((fighterID) => (
-        <Image
-          key={fighterID}
-          width={150}
-          height={100}
-          className="object-contain"
-          alt={`Axie #${fighterID}`}
-          src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
-        />
-      ))}
-    </div>
-  );
+  return <Fighters fighterIDs={lastBattleFighterIDs} />;
 }
