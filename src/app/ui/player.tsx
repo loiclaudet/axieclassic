@@ -4,7 +4,6 @@ import Link from "next/link";
 import { TeamSkeleton } from "~/app/ui/skeletons";
 import { getBattles } from "~/app/lib/data";
 import { Fighters } from "./fighters";
-// clientID exemple: 0xbfdc8693192d5b445e30a840a040ec8d87bc2ade
 
 type PlayerProps = {
   player: Player;
