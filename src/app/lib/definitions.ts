@@ -49,3 +49,9 @@ export type APIOptions = {
   limit?: number;
   offset?: number;
 };
+
+export type APIError = {
+  error: boolean;
+  status: number;
+  message: string;
+};

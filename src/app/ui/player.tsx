@@ -21,7 +21,10 @@ export default function Player({ player }: PlayerProps) {
         </Link>
         <div className="flex gap-4">
           <span>#{rank}</span>
-          <span>🏆 {elo}</span>
+          <div className="flex items-center gap-1">
+            <span className="text-xs">🏆</span>
+            <span>{elo}</span>
+          </div>
         </div>
       </div>
       <Suspense fallback={<TeamSkeleton />}>
@@ -37,7 +40,12 @@ type TeamProps = {
 
 async function Team({ clientID }: TeamProps) {
   const battles = await getBattles(clientID, { limit: 1 });
-  const lastBattle = battles?.items?.[0];
+
+  if ("error" in battles) {
+    return <p>{battles.message}</p>;
+  }
+
+  const lastBattle = battles.items[0];
 
   if (!lastBattle) {
     return <p>no battles</p>;

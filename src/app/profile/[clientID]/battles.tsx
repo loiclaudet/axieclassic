@@ -10,6 +10,10 @@ type BattlesProps = {
 export const Battles = async ({ clientID }: BattlesProps) => {
   const battles = await getBattles(clientID, { limit: 10 });
 
+  if ("error" in battles) {
+    return <p>{battles.message}</p>;
+  }
+
   return (
     <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
       {battles.items.map((battle, index) => (
