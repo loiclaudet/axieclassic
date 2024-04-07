@@ -60,7 +60,9 @@ async function Battle({ battle }: BattleProps) {
       </div>
       <Fighters fighterIDs={opponentFighterIDs} />
       <button className="self-center rounded border border-gray-600 p-1">
-        <Link href={`/profile/${opponentID}`}>👀</Link>
+        <Link prefetch={false} href={`/profile/${opponentID}`}>
+          👀
+        </Link>
       </button>
     </div>
   );
