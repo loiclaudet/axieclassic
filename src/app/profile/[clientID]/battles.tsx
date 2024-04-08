@@ -1,18 +1,19 @@
+import Link from "next/link";
+import Image from "next/image";
 import type { Battle, PvpType } from "~/app/lib/definitions";
 import { getBattles } from "~/app/lib/data";
-import Link from "next/link";
 import { Fighters } from "~/app/ui/fighters";
-import Image from "next/image";
+import { BATTLE_LIMIT } from "~/app/lib/constant";
 
 type BattlesProps = {
   clientID: string;
 };
 
 export const Battles = async ({ clientID }: BattlesProps) => {
-  const battles = await getBattles(clientID, { limit: 10 });
+  const battles = await getBattles(clientID, { limit: BATTLE_LIMIT });
 
   if ("error" in battles) {
-    return <p>{battles.message}</p>;
+    return <p className="flex-grow text-center">{battles.message}</p>;
   }
 
   return (

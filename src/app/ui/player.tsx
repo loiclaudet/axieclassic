@@ -42,13 +42,13 @@ async function Team({ clientID }: TeamProps) {
   const battles = await getBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
-    return <p>{battles.message}</p>;
+    return <p className="flex-grow text-center">{battles.message}</p>;
   }
 
   const lastBattle = battles.items[0];
 
   if (!lastBattle) {
-    return <p>no battles</p>;
+    return <p className="flex-grow text-center">no battles</p>;
   }
 
   const lastBattleFighterIDs = lastBattle.team.find(
