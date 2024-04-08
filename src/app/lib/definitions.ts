@@ -11,7 +11,7 @@ export type Battle = {
   createdAt: string;
 };
 
-export type PvpType = "tournament" | "arena" | "colosseum";
+export type PvpType = "tournament" | "arena" | "colosseum" | "challenge";
 
 export type Team = {
   id: string;

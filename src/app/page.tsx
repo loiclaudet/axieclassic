@@ -5,7 +5,7 @@ export default async function ArenaPage() {
   const leaderboard = await getLeaderboard();
 
   return (
-    <main className="col-start-2 py-4">
+    <main className="col-start-2 px-2 py-4 lg:px-0">
       <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
         {leaderboard._items.map((player, index) => (
           <li

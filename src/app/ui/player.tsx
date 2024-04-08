@@ -12,7 +12,7 @@ type PlayerProps = {
 export default function Player({ player }: PlayerProps) {
   const { name, elo, rank, clientID } = player;
   return (
-    <div className="flex">
+    <div className="flex flex-col items-center sm:flex-row">
       <div className="flex flex-col gap-2 p-4">
         <Link prefetch={false} href={`/profile/${clientID}`}>
           <h2 className="line-clamp-2 w-72 text-lg leading-6 text-[#EDEDED] hover:underline">

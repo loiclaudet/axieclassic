@@ -4,10 +4,10 @@ import { Battles } from "~/app/profile/[clientID]/battles";
 export default function Page({ params }: { params: { clientID: string } }) {
   const { clientID } = params;
   return (
-    <div>
+    <main className="py-4">
       <Suspense fallback={<p>loading battles...</p>}>
         <Battles clientID={clientID} />
       </Suspense>
-    </div>
+    </main>
   );
 }

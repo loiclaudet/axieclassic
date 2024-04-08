@@ -5,8 +5,8 @@ export function TeamSkeleton() {
       {new Array(3).fill(null).map((_, i) => (
         <Image
           key={i}
-          width={150}
-          height={100}
+          width={200}
+          height={150}
           className="object-contain"
           alt={`Axie placeholder`}
           src={`/placeholder.png`}

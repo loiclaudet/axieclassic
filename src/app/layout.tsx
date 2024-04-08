@@ -1,10 +1,10 @@
 import { Analytics } from "@vercel/analytics/react";
 import "~/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import { Sidenav } from "./sidenav";
 
-const inter = Inter({
+const inter = Work_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${inter.variable} grid grid-cols-[1fr_auto_1fr] overscroll-y-none bg-gray-950 text-[#A0A0A0]`}
+        className={`font-sans tracking-tight ${inter.variable} spac overscroll-y-none  bg-gray-950 text-[#A0A0A0] lg:grid lg:grid-cols-[1fr_auto_1fr]`}
       >
         <Sidenav />
         {children}

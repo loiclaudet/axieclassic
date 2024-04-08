@@ -3,8 +3,9 @@ import type { FighterIDs } from "~/app/lib/definitions";
 
 type FightersProps = {
   fighterIDs: FighterIDs;
+  lookRight?: boolean;
 };
-export const Fighters = ({ fighterIDs }: FightersProps) => (
+export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
   <ul className="flex">
     {fighterIDs.map((fighterID) => (
       <li
@@ -18,9 +19,9 @@ export const Fighters = ({ fighterIDs }: FightersProps) => (
         >
           <Image
             key={fighterID}
-            width={150}
-            height={100}
-            className="object-contain"
+            width={200}
+            height={150}
+            className={`object-contain ${lookRight ? "scale-x-[-1] transform" : ""}`}
             alt={`Axie #${fighterID}`}
             src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
           />

@@ -2,6 +2,7 @@ import type { Battle, PvpType } from "~/app/lib/definitions";
 import { getBattles } from "~/app/lib/data";
 import Link from "next/link";
 import { Fighters } from "~/app/ui/fighters";
+import Image from "next/image";
 
 type BattlesProps = {
   clientID: string;
@@ -42,30 +43,43 @@ async function Battle({ battle }: BattleProps) {
   const durationFromNow = calculateDurationFromNow(createdAt);
 
   return (
-    <div className="flex">
-      <Fighters fighterIDs={playerFighterIDs} />
-      <div className="flex flex-col items-center">
-        <BattleChip pvpType={pvpType} />
+    <div className="flex flex-col items-center p-2 sm:flex-row">
+      <Fighters lookRight fighterIDs={playerFighterIDs} />
+      <div className="flex flex-row items-center gap-5 sm:w-28 sm:flex-col sm:gap-2">
+        <Badge variant={badgeVariantByPvpType(pvpType)} subtle>
+          {pvpType}
+        </Badge>
         <span
           className="text-lg font-bold"
-          style={{ color: isDraw ? "gray" : isPlayerWinner ? "green" : "red" }}
+          style={{
+            color: isDraw ? "gray" : isPlayerWinner ? "limegreen" : "red",
+          }}
         >
           {isDraw ? "draw" : isPlayerWinner ? "won" : "lost"}
         </span>
-        <Duration durationFromNow={durationFromNow} />
-        <a
-          className="text-blue-500 underline"
-          href={`https://cdn.axieinfinity.com/game/deeplink.html?f=rpl&q=${uuid}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Watch
-        </a>
+
+        <div className="flex flex-row items-center gap-3 sm:flex-col sm:gap-0">
+          <Duration durationFromNow={durationFromNow} />
+          <a
+            className="flex cursor-pointer gap-1 text-sm text-gray-400 underline hover:text-[#EDEDED]"
+            href={`https://cdn.axieinfinity.com/game/deeplink.html?f=rpl&q=${uuid}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            replay
+          </a>
+        </div>
       </div>
       <Fighters fighterIDs={opponentFighterIDs} />
-      <button className="self-center rounded border border-gray-600 p-1">
+      <button className="group self-center rounded border border-gray-600 px-3 py-2">
         <Link prefetch={false} href={`/profile/${opponentID}`}>
-          👀
+          <Image
+            className="duration-400 transition-transform ease-in group-hover:scale-125"
+            src={`/user.svg`}
+            width={12}
+            height={12}
+            alt="opponent"
+          />
         </Link>
       </button>
     </div>
@@ -73,7 +87,8 @@ async function Battle({ battle }: BattleProps) {
 }
 
 const Duration = ({ durationFromNow }: { durationFromNow: number }) => (
-  <span>
+  <div className="flex items-center gap-1 text-xs">
+    <Image src={`/clock.svg`} width={12} height={12} alt="clock" />
     {durationFromNow > 1000 * 60 * 60 * 24 ? (
       <span>{Math.floor(durationFromNow / (1000 * 60 * 60 * 24))}d</span>
     ) : durationFromNow > 1000 * 60 * 60 ? (
@@ -81,33 +96,59 @@ const Duration = ({ durationFromNow }: { durationFromNow: number }) => (
     ) : (
       <span>{Math.floor(durationFromNow / (1000 * 60))}m</span>
     )}
-    &nbsp;ago
-  </span>
-);
-
-type BattleChipProps = {
-  pvpType: PvpType;
-};
-
-const BattleChip = ({ pvpType }: BattleChipProps) => (
-  <div
-    style={{
-      backgroundColor: chipColorByPvpType(pvpType),
-    }}
-    className="rounded-lg px-2 text-white"
-  >
-    {pvpType}
+    <span>ago</span>
   </div>
 );
 
-const chipColorByPvpType = (pvpType: PvpType) => {
+type BadgeProps = {
+  variant: BadgeVariant;
+  subtle?: boolean;
+  children: string;
+};
+
+type BadgeVariant = "purple" | "amber" | "orange" | "gray";
+
+const Badge = ({ variant, subtle, children }: BadgeProps) => {
+  const badgeClassName = badgeClassNameByVariant(variant, subtle);
+
+  return (
+    <div className={`rounded-full px-2 py-[1px] text-sm ${badgeClassName}`}>
+      {children}
+    </div>
+  );
+};
+
+const badgeVariantByPvpType = (pvpType: PvpType) => {
   switch (pvpType) {
-    case "tournament":
-      return "#7057D0";
     case "arena":
-      return "#EEA91D";
+      return "amber";
     case "colosseum":
-      return "#E16E1C";
+      return "orange";
+    case "tournament":
+      return "purple";
+    case "challenge":
+      return "gray";
+  }
+};
+
+const badgeClassNameByVariant = (variant: BadgeVariant, subtle = false) => {
+  switch (variant) {
+    case "purple":
+      return subtle
+        ? "bg-[#291D58] text-[#7057D0]"
+        : "bg-[#7057D0] text-[#EDEDED]";
+    case "amber":
+      return subtle
+        ? "bg-[rgba(222,140,41,.25)] text-[#EEA91E]"
+        : "bg-[#EEA91E] text-[#EDEDED]";
+    case "orange":
+      return subtle
+        ? "bg-[rgba(202,73,1,.25)] text-[#E16E1C]"
+        : "bg-[#E16E1C] text-[#EDEDED]";
+    case "gray":
+      return subtle
+        ? "bg-[rgba(179,204,206,.25)] text-[#DCE2E2]"
+        : "bg-[#DCE2E2] text-[#0A0A0A]";
   }
 };
 
