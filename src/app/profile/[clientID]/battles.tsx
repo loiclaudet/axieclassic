@@ -16,6 +16,15 @@ export const Battles = async ({ clientID }: BattlesProps) => {
     return <p className="flex-grow text-center">{battles.message}</p>;
   }
 
+  if (battles.items.length === 0) {
+    return (
+      <div>
+        <p className="flex-grow text-center">No battles found for user</p>
+        <p className="flex-grow text-center font-bold">{clientID}</p>
+      </div>
+    );
+  }
+
   return (
     <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
       {battles.items.map((battle, index) => (
@@ -79,7 +88,7 @@ async function Battle({ battle }: BattleProps) {
             src={`/user.svg`}
             width={12}
             height={12}
-            alt="opponent"
+            alt="opponent's profile"
           />
         </Link>
       </button>
