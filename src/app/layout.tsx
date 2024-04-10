@@ -7,6 +7,8 @@ import { Sidenav } from "./sidenav";
 const inter = Work_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata = {
