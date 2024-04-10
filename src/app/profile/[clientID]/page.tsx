@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { Battles } from "~/app/profile/[clientID]/battles";
 import { BattlesSkeleton } from "~/app/ui/skeletons";
 
+export const revalidate = 300;
+
 export default function Page({ params }: { params: { clientID: string } }) {
   const { clientID } = params;
   return (

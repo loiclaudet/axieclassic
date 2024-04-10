@@ -1,6 +1,8 @@
 import Player from "~/app/ui/player";
 import { getLeaderboard } from "~/app/lib/data";
 
+export const revalidate = 300;
+
 export default async function ArenaPage() {
   const leaderboard = await getLeaderboard();
 
