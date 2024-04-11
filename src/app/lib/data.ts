@@ -52,6 +52,9 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
         "Content-Type": "application/json",
         "X-API-Key": env.X_API_KEY,
       },
+      next: {
+        revalidate: 300,
+      },
     },
   );
 
@@ -64,6 +67,11 @@ export async function getLeaderboard(options: APIOptions = {}) {
 
   const response = await fetch(
     `https://axie-classic.skymavis.com/v1/leaderboards?limit=${limit}&offset=${offset}`,
+    {
+      next: {
+        revalidate: 300,
+      },
+    },
   );
 
   const data = (await response.json()) as Leaderboard;
