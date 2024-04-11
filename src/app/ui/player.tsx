@@ -4,6 +4,8 @@ import Link from "next/link";
 import { TeamSkeleton } from "~/app/ui/skeletons";
 import { getBattles } from "~/app/lib/data";
 import { Fighters } from "./fighters";
+import { pipe } from "fp-ts/lib/function";
+const DURATION_IN_MIN = 10;
 
 type PlayerProps = {
   player: Player;
@@ -12,8 +14,8 @@ type PlayerProps = {
 export default function Player({ player }: PlayerProps) {
   const { name, elo, rank, clientID } = player;
   return (
-    <div className="flex flex-col items-center sm:flex-row">
-      <div className="flex flex-col gap-2 p-4">
+    <div className="relative flex flex-col sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-2 px-10 pb-4 pt-8 sm:p-4">
         <Link prefetch={false} href={`/profile/${clientID}`}>
           <h2 className="line-clamp-2 w-72 text-lg leading-6 text-[#EDEDED] hover:underline">
             {name}
@@ -30,6 +32,14 @@ export default function Player({ player }: PlayerProps) {
       <Suspense fallback={<TeamSkeleton />}>
         <Team clientID={clientID} />
       </Suspense>
+    </div>
+  );
+}
+
+async function BlinkingGreenOnlineDot() {
+  return (
+    <div className="animate-pulse cursor-default select-none text-[10px] sm:text-[8px]">
+      🟢
     </div>
   );
 }
@@ -51,6 +61,12 @@ async function Team({ clientID }: TeamProps) {
     return <p className="flex-grow text-center">no battles</p>;
   }
 
+  const playedRecently = pipe(
+    lastBattle.createdAt,
+    getRelativeTimeStamp,
+    isLessThan(DURATION_IN_MIN * 60 * 1000),
+  );
+
   const lastBattleFighterIDs = lastBattle.team.find(
     (team) => team.owner === clientID,
   )?.fighterIDs;
@@ -59,5 +75,22 @@ async function Team({ clientID }: TeamProps) {
     return <p>no team</p>;
   }
 
-  return <Fighters fighterIDs={lastBattleFighterIDs} />;
+  return (
+    <>
+      {playedRecently && (
+        <div
+          title={`played less than ${DURATION_IN_MIN}min ago`}
+          className="absolute left-3 top-[43px] sm:left-1 sm:top-[51px]"
+        >
+          <BlinkingGreenOnlineDot />
+        </div>
+      )}
+      <Fighters fighterIDs={lastBattleFighterIDs} />
+    </>
+  );
 }
+
+const getRelativeTimeStamp = (dateString: string) =>
+  Date.now() - Date.parse(dateString);
+
+const isLessThan = (threshold: number) => (n: number) => n < threshold;
