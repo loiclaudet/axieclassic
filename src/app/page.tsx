@@ -3,6 +3,7 @@ import { getLeaderboard } from "~/app/lib/data";
 import { Search } from "~/app/ui/search";
 
 // export const revalidate = 300; // 5 minutes
+export const revalidate = 180; // 3 minutes
 
 export default async function ArenaPage() {
   const leaderboard = await getLeaderboard();
