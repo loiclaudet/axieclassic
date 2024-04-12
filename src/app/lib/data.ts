@@ -1,4 +1,3 @@
-import { env } from "~/env";
 import type {
   Leaderboard,
   APIOptions,
@@ -6,6 +5,7 @@ import type {
   APIError,
 } from "~/app/lib/definitions";
 import { apiQueue } from "./apiQueue";
+import { getNextAPIKey } from "~/app/lib/apiKeys";
 
 export async function getBattles(
   clientId: string,
@@ -50,7 +50,7 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-API-Key": env.X_API_KEY,
+        "X-API-Key": getNextAPIKey(),
       },
     },
   );

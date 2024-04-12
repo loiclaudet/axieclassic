@@ -9,6 +9,7 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     X_API_KEY: z.string(),
+    X_API_KEY_2: z.string(),
     BEARER_TOKEN: z.string(),
   },
 
@@ -28,6 +29,7 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     X_API_KEY: process.env.X_API_KEY,
+    X_API_KEY_2: process.env.X_API_KEY_2,
     BEARER_TOKEN: process.env.BEARER_TOKEN,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
