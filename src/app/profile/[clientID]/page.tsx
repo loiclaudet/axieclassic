@@ -3,7 +3,7 @@ import { Battles } from "~/app/profile/[clientID]/battles";
 import { Search } from "~/app/ui/search";
 import { BattlesSkeleton } from "~/app/ui/skeletons";
 
-export const revalidate = 300; // 5 minutes
+// export const revalidate = 300; // 5 minutes
 
 export default function Page({ params }: { params: { clientID: string } }) {
   const { clientID } = params;
