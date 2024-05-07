@@ -12,7 +12,7 @@ export default async function ArenaPage() {
 
   return (
     <main className="col-start-2 flex flex-col items-center gap-4 px-2 py-4 lg:px-0">
-      <div className="flex w-full flex-col items-center justify-between gap-4 px-2 sm:flex-row sm:gap-1">
+      <header className="z-10 flex w-full flex-col items-center justify-between gap-4 bg-gray-950 px-2 sm:sticky sm:top-0 sm:flex-row sm:gap-1 sm:py-2">
         <Suspense
           fallback={
             <Skeleton
@@ -27,7 +27,7 @@ export default async function ArenaPage() {
           <Season />
         </Suspense>
         <Search />
-      </div>
+      </header>
       <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
         {leaderboard._items.map((player, index) => (
           <li
