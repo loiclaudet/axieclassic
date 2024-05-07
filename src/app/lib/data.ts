@@ -3,9 +3,27 @@ import type {
   APIOptions,
   Battles,
   APIError,
+  Season,
 } from "~/app/lib/definitions";
 import { apiQueue } from "./apiQueue";
 import { getNextAPIKey } from "~/app/lib/apiKeys";
+
+export async function getSeason(): Promise<Season | APIError> {
+  try {
+    const response = await fetch(
+      "https://guildwar.axiedao.org/api/getGuildSeasonInfo",
+    );
+    const data = (await response.json()) as Season;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return {
+      error: true,
+      status: 500,
+      message: "Error fetching Season data.",
+    };
+  }
+}
 
 export async function getBattles(
   clientId: string,

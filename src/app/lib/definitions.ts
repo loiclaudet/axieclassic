@@ -55,3 +55,9 @@ export type APIError = {
   status: number;
   message: string;
 };
+
+export type Season = {
+  season: number;
+  startTime: string;
+  endTime: string;
+};

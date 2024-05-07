@@ -38,7 +38,7 @@ export default function Player({ player }: PlayerProps) {
 
 async function BlinkingGreenOnlineDot() {
   return (
-    <div className="animate-pulse cursor-default select-none text-[10px] sm:text-[8px]">
+    <div className="animate-pulse cursor-help select-none text-[10px] sm:text-[8px]">
       🟢
     </div>
   );
