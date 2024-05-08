@@ -2,6 +2,7 @@ import type { Player } from "~/app/lib/definitions";
 import { Suspense } from "react";
 import Link from "next/link";
 import { TeamSkeleton } from "~/app/ui/skeletons";
+import { ColoredName } from "~/app/ui/colored-name";
 import { getBattles } from "~/app/lib/data";
 import { Fighters } from "./fighters";
 import { pipe } from "fp-ts/lib/function";
@@ -18,7 +19,7 @@ export default function Player({ player }: PlayerProps) {
       <div className="flex flex-col gap-2 px-10 pb-4 pt-8 sm:p-4">
         <Link prefetch={false} href={`/profile/${clientID}`}>
           <h2 className="line-clamp-2 w-72 text-lg leading-6 text-[#EDEDED] hover:underline">
-            {name}
+            <ColoredName name={name} />
           </h2>
         </Link>
         <div className="flex gap-4">
