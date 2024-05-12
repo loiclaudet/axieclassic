@@ -10,6 +10,8 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     X_API_KEY: z.string(),
     X_API_KEY_2: z.string(),
+    X_API_KEY_3: z.string(),
+    X_API_KEY_DEV: z.string(),
     BEARER_TOKEN: z.string(),
   },
 
@@ -30,6 +32,8 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     X_API_KEY: process.env.X_API_KEY,
     X_API_KEY_2: process.env.X_API_KEY_2,
+    X_API_KEY_3: process.env.X_API_KEY_3,
+    X_API_KEY_DEV: process.env.X_API_KEY_DEV,
     BEARER_TOKEN: process.env.BEARER_TOKEN,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },

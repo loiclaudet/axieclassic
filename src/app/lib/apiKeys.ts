@@ -1,6 +1,10 @@
 import { env } from "~/env";
 
-const apiKeys = [env.X_API_KEY, env.X_API_KEY_2];
+export const apiKeys =
+  process.env.NODE_ENV === "development"
+    ? [env.X_API_KEY_DEV]
+    : [env.X_API_KEY, env.X_API_KEY_2, env.X_API_KEY_3];
+
 let concurrentAPIKeyIndex = 0;
 
 export const getNextAPIKey = () => {
