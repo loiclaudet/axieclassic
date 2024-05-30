@@ -31,7 +31,7 @@ export default function Player({ player }: PlayerProps) {
         </div>
       </div>
       <Suspense fallback={<TeamSkeleton />}>
-        <Team clientID={clientID} />
+        <Team clientID={clientID} teamImagePriority={rank <= 3} />
       </Suspense>
     </div>
   );
@@ -47,9 +47,10 @@ async function BlinkingGreenOnlineDot() {
 
 type TeamProps = {
   clientID: string;
+  teamImagePriority?: boolean;
 };
 
-async function Team({ clientID }: TeamProps) {
+async function Team({ clientID, teamImagePriority }: TeamProps) {
   const battles = await getBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
@@ -86,7 +87,10 @@ async function Team({ clientID }: TeamProps) {
           <BlinkingGreenOnlineDot />
         </div>
       )}
-      <Fighters fighterIDs={lastBattleFighterIDs} />
+      <Fighters
+        fighterIDs={lastBattleFighterIDs}
+        imagePriority={teamImagePriority}
+      />
     </>
   );
 }

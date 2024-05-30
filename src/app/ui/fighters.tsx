@@ -4,8 +4,13 @@ import type { FighterIDs } from "~/app/lib/definitions";
 type FightersProps = {
   fighterIDs: FighterIDs;
   lookRight?: boolean;
+  imagePriority?: boolean;
 };
-export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
+export const Fighters = ({
+  fighterIDs,
+  lookRight = false,
+  imagePriority,
+}: FightersProps) => (
   <ul className="flex">
     {fighterIDs.map((fighterID) => (
       <li
@@ -18,6 +23,7 @@ export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
           rel="noopener noreferrer"
         >
           <Image
+            priority={imagePriority}
             key={fighterID}
             width={200}
             height={150}
