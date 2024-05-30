@@ -2,28 +2,54 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { getAddr } from "@roninbuilders/rns";
+import { isValidRNS, isValidRoninAddress } from "~/app/utils";
 
 export const Search = () => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
+  const resolveRNS = useCallback(async (rnsName: string) => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const address = (await getAddr(rnsName)) as Promise<string>;
+
+      setIsLoading(false);
+      return address;
+    } catch (error) {
+      setError("Failed to resolve RNS name");
+      setIsLoading(false);
+      return "";
+    }
+  }, []);
+
   const handleSubmit = useCallback<React.FormEventHandler<HTMLFormElement>>(
-    (e) => {
+    async (e) => {
       e.preventDefault();
 
-      if (isValidRoninAddress(inputValue)) {
-        router.push(`/profile/${inputValue}`);
-      } else {
-        setError("Invalid Ronin address");
+      if (isValidRNS(inputValue)) {
+        const address = await resolveRNS(inputValue);
+        if (isValidRoninAddress(address)) {
+          router.push(`/profile/${address}`);
+        } else {
+          setError("Invalid RNS name or failed to resolve");
+        }
+
+        return;
       }
+
+      setError("Invalid input");
     },
-    [inputValue, router],
+    [inputValue, router, resolveRNS],
   );
 
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
@@ -49,12 +75,13 @@ export const Search = () => {
         value={inputValue}
         onChange={handleChange}
         type="text"
-        placeholder="Snap search player battles from ronin address"
+        placeholder="Search player battles from RNS or ronin address"
         className="w-full bg-transparent pl-4 text-sm text-[#EDEDED]  placeholder:font-light placeholder:italic focus:outline-none"
       />
       <button
         className="rounded-br-xl rounded-tr-xl bg-gray-950 px-4 py-2"
         type="submit"
+        disabled={isLoading}
       >
         <Image
           className="duration-400 transition-transform ease-in group-hover:scale-125"
@@ -64,12 +91,16 @@ export const Search = () => {
           alt="opponent"
         />
       </button>
-      <span className="absolute -bottom-4 left-2 text-xs italic text-red-100">
-        {error}
-      </span>
+      {isLoading && (
+        <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs italic text-gray-400">
+          resolving RNS...
+        </span>
+      )}
+      {error && (
+        <span className="absolute -bottom-4 left-2 text-xs italic text-red-100">
+          {error}
+        </span>
+      )}
     </form>
   );
 };
-
-const isValidRoninAddress = (roninAddress: string) =>
-  /^0x[a-fA-F0-9]{40}$/.test(roninAddress);
