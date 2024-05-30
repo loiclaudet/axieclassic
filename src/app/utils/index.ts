@@ -19,3 +19,8 @@ export const calculateTimeLeft = (
 
   return { days, hours, minutes };
 };
+
+export const isValidRoninAddress = (roninAddress: string) =>
+  /^0x[a-fA-F0-9]{40}$/.test(roninAddress);
+
+export const isValidRNS = (rns: string): boolean => /^[\w-]+\.ron$/.test(rns);
