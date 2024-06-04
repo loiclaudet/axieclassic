@@ -45,7 +45,7 @@ type BattleProps = {
 
 async function Battle({ battle }: BattleProps) {
   const { clientID, createdAt, pvpType, team, uuid, winner } = battle;
-  const isDraw = winner === "";
+  const isDraw = winner === "draw";
   const isPlayerWinner = winner === clientID;
   const playerFighterIDs = team.find((t) => t.owner === clientID)!.fighterIDs;
   const opponentTeam = team.find((t) => t.owner !== clientID)!;
