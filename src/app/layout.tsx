@@ -2,7 +2,6 @@ import "~/styles/globals.css";
 
 import { Work_Sans } from "next/font/google";
 import { Sidenav } from "./sidenav";
-import Script from "next/script";
 
 const inter = Work_Sans({
   subsets: ["latin"],
@@ -29,11 +28,6 @@ export default function RootLayout({
       >
         <Sidenav />
         {children}
-        <Script
-          defer
-          data-domain="axieclassic.vercel.app"
-          src="/js/script.js"
-        />
       </body>
     </html>
   );
