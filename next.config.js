@@ -11,6 +11,11 @@ const config = {
       fullUrl: true,
     },
   },
+  experimental: {
+    staleTimes: {
+      dynamic: 0,
+    },
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
