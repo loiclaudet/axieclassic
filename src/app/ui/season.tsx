@@ -10,9 +10,9 @@ export const Season = () => {
 
   // const { season, endTime } = seasonInfo;
 
-  //  June 11th at 9 AM UTC
-  const endTime = "2024-06-11T09:00:00Z";
-  const season = 3;
+  //  August 8th at 9 AM UTC
+  const endTime = "2024-08-19T09:00:00Z";
+  const season = 4;
   const timeLeft = calculateTimeLeft(endTime);
 
   if (!timeLeft) {
