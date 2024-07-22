@@ -2,6 +2,7 @@ import Player from "~/app/ui/player";
 import { getLeaderboard } from "~/app/lib/data";
 import { Search } from "~/app/ui/search";
 import { Season } from "~/app/ui/season";
+import PostHogClient from "~/app/posthog";
 // import { Suspense } from "react";
 // import Skeleton from "react-loading-skeleton";
 
@@ -9,6 +10,9 @@ export const revalidate = 180; // 3 minutes
 
 export default async function ArenaPage() {
   const leaderboard = await getLeaderboard();
+
+  const posthog = PostHogClient();
+  await posthog.shutdown();
 
   return (
     <main className="col-start-2 flex flex-col items-center gap-4 px-2 py-4 lg:px-0">

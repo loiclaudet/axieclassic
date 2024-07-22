@@ -29,6 +29,16 @@ const config = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+    ];
+  },
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true,
 };
 
 export default config;
