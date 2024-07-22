@@ -15,6 +15,7 @@
     "fp-ts": "^2.16.5",
     "next": "^14.2.5",
     "p-queue": "^8.0.1",
+    "posthog-js": "^1.148.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loading-skeleton": "^3.4.0",

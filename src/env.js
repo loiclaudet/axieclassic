@@ -22,6 +22,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -34,9 +35,10 @@ export const env = createEnv({
     X_API_KEY: process.env.X_API_KEY,
     X_API_KEY_2: process.env.X_API_KEY_2,
     X_API_KEY_3: process.env.X_API_KEY_3,
-    X_API_KEY_4: process.env.X_API_KEY_3,
+    X_API_KEY_4: process.env.X_API_KEY_4,
     X_API_KEY_DEV: process.env.X_API_KEY_DEV,
     BEARER_TOKEN: process.env.BEARER_TOKEN,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
