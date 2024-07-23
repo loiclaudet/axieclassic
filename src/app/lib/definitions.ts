@@ -23,27 +23,41 @@ export type Team = {
 
 export type FighterIDs = [number, number, number];
 
-type ClientID = string;
+export type ClientID = string;
 
-export type Leaderboard = {
-  _etag: string;
-  _items: Player[];
-  _range: {
-    limit: number;
-    offset: number;
-    hasNext: boolean;
-  };
-  _links: {
-    next: string;
-  };
+export type RankedUsersResponse = {
+  items: RankedUser[];
 };
 
-export type Player = {
+export type RankedUser = {
   clientID: ClientID;
-  name: string;
-  elo: number;
   rank: number;
+  score: number;
+  tier: Tier;
 };
+
+export type Player = RankedUser & Profile;
+
+export type Ranking = {
+  tier: Tier;
+  requiredScore: number;
+};
+
+export type Tier =
+  | "bronze-3"
+  | "bronze-2"
+  | "bronze-1"
+  | "silver-3"
+  | "silver-2"
+  | "silver-1"
+  | "gold-3"
+  | "gold-2"
+  | "gold-1"
+  | "platinum-3"
+  | "platinum-2"
+  | "platinum-1"
+  | "master"
+  | "challenger";
 
 export type APIOptions = {
   limit?: number;
@@ -61,3 +75,53 @@ export type Season = {
   startTime: string;
   endTime: string;
 };
+
+export type Profile = {
+  clientID: ClientID;
+  guild: Guild;
+  stickers: Sticker[];
+  achievements: Achievement[];
+  name: string;
+  favouriteAxie: number;
+  banner: Banner;
+  usingReferral: null;
+  ownedReferral: null;
+  selectedAchievement: string;
+  lastChangedUsingReferral: null;
+};
+
+export type ProfilesResponse = {
+  items: Profile[];
+};
+
+type Guild = {
+  id: string;
+  name: string;
+};
+
+type Banner =
+  | "dawn"
+  | "dusk"
+  | "mech"
+  | "plant"
+  | "bug"
+  | "reptile"
+  | "beast"
+  | "bird"
+  | "aquatic";
+
+type Achievement = {
+  id: string;
+  category: string;
+  rank: number;
+};
+
+type Sticker = {
+  id: number;
+  clientId: ClientID;
+  name: string;
+  condition: Condition;
+  isActive: boolean;
+};
+
+type Condition = "crit" | "be-crited" | "shieldwall" | "cannon" | "victory";

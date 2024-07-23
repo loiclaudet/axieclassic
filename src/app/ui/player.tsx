@@ -13,7 +13,7 @@ type PlayerProps = {
 };
 
 export default function Player({ player }: PlayerProps) {
-  const { name, elo, rank, clientID } = player;
+  const { name, score, rank, clientID } = player;
   return (
     <div className="relative flex flex-col sm:flex-row sm:items-center">
       <div className="flex flex-col gap-2 px-10 pb-4 pt-8 sm:p-4">
@@ -26,7 +26,7 @@ export default function Player({ player }: PlayerProps) {
           <span>#{rank}</span>
           <div className="flex items-center gap-1">
             <span className="text-xs">🏆</span>
-            <span>{elo}</span>
+            <span>{score}</span>
           </div>
         </div>
       </div>
