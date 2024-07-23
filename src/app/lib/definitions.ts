@@ -70,10 +70,19 @@ export type APIError = {
   message: string;
 };
 
-export type Season = {
+export type GuildSeason = {
   season: number;
   startTime: string;
   endTime: string;
+  rewards: Reward[];
+};
+
+type Currency = "maxs_in";
+
+type Reward = {
+  rank: number;
+  currency: Currency;
+  amount: number;
 };
 
 export type Profile = {

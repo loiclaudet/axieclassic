@@ -3,7 +3,7 @@ import type {
   APIOptions,
   Battles,
   APIError,
-  Season,
+  GuildSeason,
   ClientID,
   ProfilesResponse,
   Profile,
@@ -15,12 +15,12 @@ import { getNextAPIKey } from "~/app/lib/apiKeys";
 import { MAXIMUM_PLAYERS_API_LIMIT } from "./constant";
 import { chunk } from "src/app/utils";
 
-export async function getSeason(): Promise<Season | APIError> {
+export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   try {
     const response = await fetch(
-      "https://guildwar.axiedao.org/api/getGuildSeasonInfo",
+      "https://axie-classic.skymavis.com/v1/guild-seasons",
     );
-    const data = (await response.json()) as Season;
+    const data = (await response.json()) as GuildSeason;
     return data;
   } catch (error) {
     console.error(error);
