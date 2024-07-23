@@ -85,15 +85,22 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
 
 export async function getPlayers(): Promise<Player[] | APIError> {
   try {
-    const rankedUsers = (await getTop100RankedUsers()) as RankedUser[];
+    const rankedUsers = ((await getTop100RankedUsers()) as RankedUser[]).slice(
+      0,
+      MAXIMUM_PLAYERS_API_LIMIT,
+    );
+
     const profiles = (await getProfiles(
       rankedUsers.map((user) => user.clientID),
     )) as Profile[];
 
-    const players = profiles.map((profile, index) => ({
-      ...profile,
-      ...rankedUsers[index]!,
-    }));
+    const players = rankedUsers.map((user) => {
+      const profile = profiles.find((p) => p.clientID === user.clientID)!;
+      return {
+        ...profile,
+        ...user,
+      };
+    });
 
     return players;
   } catch (error) {
