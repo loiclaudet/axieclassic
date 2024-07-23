@@ -1,21 +1,19 @@
-// import { getSeason } from "~/app/lib/data";
-import { Countdown } from "./countdown";
+import { getGuildSeason } from "~/app/lib/data";
 import { calculateTimeLeft } from "~/app/utils";
+import { Countdown } from "./countdown";
 
-export const Season = () => {
-  // const seasonInfo = await getSeason();
-  // if ("error" in seasonInfo) {
-  //   return <div>{seasonInfo.message}</div>;
-  // }
+export const Season = async () => {
+  const guildSeason = await getGuildSeason();
+  if ("error" in guildSeason) {
+    return <div>{guildSeason.message}</div>;
+  }
 
-  // const { season, endTime } = seasonInfo;
+  const { season, endTime, startTime } = guildSeason;
 
-  //  August 8th at 9 AM UTC
-  const endTime = "2024-08-19T09:00:00Z";
-  const season = 4;
+  const hasStarted = new Date(startTime).getTime() < new Date().getTime();
   const timeLeft = calculateTimeLeft(endTime);
 
-  if (!timeLeft) {
+  if (!hasStarted || !timeLeft) {
     return <div>Off season 😴</div>;
   }
 
