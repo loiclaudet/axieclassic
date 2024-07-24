@@ -11,7 +11,10 @@ export const Season = async () => {
   const { season, endTime, startTime } = guildSeason;
 
   const hasStarted = new Date(startTime).getTime() < new Date().getTime();
-  const timeLeft = calculateTimeLeft(endTime);
+  // temporarily fix for season 4 wrong end time api response
+  const timeLeft = calculateTimeLeft(
+    season > 4 ? endTime : "2024-08-11T09:00:00.000Z",
+  );
 
   if (!hasStarted || !timeLeft) {
     return <div>Off season 😴</div>;
