@@ -81,8 +81,12 @@ async function Battle({ battle }: BattleProps) {
         </div>
       </div>
       <Fighters fighterIDs={opponentFighterIDs} />
-      <button className="group self-center rounded border border-gray-600 px-3 py-2">
-        <Link prefetch={false} href={`/profile/${opponentID}`}>
+      <button className="group self-center rounded border border-gray-600">
+        <Link
+          prefetch={false}
+          href={`/profile/${opponentID}`}
+          className="block px-3 py-2"
+        >
           <Image
             className="duration-400 transition-transform ease-in group-hover:scale-125"
             src={`/user.svg`}
