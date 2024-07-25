@@ -12,9 +12,8 @@ export const Season = async () => {
 
   const hasStarted = new Date(startTime).getTime() < new Date().getTime();
   // temporarily fix for season 4 wrong end time api response
-  const timeLeft = calculateTimeLeft(
-    season > 4 ? endTime : "2024-08-11T09:00:00.000Z",
-  );
+  const customEndTime = season > 4 ? endTime : "2024-08-11T09:00:00.000Z";
+  const timeLeft = calculateTimeLeft(customEndTime);
 
   if (!hasStarted || !timeLeft) {
     return <div>Off season 😴</div>;
@@ -23,7 +22,7 @@ export const Season = async () => {
   return (
     <div className="flex shrink-0 flex-col items-center sm:items-start">
       <h2 className="text-xl font-semibold text-white">Season {season}</h2>
-      <Countdown endTime={endTime} />
+      <Countdown endTime={customEndTime} />
     </div>
   );
 };
