@@ -1,5 +1,5 @@
 import Player from "~/app/ui/player";
-import { getPlayers } from "~/app/lib/data";
+import { getPlayers } from "~/app/data";
 import { Search } from "~/app/ui/search";
 import { Season } from "~/app/ui/season";
 import { Suspense } from "react";

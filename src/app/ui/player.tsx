@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { TeamSkeleton } from "~/app/ui/skeletons";
 import { ColoredName } from "~/app/ui/colored-name";
-import { getBattles } from "~/app/lib/data";
+import { getBattles } from "~/app/data";
 import { Fighters } from "./fighters";
 import { pipe } from "fp-ts/lib/function";
 const DURATION_IN_MIN = 10;

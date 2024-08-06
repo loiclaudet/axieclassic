@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Battle, PvpType } from "~/app/lib/definitions";
-import { getBattles } from "~/app/lib/data";
+import type { Battle } from "~/app/lib/definitions";
+import { getBattles } from "~/app/data";
 import { Fighters } from "~/app/ui/fighters";
 import { BATTLE_LIMIT } from "~/app/lib/constant";
 

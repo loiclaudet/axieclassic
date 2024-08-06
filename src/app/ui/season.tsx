@@ -1,4 +1,4 @@
-import { getGuildSeason } from "~/app/lib/data";
+import { getGuildSeason } from "~/app/data";
 import { calculateTimeLeft } from "~/app/utils";
 import { Countdown } from "./countdown";
 
