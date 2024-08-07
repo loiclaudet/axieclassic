@@ -1,14 +1,18 @@
 import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import { LuSwords as SwordsIcon } from "react-icons/lu";
 
 export const Sidenav = () => (
-  <aside className="flex flex-col items-center border-gray-600 bg-gray-950 p-6 text-white lg:sticky lg:top-0 lg:h-screen lg:items-start lg:justify-self-start lg:border-r">
-    <h1 className="text-2xl font-bold">Axie Classic</h1>
+  <aside className="sticky top-0 flex h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-6 text-white">
     <nav>
       <ul>
         <li>
-          <Link className="underline" href="/">
-            Arena
-          </Link>
+          <Button asChild size="lg" variant="link">
+            <Link href="/">
+              <SwordsIcon width={20} height={20} />
+              Arena
+            </Link>
+          </Button>
         </li>
         {/* <li>
           <Link href="/guild">Guild</Link>

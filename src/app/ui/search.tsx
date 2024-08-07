@@ -76,7 +76,7 @@ export const Search = () => {
         onChange={handleChange}
         type="text"
         placeholder="Search player battles from RNS or ronin address"
-        className="w-full bg-transparent pl-4 text-sm text-[#EDEDED]  placeholder:font-light placeholder:italic focus:outline-none"
+        className="w-full bg-transparent pl-4 text-sm text-[#EDEDED] placeholder:font-light placeholder:italic focus:outline-none"
       />
       <button
         className="rounded-br-xl rounded-tr-xl bg-gray-950 px-4 py-2"

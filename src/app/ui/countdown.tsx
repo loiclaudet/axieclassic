@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useCountDown } from "~/app/hook";
+import { LuClock as ClockIcon } from "react-icons/lu";
 
 type CountDownProps = {
   endTime: string;
@@ -16,7 +16,7 @@ export const Countdown = ({ endTime }: CountDownProps) => {
 
   return (
     <div className="flex items-center gap-1">
-      <Image src={`/clock.svg`} width={10} height={10} alt="clock" />
+      <ClockIcon width={10} height={10} />
       <p className="text-xs italic text-gray-300">
         <span>Ends in&nbsp;</span>
         <TimeLeft timeLeft={timeLeft} />

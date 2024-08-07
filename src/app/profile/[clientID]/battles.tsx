@@ -66,7 +66,7 @@ async function Battle({ battle }: BattleProps) {
         />
         <div className="flex flex-row items-center gap-3 sm:flex-col sm:gap-0">
           <Duration durationFromNow={durationFromNow} />
-          <Button asChild>
+          <Button asChild size="sm">
             <a
               href={`https://cdn.axieinfinity.com/game/deeplink.html?f=rpl&q=${uuid}`}
               target="_blank"
