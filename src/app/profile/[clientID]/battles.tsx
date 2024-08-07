@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Battle } from "~/app/lib/definitions";
-import { getBattles } from "~/app/data";
-import { Fighters } from "~/app/ui/fighters";
-import { BATTLE_LIMIT } from "~/app/lib/constant";
-import { Badge } from "~/app/ui/badge";
-import { BattleStatus } from "~/app/ui/battle-status";
+import type { Battle } from "~/lib/definitions";
+import { getBattles } from "~/data";
+import { Fighters } from "~/components/fighters";
+import { BATTLE_LIMIT } from "~/lib/constant";
+import { Badge } from "~/components/badge";
+import { BattleStatus } from "~/components/battle-status";
 import { LuClock as ClockIcon } from "react-icons/lu";
 import { Button } from "~/components/ui/button";
 

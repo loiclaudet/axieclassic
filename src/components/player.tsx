@@ -1,9 +1,9 @@
-import type { Player } from "~/app/lib/definitions";
+import type { Player } from "~/lib/definitions";
 import { Suspense } from "react";
 import Link from "next/link";
-import { TeamSkeleton } from "~/app/ui/skeletons";
-import { ColoredName } from "~/app/ui/colored-name";
-import { getBattles } from "~/app/data";
+import { TeamSkeleton } from "~/components/skeletons";
+import { ColoredName } from "~/components/colored-name";
+import { getBattles } from "~/data";
 import { Fighters } from "./fighters";
 import { pipe } from "fp-ts/lib/function";
 const DURATION_IN_MIN = 10;

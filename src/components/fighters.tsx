@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { FighterIDs } from "~/app/lib/definitions";
+import type { FighterIDs } from "~/lib/definitions";
 
 type FightersProps = {
   fighterIDs: FighterIDs;

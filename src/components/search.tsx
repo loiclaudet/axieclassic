@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getAddr } from "@roninbuilders/rns";
-import { isValidRNS, isValidRoninAddress } from "~/app/utils";
+import { isValidRNS, isValidRoninAddress } from "~/lib/utils";
 
 export const Search = () => {
   const router = useRouter();

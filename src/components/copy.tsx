@@ -1,9 +1,9 @@
 "use client";
 
-import { useCopyToClipboard } from "~/app/hook/copy-to-clipboard";
+import { useCopyToClipboard } from "~/hook/copy-to-clipboard";
 import { LuCopy as CopyIcon } from "react-icons/lu";
 import { LuCopyCheck as CopyCheckIcon } from "react-icons/lu";
-import { cn } from "~/app/lib/utils";
+import { cn } from "~/lib/utils";
 
 type CopyButtonProps = {
   text: string;

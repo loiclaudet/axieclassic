@@ -9,11 +9,11 @@ import type {
   Profile,
   RankedUser,
   Player,
-} from "~/app/lib/definitions";
-import { apiQueue } from "~/app/lib/apiQueue";
-import { getNextAPIKey } from "~/app/lib/apiKeys";
-import { MAXIMUM_PLAYERS_API_LIMIT } from "~/app/lib/constant";
-import { chunk } from "src/app/utils";
+} from "~/lib/definitions";
+import { apiQueue } from "~/lib/apiQueue";
+import { getNextAPIKey } from "~/lib/apiKeys";
+import { MAXIMUM_PLAYERS_API_LIMIT } from "~/lib/constant";
+import { chunk } from "src/lib/utils";
 
 export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   try {

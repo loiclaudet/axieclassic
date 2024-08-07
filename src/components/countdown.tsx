@@ -1,7 +1,6 @@
 "use client";
 
-import { useCountDown } from "~/app/hook/countdown";
-import { LuClock as ClockIcon } from "react-icons/lu";
+import { useCountDown } from "~/hook/countdown";
 
 type CountDownProps = {
   endTime: string;

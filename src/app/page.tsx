@@ -1,7 +1,7 @@
-import Player from "~/app/ui/player";
-import { getPlayers } from "~/app/data";
-import { Search } from "~/app/ui/search";
-import { Season } from "~/app/ui/season";
+import Player from "~/components/player";
+import { getPlayers } from "~/data";
+import { Search } from "~/components/search";
+import { Season } from "~/components/season";
 import { Suspense } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Header } from "~/app/header";

@@ -1,4 +1,4 @@
-import type { PvpType } from "~/app/lib/definitions";
+import type { PvpType } from "~/lib/definitions";
 
 type BadgeProps = {
   pvpType: PvpType;

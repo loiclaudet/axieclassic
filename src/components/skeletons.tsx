@@ -1,6 +1,6 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { BATTLE_LIMIT } from "~/app/lib/constant";
+import { BATTLE_LIMIT } from "~/lib/constant";
 
 export const TeamSkeleton = () => (
   <div className="flex">

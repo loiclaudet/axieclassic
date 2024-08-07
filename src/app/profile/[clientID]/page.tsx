@@ -2,11 +2,11 @@ import { Suspense } from "react";
 import Image from "next/image";
 import { Header } from "~/app/header";
 import { Battles } from "~/app/profile/[clientID]/battles";
-import { Search } from "~/app/ui/search";
-import { BattlesSkeleton } from "~/app/ui/skeletons";
+import { Search } from "~/components/search";
+import { BattlesSkeleton } from "~/components/skeletons";
 import { FaArrowLeft as ArrowLeftIcon } from "react-icons/fa6";
-import { shortenHash } from "~/app/lib/utils";
-import { CopyButton } from "~/app/ui/copy";
+import { shortenHash } from "~/lib/utils";
+import { CopyButton } from "~/components/copy";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
 

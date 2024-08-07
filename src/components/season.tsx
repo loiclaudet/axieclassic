@@ -1,7 +1,7 @@
-import { getGuildSeason } from "~/app/data";
-import { calculateTimeLeft } from "~/app/utils";
+import { getGuildSeason } from "~/data";
+import { calculateTimeLeft } from "~/lib/utils";
 import { Countdown } from "./countdown";
-import { formatDate } from "~/app/lib/utils";
+import { formatDate } from "~/lib/utils";
 
 export const Season = async () => {
   const guildSeason = await getGuildSeason();
