@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import Image from "next/image";
 import { Header } from "~/app/header";
 import { Battles } from "~/app/profile/[clientID]/battles";
-import { Search } from "~/components/search";
 import { BattlesSkeleton } from "~/components/skeletons";
 import { FaArrowLeft as ArrowLeftIcon } from "react-icons/fa6";
 import { shortenHash } from "~/lib/utils";
@@ -32,7 +31,6 @@ export default function Page({ params }: { params: { clientID: string } }) {
         </Button>
       </Header>
       <main className="flex flex-col items-center gap-4 py-4">
-        <Search />
         <Suspense fallback={<BattlesSkeleton />}>
           <Battles clientID={clientID} />
         </Suspense>
