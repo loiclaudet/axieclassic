@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "~/app/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex active:translate-y-px outline-0 hover:shadow-[0_2px_0_0_hsl(228,15%,13%),0_3px_0_0_hsl(360,2%,64%)] focus-visible:shadow-[0_2px_0_0_hsl(228,15%,13%),0_3px_0_0_hsl(360,2%,64%)] active:shadow-[0_1px_0_0_hsl(228,15%,13%),0_2px_0_0_hsl(360,2%,64%)] gap-1 w-full items-center justify-center whitespace-nowrap font-medium font-regular hover:text-neutral-100 hover:border-neutral-400 text-neutral-icon-dark rounded-xl border bg-neutral-bg-dark focus-visible:border-neutral-400 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex active:translate-y-px outline-0 hover:shadow-[0_2px_0_0_hsl(228,15%,13%),0_3px_0_0_hsl(360,2%,64%)] focus-visible:shadow-[0_2px_0_0_hsl(228,15%,13%),0_3px_0_0_hsl(360,2%,64%)] active:shadow-[0_1px_0_0_hsl(228,15%,13%),0_2px_0_0_hsl(360,2%,64%)] gap-1 items-center justify-center whitespace-nowrap font-medium font-regular hover:text-neutral-100 hover:border-neutral-400 text-neutral-icon-dark rounded-xl border bg-neutral-bg-dark focus-visible:border-neutral-400 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -17,7 +17,8 @@ const buttonVariants = cva(
         //   "border border-neutral-200 bg-white hover:bg-neutral-100 hover:text-neutral-100 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-100",
         // secondary:
         //   "bg-neutral-100 text-neutral-100 hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-800/80",
-        // ghost:
+        ghost:
+          "bg-transparent border-transparent active:translate-y-0 focus-visible:border-transparent focus-visible:shadow-none hover:shadow-none hover:border-transparent active:shadow-none",
         //   "hover:bg-neutral-100 hover:text-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100",
         link: "justify-start border-transparent hover:border",
       },

@@ -9,7 +9,7 @@ const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
 });
 
-const inter = Work_Sans({
+const workSans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["300", "400", "500", "600", "700"],
@@ -31,11 +31,13 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body
-          className={`font-sans tracking-tight ${inter.variable} overscroll-y-none  bg-gray-950 text-[#A0A0A0] lg:grid lg:grid-cols-[1fr_auto_1fr]`}
+          className={`flex justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <Sidenav />
-          {children}
+          <div className="flex max-w-screen-lg">
+            <Sidenav />
+            {children}
+          </div>
         </body>
       </PHProvider>
     </html>

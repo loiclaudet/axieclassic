@@ -1,6 +1,6 @@
 "use client";
 
-import { useCountDown } from "~/app/hook";
+import { useCountDown } from "~/app/hook/countdown";
 import { LuClock as ClockIcon } from "react-icons/lu";
 
 type CountDownProps = {
@@ -15,13 +15,10 @@ export const Countdown = ({ endTime }: CountDownProps) => {
   }
 
   return (
-    <div className="flex items-center gap-1">
-      <ClockIcon width={10} height={10} />
-      <p className="text-xs italic text-gray-300">
-        <span>Ends in&nbsp;</span>
-        <TimeLeft timeLeft={timeLeft} />
-      </p>
-    </div>
+    <p className="italic leading-tight">
+      <span>ends in&nbsp;</span>
+      <TimeLeft timeLeft={timeLeft} />
+    </p>
   );
 };
 

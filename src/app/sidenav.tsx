@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { LuSwords as SwordsIcon } from "react-icons/lu";
+import { TbSwords as SwordsIcon } from "react-icons/tb";
 
 export const Sidenav = () => (
-  <aside className="sticky top-0 flex h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-6 text-white">
+  <aside className="sticky top-0 hidden h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-6 text-white sm:flex">
     <nav>
       <ul>
         <li>
-          <Button asChild size="lg" variant="link">
+          <Button asChild size="lg" variant="link" className="w-full">
             <Link href="/">
-              <SwordsIcon width={20} height={20} />
+              <SwordsIcon className="h-5 w-5" />
               Arena
             </Link>
           </Button>
