@@ -22,22 +22,24 @@ export default async function ArenaPage() {
             <span className="text-2xl font-bold">Arena</span>
           </div>
         }
-      ></Header>
-      <main className="col-start-2 flex flex-col items-center gap-4 px-2 py-4 lg:px-0">
-        <Suspense
-          fallback={
-            <Skeleton
-              borderRadius={4}
-              height={50}
-              width={200}
-              baseColor="#202020"
-              highlightColor="#444"
-            />
-          }
-        >
-          <Season />
-        </Suspense>
-        <Search />
+      />
+      <main className="flex flex-1 flex-col gap-4 px-4 py-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:gap-12">
+          <Suspense
+            fallback={
+              <Skeleton
+                borderRadius={4}
+                height={50}
+                width={200}
+                baseColor="#202020"
+                highlightColor="#444"
+              />
+            }
+          >
+            <Season />
+          </Suspense>
+          <Search />
+        </div>
         {isError ? (
           <div className="flex h-96 items-center justify-center">
             <p className="text-lg text-gray-300">{players.message}</p>

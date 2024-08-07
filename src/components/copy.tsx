@@ -27,6 +27,7 @@ export const CopyButton = ({ text }: CopyButtonProps) => {
       <CopyIcon
         className={cn("text-neutral-400", copiedText === text && "hidden")}
         onClick={handleCopy(text)}
+        role="button"
       />
       <CopyCheckIcon
         className={cn(

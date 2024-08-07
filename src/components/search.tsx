@@ -1,9 +1,12 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { getAddr } from "@roninbuilders/rns";
 import { isValidRNS, isValidRoninAddress } from "~/lib/utils";
+import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
+import { HiMiniMagnifyingGlass as MagnifyingGlassIcon } from "react-icons/hi2";
+import { LuLoader as LoaderIcon } from "react-icons/lu";
 
 export const Search = () => {
   const router = useRouter();
@@ -11,10 +14,6 @@ export const Search = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   const resolveRNS = useCallback(async (rnsName: string) => {
     setIsLoading(true);
@@ -55,7 +54,7 @@ export const Search = () => {
   const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
     (e) => {
       const value = e.target.value;
-      setInputValue(value);
+      setInputValue(value.toLocaleLowerCase());
       setError("");
 
       if (isValidRoninAddress(value)) {
@@ -68,36 +67,31 @@ export const Search = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative flex w-[600px] max-w-full items-center justify-between rounded-xl border border-gray-600 bg-gray-800"
+      className="relative flex max-w-96 flex-1 items-center gap-1.5"
     >
-      <input
+      <Input
         ref={inputRef}
         value={inputValue}
         onChange={handleChange}
         type="text"
         placeholder="Search player battles from RNS or ronin address"
-        className="w-full bg-transparent pl-4 text-sm text-[#EDEDED] placeholder:font-light placeholder:italic focus:outline-none"
+        className="h-[35px] flex-1 rounded-md border-neutral-separator-dark bg-neutral-aside-dark text-xs text-neutral-100 placeholder:font-light placeholder:text-neutral-icon-dark focus-visible:border-neutral-400 focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-sm"
       />
-      <button
-        className="rounded-br-xl rounded-tr-xl bg-gray-950 px-4 py-2"
+      <Button
         type="submit"
+        size="icon"
         disabled={isLoading}
+        className="flex-shrink-0 -translate-y-px rounded-md bg-neutral-aside-dark"
       >
-        <Image
-          className="duration-400 transition-transform ease-in group-hover:scale-125"
-          src={`/magnifying-glass.svg`}
-          width={18}
-          height={18}
-          alt="opponent"
-        />
-      </button>
+        <MagnifyingGlassIcon className="h-5 w-5" />
+      </Button>
       {isLoading && (
-        <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs italic text-gray-400">
-          resolving RNS...
+        <span className="absolute right-11 top-1/2 -translate-y-1/2 text-xs text-neutral-100">
+          <LoaderIcon className="h-4 w-4 animate-spin" />
         </span>
       )}
       {error && (
-        <span className="absolute -bottom-4 left-2 text-xs italic text-red-100">
+        <span className="absolute -bottom-4 left-2 text-xs font-medium italic text-salmon-600 sm:-bottom-1">
           {error}
         </span>
       )}

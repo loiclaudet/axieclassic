@@ -21,9 +21,11 @@ export const Season = async () => {
   }
 
   return (
-    <div className="flex shrink-0 items-center gap-3 sm:flex-col sm:items-start sm:gap-1">
-      <h2 className="text-xl font-semibold text-white">Season {season}</h2>
-      <div className="flex flex-col text-[10px] text-neutral-100">
+    <div className="flex shrink-0 items-center gap-4 sm:flex-col sm:items-start sm:gap-0">
+      <h2 className="text-xl font-semibold text-white sm:text-2xl">
+        Season {season}
+      </h2>
+      <div className="flex flex-col justify-center text-[10px] text-neutral-100 sm:text-xs">
         <Countdown endTime={customEndTime} />
         <span className="italic leading-tight">
           {formatDate(new Date(customEndTime))}

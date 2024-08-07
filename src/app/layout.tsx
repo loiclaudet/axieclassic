@@ -31,10 +31,10 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body
-          className={`flex justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
+          className={`flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <div className="flex max-w-screen-lg">
+          <div className="flex w-full max-w-screen-lg flex-col sm:flex-row">
             <Sidenav />
             {children}
           </div>
