@@ -148,3 +148,23 @@ function createProfilesEndpoint(clientIDs: ClientID[]): string {
     clientIDs.map((p) => "clientIDs=" + p).join("&")
   );
 }
+
+export async function getProfile(
+  clientID: string,
+): Promise<Profile | APIError> {
+  try {
+    const response = await fetch(
+      `https://axie-classic.skymavis.com/v1/players/profile?clientIDs=${clientID}`,
+    );
+
+    const data = (await response.json()) as ProfilesResponse;
+    return data.items[0] as Profile;
+  } catch (error) {
+    console.error(error);
+    return {
+      error: true,
+      status: 500,
+      message: "Error fetching profile.",
+    };
+  }
+}

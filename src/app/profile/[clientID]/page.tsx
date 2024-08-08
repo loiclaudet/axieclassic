@@ -1,36 +1,37 @@
 import { Suspense } from "react";
-import Image from "next/image";
+import { FaArrowLeft as ArrowLeftIcon } from "react-icons/fa6";
+import Link from "next/link";
 import { Header } from "~/app/header";
 import { Battles } from "~/app/profile/[clientID]/battles";
+import { Profile } from "~/app/profile/[clientID]/profile";
 import { BattlesSkeleton } from "~/components/skeletons";
-import { FaArrowLeft as ArrowLeftIcon } from "react-icons/fa6";
-import { shortenHash } from "~/lib/utils";
-import { CopyButton } from "~/components/copy";
 import { Button } from "~/components/ui/button";
-import Link from "next/link";
+import { TbSwords as SwordsIcon } from "react-icons/tb";
+import { RoninAddress } from "~/components/ronin-address";
 
 export const revalidate = 0;
 
 export default function Page({ params }: { params: { clientID: string } }) {
   const { clientID } = params;
+
   return (
     <>
-      <Header
-        heading={
-          <div className="flex items-center gap-1">
-            <Image src={`/ronin.svg`} width={14} height={14} alt="ronin" />
-            <span>{shortenHash(clientID)}</span>
-            <CopyButton text={clientID} />
-          </div>
-        }
-      >
+      <Header heading={<RoninAddress address={clientID} />}>
         <Button asChild variant="ghost" className="-order-1">
           <Link href="/">
             <ArrowLeftIcon className="h-6 w-6" />
           </Link>
         </Button>
       </Header>
-      <main className="flex flex-col items-center gap-4 py-4">
+      <main className="flex flex-col items-center">
+        {/* TODO: use skeleton instead of loading text */}
+        <Suspense fallback={<p>loading...</p>}>
+          <Profile clientID={clientID} />
+        </Suspense>
+        <h3 className="mb-2 flex items-center gap-2">
+          <SwordsIcon className="h-5 w-5" />
+          Battle logs
+        </h3>
         <Suspense fallback={<BattlesSkeleton />}>
           <Battles clientID={clientID} />
         </Suspense>

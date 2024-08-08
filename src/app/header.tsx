@@ -6,9 +6,10 @@ type HeaderProps = {
 };
 
 export const Header = ({ heading, children }: HeaderProps) => (
-  <header className="top-0 z-10 flex w-full items-center justify-between border-b border-b-neutral-separator-dark px-4 py-4 sm:sticky sm:hidden">
+  <header className="sticky top-0 z-10 flex w-full items-center justify-between self-start border-b border-b-neutral-separator-dark bg-neutral-header-dark/80 px-4 py-4 backdrop-blur-md sm:hidden">
     <h1>{heading}</h1>
     {children}
-    <MenuIcon className="h-6 w-6 text-neutral-100" />
+    {/* // TODO: make menu icon visible */}
+    <MenuIcon className="invisible h-6 w-6 text-neutral-icon-dark" />
   </header>
 );

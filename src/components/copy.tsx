@@ -7,9 +7,10 @@ import { cn } from "~/lib/utils";
 
 type CopyButtonProps = {
   text: string;
+  size?: number;
 };
 
-export const CopyButton = ({ text }: CopyButtonProps) => {
+export const CopyButton = ({ text, size = 14 }: CopyButtonProps) => {
   const [copiedText, copy] = useCopyToClipboard();
 
   const handleCopy = (text: string) => () => {
@@ -28,10 +29,18 @@ export const CopyButton = ({ text }: CopyButtonProps) => {
         className={cn("text-neutral-400", copiedText === text && "hidden")}
         onClick={handleCopy(text)}
         role="button"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+        }}
       />
       <CopyCheckIcon
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+        }}
         className={cn(
-          "hidden text-neutral-400",
+          "hidden text-neutral-100",
           copiedText === text && "block",
         )}
       />
