@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import dynamic from "next/dynamic";
+import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { Sidenav } from "./sidenav";
 import { PHProvider } from "./providers";
@@ -15,6 +16,13 @@ const workSans = Work_Sans({
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata = {
   title: "Axie Classic",
