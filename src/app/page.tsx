@@ -24,7 +24,7 @@ export default async function ArenaPage() {
         }
       />
       <main className="flex flex-1 flex-col gap-4">
-        <div className="flex flex-col gap-4 px-4 py-4 sm:sticky sm:top-0 sm:z-10 sm:flex-row sm:gap-12 sm:border-b sm:border-b-neutral-separator-dark sm:bg-neutral-bg-dark/80 sm:backdrop-blur-md">
+        <div className="flex flex-col gap-4 px-4 py-4 sm:sticky sm:top-0 sm:z-10 sm:flex-row sm:gap-12 sm:border-b sm:border-b-neutral-separator-dark sm:bg-neutral-bg-dark/70 sm:backdrop-blur-md">
           <Suspense
             fallback={
               <Skeleton

@@ -17,12 +17,12 @@ export const Badge = ({ pvpType }: BadgeProps) => {
 const badgeClassNameByPvpType = (pvpType: PvpType) => {
   switch (pvpType) {
     case "arena":
-      return "bg-peach-800/50 text-peach-200";
+      return "bg-peach-800/30 text-peach-200";
     case "colosseum":
-      return "bg-orange-800/50 text-orange-200";
+      return "bg-orange-800/30 text-orange-200";
     case "tournament":
-      return "bg-mystic-800/50 text-mystic-200";
+      return "bg-mystic-800/30 text-mystic-200";
     case "challenge":
-      return "bg-neutral-800/50 text-neutral-200";
+      return "bg-neutral-800/30 text-neutral-200";
   }
 };

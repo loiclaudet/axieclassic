@@ -1,11 +1,13 @@
+import type { BattleStatus } from "~/lib/definitions";
+
 type BattleStatusProps = {
-  status: "victory" | "defeat" | "draw";
+  status: BattleStatus;
 };
 
-export const BattleStatus = ({ status }: BattleStatusProps) => {
+export const BattleStatusText = ({ status }: BattleStatusProps) => {
   return (
     <span
-      className={`text-lg font-semibold ${
+      className={`flex-1 text-center text-xl font-semibold sm:flex-grow-0 ${
         status === "draw"
           ? "text-neutral-500"
           : status === "victory"

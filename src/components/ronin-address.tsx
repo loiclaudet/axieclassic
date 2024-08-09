@@ -10,7 +10,7 @@ type RoninAddressProps = {
 
 export const RoninAddress = ({ address, size = 14 }: RoninAddressProps) => (
   <div className="flex items-center gap-1">
-    <Image src={`/ronin.svg`} width={size} height={size} alt="ronin" />
+    <Image src={`/ronin.svg`} width={size - 2} height={size - 2} alt="ronin" />
     <span
       style={{
         fontSize: `${size}px`,

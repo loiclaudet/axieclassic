@@ -1,15 +1,19 @@
+import { cn } from "~/lib/utils";
+
 type DashedLineProps = {
   direction?: "horizontal" | "vertical";
   color?: string;
   size?: number;
+  className?: string;
 };
 
 export const DashedLine = ({
   direction = "horizontal",
   color = "hsl(227, 8%, 23%)", // neutral-separator-dark
   size = 3,
+  className,
 }: DashedLineProps) => (
-  <div>
+  <div className={cn(className)}>
     <svg
       width={direction === "horizontal" ? "100%" : size}
       height={direction === "horizontal" ? size : "100%"}

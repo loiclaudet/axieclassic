@@ -139,3 +139,5 @@ type Sticker = {
 };
 
 type Condition = "crit" | "be-crited" | "shieldwall" | "cannon" | "victory";
+
+export type BattleStatus = "victory" | "defeat" | "draw";
