@@ -47,6 +47,12 @@ export const isValidRoninAddress = (roninAddress: string) =>
 
 export const isValidRNS = (rns: string): boolean => /^[\w-]+\.ron$/.test(rns);
 
+/**
+ * Split an array into chunks of a specific size
+ * @param arr The array to split
+ * @param size The size of each chunk
+ * @returns An array of chunks
+ */
 export const chunk = <T>(arr: T[], size: number): T[][] =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
     arr.slice(i * size, i * size + size),

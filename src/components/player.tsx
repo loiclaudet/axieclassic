@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { TeamSkeleton } from "~/components/skeletons";
 import { ColoredName } from "~/components/colored-name";
-import { getBattles } from "~/data";
+import { getArenaBattles } from "~/data";
 import { Fighters } from "./fighters";
 import { pipe } from "fp-ts/lib/function";
 const DURATION_IN_MIN = 10;
@@ -51,7 +51,7 @@ type TeamProps = {
 };
 
 async function Team({ clientID, teamImagePriority }: TeamProps) {
-  const battles = await getBattles(clientID, { limit: 1 });
+  const battles = await getArenaBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
     return <p className="flex-grow text-center">{battles.message}</p>;

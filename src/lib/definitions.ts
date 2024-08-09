@@ -11,6 +11,11 @@ export type Battle = {
   createdAt: string;
 };
 
+export type BattleWithProfiles = Battle & {
+  clientProfile: Profile;
+  opponentProfile: Profile;
+};
+
 export type PvpType = "tournament" | "arena" | "colosseum" | "challenge";
 
 export type Team = {

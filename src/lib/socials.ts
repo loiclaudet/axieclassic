@@ -15,9 +15,9 @@ export const clientSocialsByClientID = new Map<ClientID, ClientSocials>([
   [
     "0x2c6be461ad32f18456b794394d64030ee5eee5bd",
     {
-      twitch: "saveaxieclassic", //https://www.twitch.tv/
-      x: "hernan947", // https://x.com/
-      youtube: "@saveaxieclassic", // https://www.youtube.com/
+      twitch: "saveaxieclassic",
+      x: "hernan947",
+      youtube: "@saveaxieclassic",
     },
   ],
 ]);

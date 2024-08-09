@@ -9,6 +9,7 @@ import type {
   Profile,
   RankedUser,
   Player,
+  BattleWithProfiles,
 } from "~/lib/definitions";
 import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
@@ -32,19 +33,58 @@ export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   }
 }
 
-export async function getBattles(
+export async function getProfileBattles(
+  clientId: string,
+  options: APIOptions = {},
+): Promise<BattleWithProfiles[] | APIError> {
+  try {
+    const battles = (await fetchBattles(clientId, options)).items;
+
+    const opponentsIDs = battles.map((battle) => {
+      const opponentTeam = battle.team.find((t) => t.owner !== clientId)!;
+      return opponentTeam.owner;
+    });
+    const [opponentsProfiles, clientProfiles] = await Promise.all([
+      getProfiles(opponentsIDs),
+      getProfiles([clientId]),
+    ]);
+
+    if ("error" in opponentsProfiles || "error" in clientProfiles) {
+      throw new Error("Error fetching profiles.");
+    }
+
+    const clientProfile = clientProfiles[0]!;
+
+    const battlesWithProfiles = battles.map((battle) => ({
+      ...battle,
+      clientProfile,
+      opponentProfile: opponentsProfiles.find((op) => {
+        const opponentTeam = battle.team.find(
+          (t) => t.owner !== clientProfile.clientID,
+        )!;
+        const opponentID = opponentTeam.owner;
+        return op.clientID === opponentID;
+      })!,
+    }));
+
+    return battlesWithProfiles;
+  } catch (e) {
+    return {
+      error: true,
+      status: 500,
+      message: "Error fetching profile battles.",
+    };
+  }
+}
+
+export async function getArenaBattles(
   clientId: string,
   options: APIOptions = {},
 ): Promise<Battles | APIError> {
   const run = async () => {
-    const response = await fetchBattles(clientId, options);
+    const battles = await fetchBattles(clientId, options);
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
-    const data = (await response.json()) as Battles;
-    return data;
+    return battles;
   };
 
   try {
@@ -80,8 +120,13 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
       cache: "no-store",
     },
   );
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
 
-  return response;
+  const data = (await response.json()) as Battles;
+
+  return data;
 }
 
 export async function getPlayers(): Promise<Player[] | APIError> {
@@ -128,11 +173,11 @@ export async function getTop100RankedUsers(): Promise<RankedUser[] | APIError> {
 export async function getProfiles(
   profileClientIDs: ClientID[],
 ): Promise<Profile[] | APIError> {
-  const endpoints = chunk(profileClientIDs, MAXIMUM_PLAYERS_API_LIMIT).flatMap(
+  const endpoint = chunk(profileClientIDs, MAXIMUM_PLAYERS_API_LIMIT).flatMap(
     createProfilesEndpoint,
-  );
+  )[0]!;
 
-  const profiles = (await Promise.all(endpoints.map(fetchProfiles))).flat();
+  const profiles = await fetchProfiles(endpoint);
   return profiles;
 }
 
@@ -158,7 +203,7 @@ export async function getProfile(
     );
 
     const data = (await response.json()) as ProfilesResponse;
-    return data.items[0] as Profile;
+    return data.items[0]!;
   } catch (error) {
     console.error(error);
     return {

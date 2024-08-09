@@ -1,26 +1,27 @@
 import Link from "next/link";
-import Image from "next/image";
-import type { Battle } from "~/lib/definitions";
-import { getBattles } from "~/data";
-import { Fighters } from "~/components/fighters";
+import { LuClock as ClockIcon } from "react-icons/lu";
+import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
+import type { Battle, BattleWithProfiles } from "~/lib/definitions";
 import { BATTLE_LIMIT } from "~/lib/constant";
+import { getProfileBattles } from "~/data";
+import { Fighters } from "~/components/fighters";
 import { Badge } from "~/components/badge";
 import { BattleStatus } from "~/components/battle-status";
-import { LuClock as ClockIcon } from "react-icons/lu";
 import { Button } from "~/components/ui/button";
+import { DashedLine } from "~/components/ui/dashed-line";
 
 type BattlesProps = {
   clientID: string;
 };
 
 export const Battles = async ({ clientID }: BattlesProps) => {
-  const battles = await getBattles(clientID, { limit: BATTLE_LIMIT });
+  const battles = await getProfileBattles(clientID, { limit: BATTLE_LIMIT });
 
   if ("error" in battles) {
     return <p className="flex-grow text-center">{battles.message}</p>;
   }
 
-  if (battles.items.length === 0) {
+  if (battles.length === 0) {
     return (
       <div>
         <p className="flex-grow text-center">No battles found for user</p>
@@ -30,25 +31,33 @@ export const Battles = async ({ clientID }: BattlesProps) => {
   }
 
   return (
-    <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
-      {battles.items.map((battle, index) => (
-        <li
-          key={battle.uuid}
-          className={`${index % 2 === 0 ? "bg-gray-800" : "bg-gray-950"}`}
-        >
-          <Battle battle={battle} />
-        </li>
-      ))}
+    <ul className="flex flex-col gap-4 overflow-hidden">
+      {battles.map((battle) => {
+        return (
+          <li key={battle.uuid} className="bg-neutral-aside-dark">
+            <Battle battle={battle} />
+          </li>
+        );
+      })}
     </ul>
   );
 };
 
 type BattleProps = {
-  battle: Battle;
+  battle: BattleWithProfiles;
 };
 
 async function Battle({ battle }: BattleProps) {
-  const { clientID, createdAt, pvpType, team, uuid, winner } = battle;
+  const {
+    clientID,
+    createdAt,
+    pvpType,
+    team,
+    uuid,
+    winner,
+    clientProfile,
+    opponentProfile,
+  } = battle;
   const isDraw = winner === "draw";
   const isVictory = winner === clientID;
   const playerFighterIDs = team.find((t) => t.owner === clientID)!.fighterIDs;
@@ -57,42 +66,41 @@ async function Battle({ battle }: BattleProps) {
   const durationFromNow = calculateDurationFromNow(createdAt);
 
   return (
-    <div className="flex flex-col items-center p-2 sm:flex-row">
-      <Fighters lookRight fighterIDs={playerFighterIDs} />
-      <div className="flex flex-row items-center gap-5 sm:w-28 sm:flex-col sm:gap-2">
-        <Badge pvpType={pvpType} />
+    <div className="flex border-y border-b border-y-neutral-separator-dark p-2">
+      <div className="flex flex-col items-start">
+        <p className="pl-2 text-sm">{clientProfile.name}</p>
+        <Fighters lookRight fighterIDs={playerFighterIDs} />
+        <DashedLine />
+        <Link
+          className="group flex items-center gap-1 p-2 pb-0 transition-colors hover:text-neutral-100 hover:underline"
+          prefetch={false}
+          href={`/profile/${opponentID}`}
+        >
+          <p className="text-sm">{opponentProfile.name}</p>
+          <ExternalLinkIcon className="h-3 w-3 text-neutral-100 transition-all group-hover:scale-125" />
+        </Link>
+        <Fighters fighterIDs={opponentFighterIDs} />
+      </div>
+      <DashedLine direction="vertical" />
+
+      <div className="flex flex-col items-center justify-center gap-4 p-2">
         <BattleStatus
           status={isDraw ? "draw" : isVictory ? "victory" : "defeat"}
         />
-        <div className="flex flex-row items-center gap-3 sm:flex-col sm:gap-0">
+        <div className="flex flex-col items-center gap-2">
           <Duration durationFromNow={durationFromNow} />
-          <Button asChild size="sm">
-            <a
-              href={`https://cdn.axieinfinity.com/game/deeplink.html?f=rpl&q=${uuid}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              replay
-            </a>
-          </Button>
+          <Badge pvpType={pvpType} />
         </div>
+        <Button asChild size="sm">
+          <a
+            href={`https://cdn.axieinfinity.com/game/deeplink.html?f=rpl&q=${uuid}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            replay
+          </a>
+        </Button>
       </div>
-      <Fighters fighterIDs={opponentFighterIDs} />
-      <button className="group flex h-6 w-8 items-stretch self-center rounded border border-gray-600">
-        <Link
-          prefetch={false}
-          href={`/profile/${opponentID}`}
-          className="flex flex-grow items-center justify-center"
-        >
-          <Image
-            className="duration-400 transition-transform ease-in group-hover:scale-125"
-            src={`/user.svg`}
-            width={12}
-            height={12}
-            alt="opponent's profile"
-          />
-        </Link>
-      </button>
     </div>
   );
 }
