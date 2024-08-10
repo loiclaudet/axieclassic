@@ -26,12 +26,12 @@ export const clientSocialsByClientID = new Map<ClientID, ClientSocials>([
       x: "ThunderRoyale",
     },
   ],
-  [
-    "0x7775524c9ab7543915bb5ce2310fe25787d82de5",
-    {
-      x: "chan103199",
-    },
-  ],
+  // [
+  //   "",
+  //   {
+  //     x: "chan103199",
+  //   },
+  // ],
   [
     "0x1261b9ad128e9e74c4d224a870099c85b956b3bb",
     {
@@ -39,7 +39,7 @@ export const clientSocialsByClientID = new Map<ClientID, ClientSocials>([
     },
   ],
   // [
-  //   "",
+  //   "0x7775524c9ab7543915bb5ce2310fe25787d82de5",
   //   {
   //     x: "Mythrasaur",
   //   },
