@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 :root {
-  font-size: calc(1rem + 0.25vw);
+  touch-action: pan-x pan-y;
+  height: 100%;
 }

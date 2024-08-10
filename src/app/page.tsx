@@ -1,9 +1,11 @@
-import Player from "~/app/ui/player";
-import { getPlayers } from "~/app/lib/data";
-import { Search } from "~/app/ui/search";
-import { Season } from "~/app/ui/season";
+import Player from "~/components/player";
+import { getPlayers } from "~/data";
+import { Search } from "~/components/search";
+import { Season } from "~/components/season";
 import { Suspense } from "react";
-import Skeleton from "react-loading-skeleton";
+import { Header } from "~/app/header";
+import { TbSwords as SwordsIcon } from "react-icons/tb";
+import { SeasonSkeleton } from "~/components/skeletons";
 
 export const revalidate = 180; // 3 minutes
 
@@ -12,39 +14,36 @@ export default async function ArenaPage() {
   const isError = "error" in players;
 
   return (
-    <main className="col-start-2 flex flex-col items-center gap-4 px-2 py-4 lg:px-0">
-      <header className="z-10 flex w-full flex-col items-center justify-between gap-4 bg-gray-950 px-2 sm:sticky sm:top-0 sm:flex-row sm:gap-1 sm:py-2">
-        <Suspense
-          fallback={
-            <Skeleton
-              borderRadius={4}
-              height={50}
-              width={200}
-              baseColor="#202020"
-              highlightColor="#444"
-            />
-          }
-        >
-          <Season />
-        </Suspense>
-        <Search />
-      </header>
-      {isError ? (
-        <div className="flex h-96 items-center justify-center">
-          <p className="text-lg text-gray-300">{players.message}</p>
+    <>
+      <Header
+        heading={
+          <div className="flex items-center gap-2 text-neutral-100">
+            <SwordsIcon className="h-6 w-6" />
+            <span className="text-2xl font-bold">Arena</span>
+          </div>
+        }
+      />
+      <main className="flex flex-1 flex-col">
+        <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12 md:border-b md:border-b-neutral-separator-dark md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
+          <Suspense fallback={<SeasonSkeleton />}>
+            <Season />
+          </Suspense>
+          <Search />
         </div>
-      ) : (
-        <ul className="flex flex-col overflow-hidden rounded-xl border border-gray-600">
-          {players.map((player, index) => (
-            <li
-              className={`${index % 2 === 0 ? "bg-gray-800" : "bg-gray-950"}`}
-              key={player.clientID}
-            >
-              <Player player={player} />
-            </li>
-          ))}
-        </ul>
-      )}
-    </main>
+        {isError ? (
+          <div className="flex h-96 items-center justify-center">
+            <p className="text-lg text-neutral-100">{players.message}</p>
+          </div>
+        ) : (
+          <ul className="flex w-full flex-col overflow-hidden">
+            {players.map((player) => (
+              <li className="bg-neutral-aside-dark" key={player.clientID}>
+                <Player player={player} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </main>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { calculateTimeLeft } from "~/app/utils";
+import { calculateTimeLeft } from "~/lib/utils";
 
 export const useCountDown = (endTime: string, refreshInterval = 1000 * 60) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(endTime));

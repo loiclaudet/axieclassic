@@ -1,14 +1,18 @@
 import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import { TbSwords as SwordsIcon } from "react-icons/tb";
 
 export const Sidenav = () => (
-  <aside className="flex flex-col items-center border-gray-600 bg-gray-950 p-6 text-white lg:sticky lg:top-0 lg:h-screen lg:items-start lg:justify-self-start lg:border-r">
-    <h1 className="text-2xl font-bold">Axie Classic</h1>
+  <aside className="sticky top-0 hidden h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
     <nav>
       <ul>
         <li>
-          <Link className="underline" href="/">
-            Arena
-          </Link>
+          <Button asChild size="lg" variant="link" className="w-full">
+            <Link href="/">
+              <SwordsIcon className="h-5 w-5" />
+              Arena
+            </Link>
+          </Button>
         </li>
         {/* <li>
           <Link href="/guild">Guild</Link>

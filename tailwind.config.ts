@@ -1,14 +1,125 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-export default {
-  content: ["./src/**/*.tsx"],
+const config = {
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      colors: {
+        cream: {
+          DEFAULT: "hsl(34 64% 91%)",
+          100: "hsl(34 64% 96%)",
+          200: "hsl(34 64% 84%)",
+          300: "hsl(35 63% 75%)",
+          400: "hsl(34 63% 68%)",
+          500: "hsl(34 64% 60%)",
+          600: "hsl(34 64% 52%)",
+          700: "hsl(34 64% 44%)",
+          800: "hsl(34 63% 36%)",
+          900: "hsl(34 64% 28%)",
+        },
+        mystic: {
+          DEFAULT: "hsl(252 56% 58%)",
+          100: "hsl(252 56% 93%)",
+          200: "hsl(252 56% 86%)",
+          300: "hsl(252 57% 79%)",
+          400: "hsl(253 57% 72%)",
+          500: "hsl(252 56% 65%)",
+          600: "hsl(252 57% 50%)",
+          700: "hsl(252 56% 43%)",
+          800: "hsl(252 56% 35%)",
+          900: "hsl(252 56% 28%)",
+        },
+        neutral: {
+          "base-black": "hsl(0 5% 4%)",
+          "base-white": "hsl(0 0 98%)",
+          text: "hsl(0 0 89%)",
+          "text-dark--hover": "hsl(240, 2%, 79%)",
+          "text-light--hover": "hsl(90, 1%, 28%)",
+          "aside-dark": "hsl(227 12% 15%)",
+          "aside-light": "hsl(69 18% 92%)",
+          "bg-dark": "hsl(228 15% 13%)",
+          "bg-light": "hsl(75 15% 95%)",
+          "button-border-dark": "hsl(225 5% 31%)",
+          "button-shadow": "hsl(0 0 20%)",
+          "header-dark": "hsl(230 8% 15%)",
+          "header-light": "hsl(69 14% 90%)",
+          "icon-dark": "hsl(240 2% 49%)",
+          "icon-light": "hsl(80 1% 41%)",
+          "separator-dark": "hsl(227 8% 23%)",
+          "separator-light": "hsl(69 12% 88%)",
+        },
+        peach: {
+          DEFAULT: "hsl(35 100% 79%)",
+          100: "hsl(36 100% 95%)",
+          200: "hsl(34 100% 90%)",
+          300: "hsl(35 100% 84%)",
+          400: "hsl(35 100% 71%)",
+          500: "hsl(35 100% 63%)",
+          600: "hsl(35 100% 54%)",
+          700: "hsl(35 100% 46%)",
+          800: "hsl(35 100% 38%)",
+          900: "hsl(35 100% 30%)",
+        },
+        salmon: {
+          DEFAULT: "hsl(13 82% 75%)",
+          100: "hsl(12 81% 94%)",
+          200: "hsl(14 82% 87%)",
+          300: "hsl(14 82% 81%)",
+          400: "hsl(13 81% 67%)",
+          500: "hsl(13 82% 59%)",
+          600: "hsl(13 81% 51%)",
+          700: "hsl(13 81% 44%)",
+          800: "hsl(13 81% 36%)",
+          900: "hsl(13 82% 28%)",
+        },
+        "seafoam-green": {
+          DEFAULT: "hsl(149 63% 84%)",
+          100: "hsl(148 63% 95%)",
+          200: "hsl(150 63% 89%)",
+          300: "hsl(150 64% 76%)",
+          400: "hsl(149 63% 68%)",
+          500: "hsl(150 63% 60%)",
+          600: "hsl(149 63% 52%)",
+          700: "hsl(149 63% 45%)",
+          800: "hsl(149 63% 37%)",
+          900: "hsl(149 63% 29%)",
+        },
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;

@@ -1,3 +1,25 @@
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+
+export const shortenHash = (hash: string) =>
+  `${hash.slice(0, 6)}...${hash.slice(-4)}`;
+
+export const formatDate = (date: Date) => {
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    hour12: false,
+  }).format(date);
+
+  return formattedDate.replace(",", "") + " UTC";
+};
+
 export const calculateTimeLeft = (
   endTime: string,
 ): {
@@ -25,6 +47,12 @@ export const isValidRoninAddress = (roninAddress: string) =>
 
 export const isValidRNS = (rns: string): boolean => /^[\w-]+\.ron$/.test(rns);
 
+/**
+ * Split an array into chunks of a specific size
+ * @param arr The array to split
+ * @param size The size of each chunk
+ * @returns An array of chunks
+ */
 export const chunk = <T>(arr: T[], size: number): T[][] =>
   Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
     arr.slice(i * size, i * size + size),

@@ -11,6 +11,11 @@ export type Battle = {
   createdAt: string;
 };
 
+export type BattleWithProfiles = Battle & {
+  clientProfile: Profile;
+  opponentProfile: Profile;
+};
+
 export type PvpType = "tournament" | "arena" | "colosseum" | "challenge";
 
 export type Team = {
@@ -87,7 +92,7 @@ type Reward = {
 
 export type Profile = {
   clientID: ClientID;
-  guild: Guild;
+  guild?: Guild;
   stickers: Sticker[];
   achievements: Achievement[];
   name: string;
@@ -134,3 +139,5 @@ type Sticker = {
 };
 
 type Condition = "crit" | "be-crited" | "shieldwall" | "cannon" | "victory";
+
+export type BattleStatus = "victory" | "defeat" | "draw";

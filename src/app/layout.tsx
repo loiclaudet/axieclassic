@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 
 import dynamic from "next/dynamic";
+import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { Sidenav } from "./sidenav";
 import { PHProvider } from "./providers";
@@ -9,12 +10,19 @@ const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
 });
 
-const inter = Work_Sans({
+const workSans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata = {
   title: "Axie Classic",
@@ -31,11 +39,13 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body
-          className={`font-sans tracking-tight ${inter.variable} overscroll-y-none  bg-gray-950 text-[#A0A0A0] lg:grid lg:grid-cols-[1fr_auto_1fr]`}
+          className={`flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <Sidenav />
-          {children}
+          <div className="flex w-full max-w-screen-lg flex-col md:flex-row md:border-r md:border-r-neutral-separator-dark">
+            <Sidenav />
+            {children}
+          </div>
         </body>
       </PHProvider>
     </html>
