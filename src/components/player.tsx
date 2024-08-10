@@ -1,11 +1,16 @@
-import type { Player } from "~/lib/definitions";
 import { Suspense } from "react";
+import { PiStarFourBold as StarIcon } from "react-icons/pi";
+import Image from "next/image";
 import Link from "next/link";
+import { pipe } from "fp-ts/lib/function";
+import type { Player } from "~/lib/definitions";
 import { TeamSkeleton } from "~/components/skeletons";
 import { ColoredName } from "~/components/colored-name";
 import { getArenaBattles } from "~/data";
 import { Fighters } from "./fighters";
-import { pipe } from "fp-ts/lib/function";
+import { SocialIcons } from "./social-icons";
+import { clientSocialsByClientID } from "~/lib/socials";
+
 const DURATION_IN_MIN = 10;
 
 type PlayerProps = {
@@ -13,33 +18,53 @@ type PlayerProps = {
 };
 
 export default function Player({ player }: PlayerProps) {
-  const { name, score, rank, clientID } = player;
+  const { name, score, rank, clientID, guild } = player;
+  const guildName = guild?.name;
+  const socials = clientSocialsByClientID.get(clientID);
+
   return (
-    <div className="relative flex flex-col sm:flex-row sm:items-center">
-      <div className="flex flex-col gap-2 px-10 pb-4 pt-8 sm:p-4">
-        <Link prefetch={false} href={`/profile/${clientID}`}>
-          <h2 className="line-clamp-2 w-72 text-lg leading-6 text-[#EDEDED] hover:underline">
-            <ColoredName name={name} />
-          </h2>
-        </Link>
-        <div className="flex gap-4">
-          <span>#{rank}</span>
-          <div className="flex items-center gap-1">
-            <span className="text-xs">🏆</span>
+    <div className="relative flex border-b border-b-neutral-separator-dark">
+      <div className="flex w-12 shrink-0 flex-col sm:w-20">
+        <div className="flex basis-1/2 items-center justify-center border-b border-dashed border-neutral-separator-dark">
+          <div className="flex items-baseline text-neutral-100">
+            <span className="text-xs">#</span>
+            <span className="text-xl font-bold">{rank}</span>
+          </div>
+        </div>
+        <div className="flex basis-1/2 items-center justify-center">
+          <div className="flex flex-col items-center justify-center text-neutral-100">
+            <StarIcon className="h-4 w-4" />
             <span>{score}</span>
           </div>
         </div>
       </div>
-      <Suspense fallback={<TeamSkeleton />}>
-        <Team clientID={clientID} teamImagePriority={rank <= 3} />
-      </Suspense>
+      <div className="flex flex-col border-l border-dashed border-neutral-separator-dark sm:flex-row">
+        <div className="flex w-60 flex-col gap-2 px-4 py-2 sm:py-4">
+          <Link prefetch={false} href={`/profile/${clientID}`}>
+            <h2 className="w-60 text-lg leading-5 text-neutral-100 hover:underline sm:line-clamp-2">
+              <ColoredName name={name} />
+            </h2>
+          </Link>
+          {socials && (
+            <SocialIcons
+              iconClassName="h-6 w-6 rounded-lg px-1 py-0.5"
+              listClassName="sm:mb-3"
+              socials={socials}
+            />
+          )}
+          <p className="text-sm text-neutral-icon-dark">{guildName}</p>
+        </div>
+        <Suspense fallback={<TeamSkeleton />}>
+          <Team clientID={clientID} teamImagePriority={rank <= 3} />
+        </Suspense>
+      </div>
     </div>
   );
 }
 
 async function BlinkingGreenOnlineDot() {
   return (
-    <div className="animate-pulse cursor-help select-none text-[10px] sm:text-[8px]">
+    <div className="animate-pulse cursor-help select-none text-[8px] sm:text-[6px]">
       🟢
     </div>
   );
@@ -54,7 +79,53 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
   const battles = await getArenaBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
-    return <p className="flex-grow text-center">{battles.message}</p>;
+    return (
+      <div className="flex flex-col">
+        <div className="hidden sm:flex">
+          <Image
+            src={`/placeholder.png`}
+            width={170}
+            height={90}
+            alt="placeholder"
+          />
+          <Image
+            src={`/placeholder.png`}
+            width={170}
+            height={90}
+            alt="placeholder"
+          />
+          <Image
+            src={`/placeholder.png`}
+            width={170}
+            height={90}
+            alt="placeholder"
+          />
+        </div>
+        <div className="flex self-center sm:hidden">
+          <Image
+            src={`/placeholder.png`}
+            width={80}
+            height={110}
+            alt="placeholder"
+          />
+          <Image
+            src={`/placeholder.png`}
+            width={80}
+            height={110}
+            alt="placeholder"
+          />
+          <Image
+            src={`/placeholder.png`}
+            width={80}
+            height={110}
+            alt="placeholder"
+          />
+        </div>
+        <p className="w-full pb-2 pl-4 pt-1 text-xs sm:text-center">
+          ⚠ Error fetching battle data, please reload the page.
+        </p>
+      </div>
+    );
   }
 
   const lastBattle = battles.items[0];
@@ -81,8 +152,8 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
     <>
       {playedRecently && (
         <div
-          title={`played less than ${DURATION_IN_MIN}min ago`}
-          className="absolute left-3 top-[43px] sm:left-1 sm:top-[51px]"
+          title={`active less than ${DURATION_IN_MIN}min ago`}
+          className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:left-10"
         >
           <BlinkingGreenOnlineDot />
         </div>

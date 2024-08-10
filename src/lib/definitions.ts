@@ -92,7 +92,7 @@ type Reward = {
 
 export type Profile = {
   clientID: ClientID;
-  guild: Guild;
+  guild?: Guild;
   stickers: Sticker[];
   achievements: Achievement[];
   name: string;

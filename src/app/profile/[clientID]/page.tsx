@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Header } from "~/app/header";
 import { Battles } from "~/app/profile/[clientID]/battles";
 import { Profile } from "~/app/profile/[clientID]/profile";
-import { BattlesSkeleton } from "~/components/skeletons";
+import { BattlesSkeleton, ProfileSkeleton } from "~/components/skeletons";
 import { Button } from "~/components/ui/button";
 import { TbSwords as SwordsIcon } from "react-icons/tb";
 import { RoninAddress } from "~/components/ronin-address";
@@ -24,8 +24,7 @@ export default function Page({ params }: { params: { clientID: string } }) {
         </Button>
       </Header>
       <main className="flex flex-col items-center">
-        {/* TODO: use skeleton instead of loading text */}
-        <Suspense fallback={<p>loading...</p>}>
+        <Suspense fallback={<ProfileSkeleton />}>
           <Profile clientID={clientID} />
         </Suspense>
         <h3 className="mb-2 flex items-center gap-2">
