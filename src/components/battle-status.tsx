@@ -7,7 +7,7 @@ type BattleStatusProps = {
 export const BattleStatusText = ({ status }: BattleStatusProps) => {
   return (
     <span
-      className={`flex-1 text-center text-xl font-semibold sm:flex-grow-0 ${
+      className={`flex-1 text-center text-xl font-semibold md:flex-grow-0 ${
         status === "draw"
           ? "text-neutral-500"
           : status === "victory"

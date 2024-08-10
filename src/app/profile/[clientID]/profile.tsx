@@ -20,12 +20,12 @@ export const Profile = async ({ clientID }: ProfileProps) => {
   const guildName = guild?.name;
 
   return (
-    <section className="mb-6 flex flex-col items-center justify-center gap-3 self-stretch border-b border-b-neutral-separator-dark bg-neutral-aside-dark p-3 sm:sticky sm:top-0 sm:z-10 sm:bg-neutral-aside-dark/70 sm:backdrop-blur-md">
+    <section className="mb-6 flex flex-col items-center justify-center gap-3 self-stretch border-b border-b-neutral-separator-dark bg-neutral-aside-dark p-3 md:sticky md:top-0 md:z-10 md:bg-neutral-aside-dark/70 md:backdrop-blur-md">
       <div className="flex flex-col items-center">
         <h2 className="max-w-96 text-center text-2xl font-bold text-neutral-100">
           {<ColoredName name={name} />}
         </h2>
-        <div className="hidden sm:block">
+        <div className="hidden md:block">
           <RoninAddress address={clientID} size={12} />
         </div>
       </div>

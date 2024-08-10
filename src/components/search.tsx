@@ -75,7 +75,7 @@ export const Search = () => {
         onChange={handleChange}
         type="text"
         placeholder="Search player battles from RNS or ronin address"
-        className="h-[35px] flex-1 rounded-md border-neutral-separator-dark bg-neutral-aside-dark text-xs text-neutral-100 placeholder:font-light placeholder:text-neutral-icon-dark focus-visible:border-neutral-400 focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-sm"
+        className="h-[35px] flex-1 rounded-md border-neutral-separator-dark bg-neutral-aside-dark text-xs text-neutral-100 placeholder:font-light placeholder:text-neutral-icon-dark focus-visible:border-neutral-400 focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 md:text-sm"
       />
       <Button
         type="submit"
@@ -91,7 +91,7 @@ export const Search = () => {
         </span>
       )}
       {error && (
-        <span className="absolute -bottom-4 left-2 text-xs font-medium italic text-salmon-600 sm:-bottom-1">
+        <span className="absolute -bottom-4 left-2 text-xs font-medium italic text-salmon-600 md:-bottom-1">
           {error}
         </span>
       )}

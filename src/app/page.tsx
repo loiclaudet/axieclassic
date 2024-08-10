@@ -24,7 +24,7 @@ export default async function ArenaPage() {
         }
       />
       <main className="flex flex-1 flex-col">
-        <div className="flex flex-col gap-4 px-4 py-4 sm:sticky sm:top-0 sm:z-10 sm:flex-row sm:gap-12 sm:border-b sm:border-b-neutral-separator-dark sm:bg-neutral-bg-dark/70 sm:backdrop-blur-md">
+        <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12 md:border-b md:border-b-neutral-separator-dark md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
           <Suspense fallback={<SeasonSkeleton />}>
             <Season />
           </Suspense>

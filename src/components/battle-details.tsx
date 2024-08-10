@@ -23,11 +23,11 @@ export const BattleDetails = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-2 px-4 py-1 sm:flex-col sm:p-2",
+        "flex items-center justify-center gap-2 px-4 py-1 md:flex-col md:p-2",
         className,
       )}
     >
-      <div className="flex items-center gap-2 sm:flex-col">
+      <div className="flex items-center gap-2 md:flex-col">
         <Badge pvpType={pvpType} />
         <Duration durationFromNow={durationFromNow} />
       </div>

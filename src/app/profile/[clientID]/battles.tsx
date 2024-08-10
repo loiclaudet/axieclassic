@@ -65,23 +65,23 @@ async function Battle({ battle }: BattleProps) {
 
   return (
     <div className="flex border-y border-b border-y-neutral-separator-dark">
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col md:flex-row">
         <div>
           <p className="pl-4 pt-2 text-sm">
             <ColoredName name={clientProfile.name} />
           </p>
           <Fighters lookRight fighterIDs={playerFighterIDs} />
         </div>
-        <DashedLine className="sm:hidden" />
-        <DashedLine className="hidden sm:block" direction="vertical" />
+        <DashedLine className="md:hidden" />
+        <DashedLine className="hidden md:block" direction="vertical" />
         <BattleDetails
           pvpType={pvpType}
           durationFromNow={durationFromNow}
           status={isDraw ? "draw" : isVictory ? "victory" : "defeat"}
           uuid={uuid}
         />
-        <DashedLine className="hidden sm:block" direction="vertical" />
-        <DashedLine className="sm:hidden" />
+        <DashedLine className="hidden md:block" direction="vertical" />
+        <DashedLine className="md:hidden" />
         <div>
           <Link
             className="group flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"

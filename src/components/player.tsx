@@ -24,7 +24,7 @@ export default function Player({ player }: PlayerProps) {
 
   return (
     <div className="relative flex border-b border-b-neutral-separator-dark">
-      <div className="flex w-12 shrink-0 flex-col sm:w-20">
+      <div className="flex w-12 shrink-0 flex-col md:w-20">
         <div className="flex basis-1/2 items-center justify-center border-b border-dashed border-neutral-separator-dark">
           <div className="flex items-baseline text-neutral-100">
             <span className="text-xs">#</span>
@@ -38,17 +38,17 @@ export default function Player({ player }: PlayerProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col border-l border-dashed border-neutral-separator-dark sm:flex-row">
-        <div className="flex w-60 flex-col gap-2 px-4 py-2 sm:py-4">
+      <div className="flex flex-col border-l border-dashed border-neutral-separator-dark md:flex-row">
+        <div className="flex w-60 flex-col gap-2 px-4 py-2 md:py-4">
           <Link prefetch={false} href={`/profile/${clientID}`}>
-            <h2 className="w-60 text-lg leading-5 text-neutral-100 hover:underline sm:line-clamp-2">
+            <h2 className="w-60 text-lg leading-5 text-neutral-100 hover:underline md:line-clamp-2">
               <ColoredName name={name} />
             </h2>
           </Link>
           {socials && (
             <SocialIcons
               iconClassName="h-6 w-6 rounded-lg px-1 py-0.5"
-              listClassName="sm:mb-3"
+              listClassName="md:mb-3"
               socials={socials}
             />
           )}
@@ -64,7 +64,7 @@ export default function Player({ player }: PlayerProps) {
 
 async function BlinkingGreenOnlineDot() {
   return (
-    <div className="animate-pulse cursor-help select-none text-[8px] sm:text-[6px]">
+    <div className="animate-pulse cursor-help select-none text-[8px] md:text-[6px]">
       🟢
     </div>
   );
@@ -81,7 +81,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
   if ("error" in battles) {
     return (
       <div className="flex flex-col">
-        <div className="hidden sm:flex">
+        <div className="hidden md:flex">
           <Image
             src={`/placeholder.png`}
             width={170}
@@ -101,7 +101,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
             alt="placeholder"
           />
         </div>
-        <div className="flex self-center sm:hidden">
+        <div className="flex self-center md:hidden">
           <Image
             src={`/placeholder.png`}
             width={80}
@@ -121,7 +121,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
             alt="placeholder"
           />
         </div>
-        <p className="w-full pb-2 pl-4 pt-1 text-xs sm:text-center">
+        <p className="w-full pb-2 pl-4 pt-1 text-xs md:text-center">
           ⚠ Error fetching battle data, please reload the page.
         </p>
       </div>
@@ -153,7 +153,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
       {playedRecently && (
         <div
           title={`active less than ${DURATION_IN_MIN}min ago`}
-          className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:left-10"
+          className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10"
         >
           <BlinkingGreenOnlineDot />
         </div>

@@ -42,7 +42,7 @@ export default function RootLayout({
           className={`flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <div className="flex w-full max-w-screen-lg flex-col sm:flex-row sm:border-r sm:border-r-neutral-separator-dark">
+          <div className="flex w-full max-w-screen-lg flex-col md:flex-row md:border-r md:border-r-neutral-separator-dark">
             <Sidenav />
             {children}
           </div>
