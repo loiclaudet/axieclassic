@@ -1,10 +1,13 @@
-import Player from "~/components/player";
+import { Suspense } from "react";
+import { TbSwords as SwordsIcon } from "react-icons/tb";
+import { TbArrowBigUpLineFilled as ArrowUpIcon } from "react-icons/tb";
+import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { getPlayers } from "~/data";
+import { SEASON_CHAMPIONSHIP_QUALIFIED } from "~/lib/constant";
+import { Header } from "~/app/header";
+import Player from "~/components/player";
 import { Search } from "~/components/search";
 import { Season } from "~/components/season";
-import { Suspense } from "react";
-import { Header } from "~/app/header";
-import { TbSwords as SwordsIcon } from "react-icons/tb";
 import { SeasonSkeleton } from "~/components/skeletons";
 
 export const revalidate = 180; // 3 minutes
@@ -36,11 +39,40 @@ export default async function ArenaPage() {
           </div>
         ) : (
           <ul className="flex w-full flex-col overflow-hidden">
-            {players.map((player) => (
-              <li className="bg-neutral-aside-dark" key={player.clientID}>
-                <Player player={player} />
-              </li>
-            ))}
+            {players.map((player, index) => {
+              return (
+                <>
+                  <li
+                    className="relative border-b border-b-neutral-separator-dark bg-neutral-aside-dark"
+                    key={player.clientID}
+                  >
+                    <Player player={player} />
+                  </li>
+                  {index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
+                    <li
+                      key="season-championship-qualified"
+                      className="flex items-center justify-center gap-3 py-2"
+                    >
+                      <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                      <div className="group cursor-pointer rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
+                        <a
+                          href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-1"
+                        >
+                          <span className="group-hover:underline">
+                            Season Championship qualified
+                          </span>
+                          <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" />
+                        </a>
+                      </div>
+                      <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                    </li>
+                  )}
+                </>
+              );
+            })}
           </ul>
         )}
       </main>

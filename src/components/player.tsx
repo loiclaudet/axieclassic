@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { PiStarFourBold as StarIcon } from "react-icons/pi";
+import { FaCircle as CircleIcon } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { pipe } from "fp-ts/lib/function";
@@ -23,7 +24,7 @@ export default function Player({ player }: PlayerProps) {
   const socials = clientSocialsByClientID.get(clientID);
 
   return (
-    <div className="relative flex border-b border-b-neutral-separator-dark">
+    <div className="relative flex">
       <div className="flex w-12 shrink-0 flex-col md:w-20">
         <div className="flex basis-1/2 items-center justify-center border-b border-dashed border-neutral-separator-dark">
           <div className="flex items-baseline text-neutral-100">
@@ -64,9 +65,7 @@ export default function Player({ player }: PlayerProps) {
 
 async function BlinkingGreenOnlineDot() {
   return (
-    <div className="animate-pulse cursor-help select-none text-[8px] md:text-[6px]">
-      🟢
-    </div>
+    <CircleIcon className="h-2 w-2 animate-pulse cursor-help select-none text-seafoam-green-700 md:h-2.5 md:w-2.5" />
   );
 }
 

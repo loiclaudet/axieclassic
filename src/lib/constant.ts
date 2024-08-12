@@ -10,3 +10,5 @@ export const X_RATELIMIT_LIMIT_SECOND = 5;
 }
  */
 export const MAXIMUM_PLAYERS_API_LIMIT = 50;
+
+export const SEASON_CHAMPIONSHIP_QUALIFIED = 16;
