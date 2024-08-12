@@ -23,6 +23,6 @@ const badgeClassNameByPvpType = (pvpType: PvpType) => {
     case "tournament":
       return "bg-mystic-800/30 text-mystic-200";
     case "challenge":
-      return "bg-neutral-800/30 text-neutral-200";
+      return "bg-neutral-400/30 text-neutral-200";
   }
 };
