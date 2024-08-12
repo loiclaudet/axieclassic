@@ -123,3 +123,19 @@ export const SeasonSkeleton = () => {
     </SkeletonTheme>
   );
 };
+
+export const RoninAddressSkeleton = ({ size = 14 }: { size?: number }) => (
+  <div
+    className="flex items-center gap-1"
+    style={{
+      fontSize: `${size}px`,
+    }}
+  >
+    <Skeleton
+      width={120}
+      height={size}
+      baseColor="hsl(227 12% 15%)"
+      highlightColor="hsl(227 8% 23%)"
+    />
+  </div>
+);

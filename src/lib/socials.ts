@@ -1,4 +1,4 @@
-import { ClientID } from "~/lib/definitions";
+import type { ClientID } from "~/lib/definitions";
 
 export type Social = "twitch" | "x" | "youtube" | "facebook";
 type SocialURL =
