@@ -1,18 +1,17 @@
 import { Suspense } from "react";
 import { PiStarFourBold as StarIcon } from "react-icons/pi";
-import { FaCircle as CircleIcon } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { pipe } from "fp-ts/lib/function";
 import type { Player } from "~/lib/definitions";
 import { TeamSkeleton } from "~/components/skeletons";
 import { ColoredName } from "~/components/colored-name";
+import { BlinkingGreenDot } from "~/components/blinking-dot";
+import { SocialIcons } from "~/components/social-icons";
+import { Fighters } from "~/components/fighters";
 import { getArenaBattles } from "~/data";
-import { Fighters } from "./fighters";
-import { SocialIcons } from "./social-icons";
 import { clientSocialsByClientID } from "~/lib/socials";
-
-const DURATION_IN_MIN = 10;
+import { CONSIDERED_ONLINE_DURATION_IN_MIN } from "~/lib/constant";
 
 type PlayerProps = {
   player: Player;
@@ -60,12 +59,6 @@ export default function Player({ player }: PlayerProps) {
         </Suspense>
       </div>
     </div>
-  );
-}
-
-async function BlinkingGreenOnlineDot() {
-  return (
-    <CircleIcon className="h-2 w-2 animate-pulse cursor-help select-none text-seafoam-green-700 md:h-2.5 md:w-2.5" />
   );
 }
 
@@ -136,7 +129,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
   const playedRecently = pipe(
     lastBattle.createdAt,
     getRelativeTimeStamp,
-    isLessThan(DURATION_IN_MIN * 60 * 1000),
+    isLessThan(CONSIDERED_ONLINE_DURATION_IN_MIN * 60 * 1000),
   );
 
   const lastBattleFighterIDs = lastBattle.team.find(
@@ -150,11 +143,8 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
   return (
     <>
       {playedRecently && (
-        <div
-          title={`active less than ${DURATION_IN_MIN}min ago`}
-          className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10"
-        >
-          <BlinkingGreenOnlineDot />
+        <div className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10">
+          <BlinkingGreenDot />
         </div>
       )}
       <Fighters
