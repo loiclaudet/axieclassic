@@ -6,7 +6,7 @@ export const Sidenav = () => (
   <aside className="sticky top-0 hidden h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
     <nav>
       <ul>
-        <li>
+        <li key="arena">
           <Button asChild size="lg" variant="link" className="w-full">
             <Link href="/">
               <SwordsIcon className="h-5 w-5" />

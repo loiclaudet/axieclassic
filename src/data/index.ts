@@ -205,7 +205,10 @@ export async function getProfile(
     );
 
     const data = (await response.json()) as ProfilesResponse;
-    return data.items[0]!;
+    if (!data?.items?.length) {
+      throw new Error("No profile found");
+    }
+    return data.items[0] as Profile;
   } catch (error) {
     console.error(error);
     return {
