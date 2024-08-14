@@ -10,6 +10,8 @@ import type {
   RankedUser,
   Player,
   BattleWithProfiles,
+  AxieDetailsResponse,
+  Axie,
 } from "~/lib/definitions";
 import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
@@ -213,3 +215,30 @@ export async function getProfile(
     };
   }
 }
+
+export const getAxie = async (axieId: string): Promise<Axie | APIError> => {
+  try {
+    const response = await fetch(
+      "https://graphql-gateway.axieinfinity.com/graphql",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          variables: { axieId },
+          query:
+            "query GetAxieDetail($axieId: ID!) { axie(axieId: $axieId) { parts { type class id } class stats { hp morale skill speed } }}",
+        }),
+      },
+    );
+
+    const axieDetails = (await response.json()) as AxieDetailsResponse;
+    return axieDetails.data.axie;
+  } catch (error) {
+    console.error(error);
+    return {
+      error: true,
+      status: 500,
+      message: "Failed to fetch axie",
+    };
+  }
+};

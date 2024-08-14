@@ -15,11 +15,7 @@ import { RoninAddress } from "~/components/ronin-address";
 
 export const revalidate = 0;
 
-export default async function Page({
-  params,
-}: {
-  params: { clientID: string };
-}) {
+export default function Page({ params }: { params: { clientID: string } }) {
   const { clientID } = params;
 
   return (

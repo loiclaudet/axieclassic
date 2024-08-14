@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { FighterIDs } from "~/lib/definitions";
 
 type FightersProps = {
@@ -17,11 +18,7 @@ export const Fighters = ({
         key={fighterID}
         className="duration-400 max-h-[135px] overflow-hidden transition-transform ease-in hover:scale-110"
       >
-        <a
-          href={`https://app.axieinfinity.com/marketplace/axies/${fighterID}/`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href={`/find-similar/${fighterID}`}>
           <Image
             priority={imagePriority}
             key={fighterID}
@@ -31,7 +28,7 @@ export const Fighters = ({
             alt={`Axie #${fighterID}`}
             src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
           />
-        </a>
+        </Link>
       </li>
     ))}
   </ul>

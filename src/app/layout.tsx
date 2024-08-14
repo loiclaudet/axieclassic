@@ -32,8 +32,10 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -46,6 +48,7 @@ export default function RootLayout({
             <Sidenav />
             {children}
           </div>
+          {modal}
         </body>
       </PHProvider>
     </html>

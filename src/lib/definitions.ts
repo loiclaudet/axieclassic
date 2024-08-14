@@ -141,3 +141,40 @@ type Sticker = {
 type Condition = "crit" | "be-crited" | "shieldwall" | "cannon" | "victory";
 
 export type BattleStatus = "victory" | "defeat" | "draw";
+
+export type AxieClass =
+  | "Beast"
+  | "Bug"
+  | "Bird"
+  | "Plant"
+  | "Reptile"
+  | "Aquatic"
+  | "Dawn"
+  | "Dusk"
+  | "Mech";
+
+type AxiePartType = "Eyes" | "Mouth" | "Ears" | "Horn" | "Back" | "Tail";
+
+export type AxiePart = {
+  type: AxiePartType;
+  class: AxieClass;
+  id: string;
+};
+
+export type Stat = "hp" | "morale" | "skill" | "speed";
+
+export type AxieStats = {
+  [key in Stat]: number;
+};
+
+export type Axie = {
+  parts: AxiePart[];
+  class: AxieClass;
+  stats: AxieStats;
+};
+
+export type AxieDetailsResponse = {
+  data: {
+    axie: Axie;
+  };
+};
