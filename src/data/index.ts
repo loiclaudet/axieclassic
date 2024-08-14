@@ -225,7 +225,10 @@ export const getAxie = async (axieId: string): Promise<Axie | APIError> => {
       "https://graphql-gateway.axieinfinity.com/graphql",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": process.env.X_API_KEY_4!,
+        },
         body: JSON.stringify({
           variables: { axieId },
           query:
