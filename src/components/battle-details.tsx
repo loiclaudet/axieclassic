@@ -1,6 +1,6 @@
 import { LuClock as ClockIcon } from "react-icons/lu";
 import { cn } from "~/lib/utils";
-import { BattleStatus, PvpType } from "~/lib/definitions";
+import type { BattleStatus, PvpType } from "~/lib/definitions";
 import { Button } from "./ui/button";
 import { Badge } from "./badge";
 import { BattleStatusText } from "./battle-status";

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { FindSimilarAxie } from "~/components/find-similiar-axie";
-import { getAxie } from "~/data";
+// import { FindSimilarAxie } from "~/components/find-similiar-axie";
+// import { getAxie } from "~/data";
 
 export default async function FindSimilarPage() {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <span className="text-xl">
-        404 -{" "}
+        404&nbsp;-&nbsp;
         <Link className="underline" href={"/"}>
           Back home
         </Link>

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import type { Axie, AxieClass, Stat } from "~/lib/definitions";
 import { createFindSimilarAxieUrl } from "~/lib/find-similar-axie";
