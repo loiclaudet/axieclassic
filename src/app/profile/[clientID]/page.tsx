@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { clientID: string } }) {
         }
       >
         <Button asChild variant="ghost" className="-order-1">
-          <Link href="/">
+          <Link href="/" prefetch={false}>
             <ArrowLeftIcon className="h-6 w-6" />
           </Link>
         </Button>

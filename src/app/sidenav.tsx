@@ -8,7 +8,7 @@ export const Sidenav = () => (
       <ul>
         <li key="arena">
           <Button asChild size="lg" variant="link" className="w-full">
-            <Link href="/">
+            <Link href="/" prefetch={false}>
               <SwordsIcon className="h-5 w-5" />
               Arena
             </Link>

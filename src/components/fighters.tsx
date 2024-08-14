@@ -18,7 +18,7 @@ export const Fighters = ({
         key={fighterID}
         className="duration-400 max-h-[135px] overflow-hidden transition-transform ease-in hover:scale-110"
       >
-        <Link href={`/find-similar/${fighterID}`}>
+        <Link href={`/find-similar/${fighterID}`} prefetch={false}>
           <Image
             priority={imagePriority}
             key={fighterID}
