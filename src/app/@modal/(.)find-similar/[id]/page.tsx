@@ -1,20 +1,15 @@
-import { FindSimilarAxie } from "~/components/find-similiar-axie";
+import { Suspense } from "react";
+import { FindSimilarAxieContent } from "~/components/find-similar-axie-content";
+import type { FindSimilarProps } from "~/components/find-similar-axie-content";
 import { Modal } from "~/components/modal";
-import { getAxie } from "~/data";
+import { FindSimilarSkeleton } from "~/components/skeletons";
 
-export default async function FindSimilarPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const axie = await getAxie(params.id);
-  if ("error" in axie) {
-    throw new Error(axie.message);
-  }
-
+export default function FindSimilarPage({ params }: FindSimilarProps) {
   return (
     <Modal>
-      <FindSimilarAxie axieId={params.id} axie={axie} />
+      <Suspense fallback={<FindSimilarSkeleton />}>
+        <FindSimilarAxieContent params={params} />
+      </Suspense>
     </Modal>
   );
 }

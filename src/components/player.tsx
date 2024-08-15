@@ -38,7 +38,7 @@ export default function Player({ player }: PlayerProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col border-l border-dashed border-neutral-separator-dark md:flex-row">
+      <div className="flex flex-1 flex-col border-l border-dashed border-neutral-separator-dark md:flex-row">
         <div className="flex w-60 flex-col gap-2 px-4 py-2 md:py-4">
           <Link prefetch={false} href={`/profile/${clientID}`}>
             <h2 className="w-60 text-lg leading-5 text-neutral-100 hover:underline md:line-clamp-2">
@@ -72,46 +72,30 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
 
   if ("error" in battles) {
     return (
-      <div className="flex flex-col">
-        <div className="hidden md:flex">
-          <Image
-            src={`/placeholder.png`}
-            width={170}
-            height={90}
-            alt="placeholder"
-          />
-          <Image
-            src={`/placeholder.png`}
-            width={170}
-            height={90}
-            alt="placeholder"
-          />
-          <Image
-            src={`/placeholder.png`}
-            width={170}
-            height={90}
-            alt="placeholder"
-          />
+      <div className="flex flex-1 flex-col items-center">
+        <div className="hidden flex-1 items-center gap-6 md:flex">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Image
+              key={i}
+              className="opacity-50"
+              src={`/body-normal.png`}
+              width={130}
+              height={68}
+              alt="placeholder"
+            />
+          ))}
         </div>
-        <div className="flex self-center md:hidden">
-          <Image
-            src={`/placeholder.png`}
-            width={80}
-            height={110}
-            alt="placeholder"
-          />
-          <Image
-            src={`/placeholder.png`}
-            width={80}
-            height={110}
-            alt="placeholder"
-          />
-          <Image
-            src={`/placeholder.png`}
-            width={80}
-            height={110}
-            alt="placeholder"
-          />
+        <div className="flex gap-6 self-center md:hidden">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Image
+              key={i}
+              className="opacity-50"
+              src={`/body-normal.png`}
+              width={80}
+              height={110}
+              alt="placeholder"
+            />
+          ))}
         </div>
         <p className="w-full pb-2 pl-4 pt-1 text-xs md:text-center">
           ⚠ Error fetching battle data, please reload the page.

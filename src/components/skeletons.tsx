@@ -139,3 +139,28 @@ export const RoninAddressSkeleton = ({ size = 14 }: { size?: number }) => (
     />
   </div>
 );
+
+export const FindSimilarSkeleton = () => (
+  <SkeletonTheme baseColor="hsl(227 12% 15%)" highlightColor="hsl(227 8% 23%)">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:min-h-[330px]">
+      <div className="flex flex-col items-center">
+        <Skeleton width={200} height={32} />
+        <div className="flex items-center gap-1">
+          <Skeleton width={120} height={16} />
+        </div>
+      </div>
+      <div className="flex flex-col items-center gap-4 md:flex-row">
+        <Skeleton width={150} height={112} />
+        <div className="flex flex-col gap-2">
+          <Skeleton width={120} height={20} />
+          <div className="grid grid-cols-2 gap-4">
+            {new Array(4).fill(null).map((_, i) => (
+              <Skeleton key={i} width={50} height={20} />
+            ))}
+          </div>
+        </div>
+      </div>
+      <Skeleton width={200} height={32} />
+    </div>
+  </SkeletonTheme>
+);

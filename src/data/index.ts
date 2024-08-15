@@ -220,31 +220,35 @@ export async function getProfile(
 }
 
 export const getAxie = async (axieId: string): Promise<Axie | APIError> => {
-  try {
-    const response = await fetch(
-      "https://graphql-gateway.axieinfinity.com/graphql",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-Key": process.env.X_API_KEY_4!,
-        },
-        body: JSON.stringify({
-          variables: { axieId },
-          query:
-            "query GetAxieDetail($axieId: ID!) { axie(axieId: $axieId) { parts { type class id } class stats { hp morale skill speed } }}",
-        }),
+  const response = await fetch(
+    "https://graphql-gateway.axieinfinity.com/graphql",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": process.env.X_API_KEY_4!,
       },
-    );
+      body: JSON.stringify({
+        variables: { axieId },
+        query:
+          "query GetAxieDetail($axieId: ID!) { axie(axieId: $axieId) { parts { type class id } class stats { hp morale skill speed } }}",
+      }),
+      next: {
+        tags: [`axie-${axieId}`],
+        revalidate: false,
+      },
+    },
+  );
 
-    const axieDetails = (await response.json()) as AxieDetailsResponse;
-    return axieDetails.data.axie;
-  } catch (error) {
-    console.error(error);
+  if (!response.ok) {
     return {
       error: true,
-      status: 500,
+      status: response.status,
       message: "Failed to fetch axie",
     };
   }
+
+  const axieDetails = (await response.json()) as AxieDetailsResponse;
+
+  return axieDetails.data.axie;
 };

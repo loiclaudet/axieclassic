@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import type { Battle, BattleWithProfiles } from "~/lib/definitions";
 import { BATTLE_LIMIT } from "~/lib/constant";
@@ -7,6 +8,8 @@ import { Fighters } from "~/components/fighters";
 import { DashedLine } from "~/components/ui/dashed-line";
 import { BattleDetails } from "~/components/battle-details";
 import { ColoredName } from "~/components/colored-name";
+import { Button } from "~/components/ui/button";
+import { TbReload as ReloadIcon } from "react-icons/tb";
 
 type BattlesProps = {
   clientID: string;
@@ -16,7 +19,30 @@ export const Battles = async ({ clientID }: BattlesProps) => {
   const battles = await getProfileBattles(clientID, { limit: BATTLE_LIMIT });
 
   if ("error" in battles) {
-    return <p className="flex-grow text-center">{battles.message}</p>;
+    return (
+      <div className="flex flex-col items-center justify-center gap-2">
+        <Image
+          src="/olek-fails.png"
+          width={200}
+          height={200}
+          alt="404 - Page not found"
+        />
+        <div className="text-md w-full pb-2 pt-1 md:text-center">
+          <p className="text-md w-full leading-none md:text-center">
+            Error fetching battle data,
+          </p>
+          <p className="text-md w-full  md:text-center">
+            please reload the page.
+          </p>
+        </div>
+        <Button asChild>
+          <Link href={`/profile/${clientID}`} prefetch={false}>
+            <ReloadIcon className="h-5 w-5" />
+            Reload
+          </Link>
+        </Button>
+      </div>
+    );
   }
 
   if (battles.length === 0) {

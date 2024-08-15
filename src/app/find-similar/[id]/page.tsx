@@ -1,24 +1,14 @@
-import Link from "next/link";
-// import { FindSimilarAxie } from "~/components/find-similiar-axie";
-// import { getAxie } from "~/data";
+import { Suspense } from "react";
+import {
+  FindSimilarAxieContent,
+  type FindSimilarProps,
+} from "~/components/find-similar-axie-content";
+import { FindSimilarSkeleton } from "~/components/skeletons";
 
-export default async function FindSimilarPage() {
+export default function FindSimilarPage({ params }: FindSimilarProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <span className="text-xl">
-        404&nbsp;-&nbsp;
-        <Link className="underline" href={"/"}>
-          Back home
-        </Link>
-      </span>
-    </div>
+    <Suspense fallback={<FindSimilarSkeleton />}>
+      <FindSimilarAxieContent params={params} />
+    </Suspense>
   );
-
-  // const axie = await getAxie("11423254");
-  // if ("error" in axie) {
-  //   // TODO: throw an error and create a custom error page
-  //   return <p>{axie.message}</p>;
-  // }
-
-  // return <FindSimilarAxie axieId={"11423254"} axie={axie} />;
 }

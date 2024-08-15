@@ -38,7 +38,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-4">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:min-h-[330px]">
       <div className="flex flex-col items-center">
         <h2 className="text-3xl font-semibold leading-none">
           find similar axie
@@ -79,7 +79,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
           </TooltipProvider>
         </div>
       </div>
-      <div className="flex flex-col items-center lg:flex-row">
+      <div className="flex flex-col items-center md:flex-row">
         <div
           className={`h-[150px] w-[200px] scale-x-[-1] transform bg-no-repeat`}
           style={{
@@ -103,7 +103,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
           </div>
         </div>
       </div>
-      <Button asChild className="mt-4 px-2 py-1.5 text-lg lg:mt-0">
+      <Button asChild className="mt-4 px-2 py-1.5 text-lg md:mt-0">
         <a
           target="_blank"
           rel="noreferrer"
