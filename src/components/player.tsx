@@ -55,7 +55,7 @@ export default function Player({ player }: PlayerProps) {
           <p className="text-sm text-neutral-icon-dark">{guildName}</p>
         </div>
         <Suspense fallback={<TeamSkeleton />}>
-          <Team clientID={clientID} teamImagePriority={rank <= 3} />
+          <Team clientID={clientID} />
         </Suspense>
       </div>
     </div>
@@ -64,10 +64,9 @@ export default function Player({ player }: PlayerProps) {
 
 type TeamProps = {
   clientID: string;
-  teamImagePriority?: boolean;
 };
 
-async function Team({ clientID, teamImagePriority }: TeamProps) {
+async function Team({ clientID }: TeamProps) {
   const battles = await getArenaBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
@@ -91,7 +90,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
               key={i}
               className="opacity-50"
               src={`/body-normal.png`}
-              width={80}
+              width={82}
               height={110}
               alt="placeholder"
             />
@@ -131,10 +130,7 @@ async function Team({ clientID, teamImagePriority }: TeamProps) {
           <BlinkingGreenDot />
         </div>
       )}
-      <Fighters
-        fighterIDs={lastBattleFighterIDs}
-        imagePriority={teamImagePriority}
-      />
+      <Fighters fighterIDs={lastBattleFighterIDs} />
     </>
   );
 }

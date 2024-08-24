@@ -55,7 +55,7 @@ export const Battles = async ({ clientID }: BattlesProps) => {
   }
 
   return (
-    <ul className="flex flex-col gap-4 overflow-hidden">
+    <ul className="flex w-full flex-col gap-4 overflow-hidden md:w-auto">
       {battles.map((battle) => {
         return (
           <li key={battle.uuid} className="bg-neutral-aside-dark">
@@ -91,8 +91,8 @@ async function Battle({ battle }: BattleProps) {
 
   return (
     <div className="flex border-y border-b border-y-neutral-separator-dark">
-      <div className="flex flex-col md:flex-row">
-        <div>
+      <div className="flex w-full flex-col md:w-auto md:flex-row">
+        <div className="self-center md:self-auto">
           <p className="pl-4 pt-2 text-sm">
             <ColoredName name={clientProfile.name} />
           </p>
@@ -108,9 +108,9 @@ async function Battle({ battle }: BattleProps) {
         />
         <DashedLine className="hidden md:block" direction="vertical" />
         <DashedLine className="md:hidden" />
-        <div>
+        <div className="self-center md:self-auto">
           <Link
-            className="group flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"
+            className="group inline-flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"
             prefetch={false}
             href={`/profile/${opponentID}`}
           >

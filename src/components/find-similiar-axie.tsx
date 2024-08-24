@@ -38,7 +38,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:min-h-[330px]">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:min-h-[330px]">
       <div className="flex flex-col items-center">
         <h2 className="text-3xl font-semibold leading-none">
           find similar axie

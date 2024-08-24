@@ -1,34 +1,33 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { FighterIDs } from "~/lib/definitions";
+import { cn } from "~/lib/utils";
 
 type FightersProps = {
   fighterIDs: FighterIDs;
   lookRight?: boolean;
-  imagePriority?: boolean;
 };
-export const Fighters = ({
-  fighterIDs,
-  lookRight = false,
-  imagePriority,
-}: FightersProps) => (
-  <ul className="flex">
+export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
+  <ul className="flex items-center">
     {fighterIDs.map((fighterID) => (
       <li
         key={fighterID}
-        className="duration-400 max-h-[135px] overflow-hidden transition-transform ease-in hover:scale-110"
+        className={cn(
+          lookRight && "scale-x-[-1] transform",
+          " max-h-[82px] max-w-[110px] md:max-h-[112px] md:max-w-[150px]",
+        )}
       >
-        <Link href={`/find-similar/${fighterID}`} prefetch={false}>
-          <Image
-            priority={imagePriority}
-            key={fighterID}
-            width={180}
-            height={135}
-            className={`object-contain ${lookRight ? "scale-x-[-1] transform" : ""}`}
-            alt={`Axie #${fighterID}`}
-            src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
-          />
-        </Link>
+        <div className="duration-400 overflow-hidden transition-transform ease-in hover:scale-110">
+          <Link href={`/find-similar/${fighterID}`} prefetch={false}>
+            <div
+              className="h-[82px] w-[110px] scale-90 bg-no-repeat md:h-[112px] md:w-[150px]"
+              style={{
+                backgroundImage: `url(https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png)`,
+                backgroundSize: "140%",
+                backgroundPosition: "40% 20%",
+              }}
+            />
+          </Link>
+        </div>
       </li>
     ))}
   </ul>

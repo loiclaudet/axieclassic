@@ -63,7 +63,7 @@ export const BattleSkeleton = () => (
           <p className="pl-4 pt-2">
             <Skeleton width={120} height={16} />
           </p>
-          <TeamSkeleton width={100} />
+          <TeamSkeleton width={120} />
         </div>
         <DashedLine className="md:hidden" />
         <DashedLine className="hidden md:block" direction="vertical" />
@@ -90,7 +90,7 @@ export const BattleSkeleton = () => (
           <p className="flex items-center gap-1 pb-0 pl-4 pt-2">
             <Skeleton width={120} height={16} />
           </p>
-          <TeamSkeleton width={100} />
+          <TeamSkeleton width={120} />
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@ export const RoninAddressSkeleton = ({ size = 14 }: { size?: number }) => (
 
 export const FindSimilarSkeleton = () => (
   <SkeletonTheme baseColor="hsl(227 12% 15%)" highlightColor="hsl(227 8% 23%)">
-    <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:min-h-[330px]">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:min-h-[330px]">
       <div className="flex flex-col items-center">
         <Skeleton width={200} height={32} />
         <div className="flex items-center gap-1">
