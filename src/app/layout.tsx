@@ -5,6 +5,8 @@ import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { Sidenav } from "./sidenav";
 import { PHProvider } from "./providers";
+import { TopBanner } from "~/components/top-banner";
+import { LiveChampionShip } from "~/components/live-championship";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -41,8 +43,12 @@ export default function RootLayout({
     <html lang="en">
       <PHProvider>
         <body
-          className={`flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
+          className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
+          <TopBanner className="bg-mystic-600/90 text-neutral-100">
+            <LiveChampionShip />
+          </TopBanner>
+
           <PostHogPageView />
           <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row md:border-r md:border-r-neutral-separator-dark">
             <Sidenav />
