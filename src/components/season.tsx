@@ -17,7 +17,11 @@ export const Season = async () => {
   const timeLeft = calculateTimeLeft(customEndTime);
 
   if (!hasStarted || !timeLeft) {
-    return <div>Off season 😴</div>;
+    return (
+      <div className="flex flex-col items-center justify-center">
+        Off season 😴
+      </div>
+    );
   }
 
   return (

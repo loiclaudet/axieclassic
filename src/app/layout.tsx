@@ -3,10 +3,8 @@ import "~/styles/globals.css";
 import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
-import { Sidenav } from "./sidenav";
 import { PHProvider } from "./providers";
-import { TopBanner } from "~/components/top-banner";
-import { LiveChampionShip } from "~/components/live-championship";
+import { Navigation } from "~/components/navigation";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -46,8 +44,10 @@ export default function RootLayout({
           className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row md:border-r md:border-r-neutral-separator-dark">
-            <Sidenav />
+          <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row">
+            <aside className="sticky top-0 hidden h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
+              <Navigation />
+            </aside>
             {children}
           </div>
           {modal}

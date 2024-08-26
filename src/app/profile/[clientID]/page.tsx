@@ -33,7 +33,7 @@ export default function Page({ params }: { params: { clientID: string } }) {
           </Link>
         </Button>
       </Header>
-      <main className="flex w-full flex-col items-center md:w-auto">
+      <main className="flex w-full flex-col items-center border-r border-r-neutral-separator-dark md:w-auto lg:w-[987px]">
         <Suspense fallback={<ProfileSkeleton />}>
           <Profile clientID={clientID} />
         </Suspense>

@@ -110,11 +110,11 @@ async function Battle({ battle }: BattleProps) {
         <DashedLine className="md:hidden" />
         <div className="self-center md:self-auto">
           <Link
-            className="group inline-flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"
+            className="group mr-2 inline-flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"
             prefetch={false}
             href={`/profile/${opponentID}`}
           >
-            <p className="text-sm">
+            <p className="max-w-full truncate text-sm md:max-w-[400px]">
               <ColoredName name={opponentProfile.name} />
             </p>
             <ExternalLinkIcon className="h-3 w-3 text-neutral-100 transition-all group-hover:scale-125" />

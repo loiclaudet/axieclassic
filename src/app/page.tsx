@@ -26,55 +26,57 @@ export default async function ArenaPage() {
           </div>
         }
       />
-      <main className="flex flex-1 flex-col">
-        <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12 md:border-b md:border-b-neutral-separator-dark md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
-          <Suspense fallback={<SeasonSkeleton />}>
-            <Season />
-          </Suspense>
-          <Search />
-        </div>
-        {isError ? (
-          <div className="flex h-96 items-center justify-center">
-            <p className="text-lg text-neutral-100">{players.message}</p>
+      <main className="flex flex-col items-start lg:w-[987px]">
+        <div className="flex flex-col border-r border-r-neutral-separator-dark">
+          <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12  md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
+            <Suspense fallback={<SeasonSkeleton />}>
+              <Season />
+            </Suspense>
+            <Search />
           </div>
-        ) : (
-          <ul className="flex w-full flex-col overflow-hidden">
-            {players.map((player, index) => {
-              return (
-                <>
-                  <li
-                    className="relative border-b border-b-neutral-separator-dark bg-neutral-aside-dark"
-                    key={player.clientID}
-                  >
-                    <Player player={player} />
-                  </li>
-                  {index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
+          {isError ? (
+            <div className="flex h-96 items-center justify-center">
+              <p className="text-lg text-neutral-100">{players.message}</p>
+            </div>
+          ) : (
+            <ul className="flex flex-col md:border-t md:border-t-neutral-separator-dark">
+              {players.map((player, index) => {
+                return (
+                  <>
                     <li
-                      key="season-championship-qualified"
-                      className="flex items-center justify-center gap-3 py-2"
+                      className="relative border-b border-b-neutral-separator-dark bg-neutral-aside-dark"
+                      key={player.clientID}
                     >
-                      <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
-                      <div className="group cursor-pointer rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
-                        <a
-                          href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-1"
-                        >
-                          <span className="group-hover:underline">
-                            Season Championship qualified
-                          </span>
-                          <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" />
-                        </a>
-                      </div>
-                      <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                      <Player player={player} />
                     </li>
-                  )}
-                </>
-              );
-            })}
-          </ul>
-        )}
+                    {index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
+                      <li
+                        key="season-championship-qualified"
+                        className="flex items-center justify-center gap-3 py-2"
+                      >
+                        <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                        <div className="group cursor-pointer rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
+                          <a
+                            href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-1"
+                          >
+                            <span className="group-hover:underline">
+                              Season Championship qualified
+                            </span>
+                            <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" />
+                          </a>
+                        </div>
+                        <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                      </li>
+                    )}
+                  </>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </main>
     </>
   );

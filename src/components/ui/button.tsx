@@ -26,6 +26,7 @@ const buttonVariants = cva(
         default: "px-1.5 py-0.5 text-md",
         sm: "px-1.5 py-0.1 text-sm",
         lg: "px-2 py-1 text-xl",
+        xl: "px-2 py-1 text-4xl font-semibold gap-3",
         icon: "px-1.5 py-1",
       },
     },
