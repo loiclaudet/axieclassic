@@ -45,10 +45,6 @@ export default function RootLayout({
         <body
           className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
-          <TopBanner className="bg-mystic-600/90 text-neutral-100">
-            <LiveChampionShip />
-          </TopBanner>
-
           <PostHogPageView />
           <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row md:border-r md:border-r-neutral-separator-dark">
             <Sidenav />
