@@ -22,7 +22,7 @@ export const Battles = async ({ clientID }: BattlesProps) => {
     return (
       <div className="flex flex-col items-center justify-center gap-2">
         <Image
-          src="/olek-fails.png"
+          src="/axie-sleep.png"
           width={200}
           height={200}
           alt="404 - Page not found"

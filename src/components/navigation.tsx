@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { Button } from "~/components/ui/button";
 import { TbSwords as SwordsIcon } from "react-icons/tb";
 import { LuBookOpenCheck as BookOpenCheckIcon } from "react-icons/lu";
+import { GiSwordsEmblem as GuildIcon } from "react-icons/gi";
+
 import { cn } from "~/lib/utils";
 
 type NavigationProps = {
@@ -48,6 +50,34 @@ export const Navigation = ({
             </Link>
           </Button>
         </li>
+        <li className="relative" key="guilds">
+          <Button
+            asChild
+            size={buttonSize}
+            variant="link"
+            className="w-full"
+            onClick={onNavigate}
+          >
+            <Link href="/guilds" prefetch={false}>
+              <GuildIcon
+                className={cn(
+                  getButtonClassNameBySize(buttonSize),
+                  pathname === "/guilds" && "text-neutral-100",
+                )}
+              />
+              <span
+                className={cn(pathname === "/guilds" && "text-neutral-100")}
+              >
+                Guilds
+              </span>
+            </Link>
+          </Button>
+          <div
+            className={`absolute bottom-1/2 right-1.5 translate-y-1/2 rounded-full bg-peach-800/30 px-1.5 py-px text-[9px] text-peach-200`}
+          >
+            beta
+          </div>
+        </li>
         <li key="learn">
           <Button
             asChild
@@ -69,9 +99,6 @@ export const Navigation = ({
             </a>
           </Button>
         </li>
-        {/* <li>
-      <Link href="/guild">Guild</Link>
-    </li> */}
       </ul>
     </nav>
   );

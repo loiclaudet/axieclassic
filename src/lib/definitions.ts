@@ -29,6 +29,7 @@ export type Team = {
 export type FighterIDs = [number, number, number];
 
 export type ClientID = string;
+export type GuildID = string;
 
 export type RankedUsersResponse = {
   items: RankedUser[];
@@ -108,11 +109,6 @@ export type ProfilesResponse = {
   items: Profile[];
 };
 
-type Guild = {
-  id: string;
-  name: string;
-};
-
 type Banner =
   | "dawn"
   | "dusk"
@@ -177,4 +173,53 @@ export type AxieDetailsResponse = {
   data: {
     axie: Axie;
   };
+};
+
+export type Guild = {
+  id: string;
+  name: string;
+  avatar: string;
+  description: string;
+  ownerID: string;
+  countryCode: string;
+  xps: number;
+  memberCounts: number;
+  memberLimits: number;
+  level: number;
+  passwordRequired: boolean;
+  verified: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GuilUsersResponse = {
+  items: GuildUser[];
+};
+
+export type GuildUser = {
+  clientID: string;
+  role: string;
+  contributionPoints: number;
+  guildPoints: number;
+  joinedAt: string;
+};
+
+export type GuildsLeaderboardResponse = {
+  items: RankedGuild[];
+  pagination: Pagination;
+};
+
+type Pagination = {
+  hasNext: boolean;
+  limit: number;
+  offset: number;
+};
+
+export type RankedGuild = {
+  id: string;
+  name: string;
+  rank: number;
+  totalGuildPoints: number;
+  countryCode: string;
+  avatar: string;
 };

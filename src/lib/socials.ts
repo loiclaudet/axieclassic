@@ -1,17 +1,45 @@
-import type { ClientID } from "~/lib/definitions";
+import type { ClientID, GuildID } from "~/lib/definitions";
 
-export type Social = "twitch" | "x" | "youtube" | "facebook";
+export type Social = "twitch" | "x" | "youtube" | "facebook" | "discord";
 type SocialURL =
   | "https://www.twitch.tv/"
   | "https://x.com/"
   | "https://www.youtube.com/"
-  | "https://www.facebook.com/";
+  | "https://www.facebook.com/"
+  | "https://discord.gg/";
 
-export type ClientSocials = {
+export type Socials = {
   [key in Social]?: string;
 };
 
-export const clientSocialsByClientID = new Map<ClientID, ClientSocials>([
+export const guildSocialsByGuildID = new Map<GuildID, Socials>([
+  [
+    "aQEiobGq", // Wolf Gang
+    {
+      discord: "b8BK8T4Q5t",
+    },
+  ],
+  [
+    "SIVQWj8z", // Kokushibo
+    {
+      discord: "j9rxWeDyxU",
+    },
+  ],
+  [
+    "hbAk12xG", // Crit-Theory Gaming
+    {
+      discord: "crit-theory",
+    },
+  ],
+  [
+    "KWOBSIV7", //Monarchs guild
+    {
+      discord: "KFEWGQ34Cr",
+    },
+  ],
+]);
+
+export const userSocialsByClientID = new Map<ClientID, Socials>([
   [
     "0x2c6be461ad32f18456b794394d64030ee5eee5bd",
     {
@@ -69,4 +97,5 @@ export const socialURLBySocial = new Map<Social, SocialURL>([
   ["x", "https://x.com/"],
   ["youtube", "https://www.youtube.com/"],
   ["facebook", "https://www.facebook.com/"],
+  ["discord", "https://discord.gg/"],
 ]);
