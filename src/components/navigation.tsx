@@ -73,7 +73,7 @@ export const Navigation = ({
             </Link>
           </Button>
           <div
-            className={`absolute bottom-1/2 right-1.5 translate-y-1/2 rounded-full bg-peach-800/30 px-1.5 py-px text-[9px] text-peach-200`}
+            className={`absolute bottom-1/2 right-1.5 hidden translate-y-1/2 rounded-full bg-peach-800/30 px-1.5 py-px text-[9px] text-peach-200 md:block`}
           >
             beta
           </div>

@@ -73,7 +73,7 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
           </div>
           <div className="flex flex-col gap-1 md:gap-2">
             {/* <Link prefetch={false} href={`/guilds/${id}`}> */}
-            <h2 className="text-lg leading-5 text-neutral-100 md:line-clamp-2 md:text-xl">
+            <h2 className="text-base leading-5 text-neutral-100 md:line-clamp-2 md:text-xl">
               {name}
             </h2>
             {/* </Link> */}
