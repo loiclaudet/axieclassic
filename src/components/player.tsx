@@ -10,7 +10,7 @@ import { BlinkingGreenDot } from "~/components/blinking-dot";
 import { SocialIcons } from "~/components/social-icons";
 import { Fighters } from "~/components/fighters";
 import { getArenaBattles } from "~/data";
-import { clientSocialsByClientID } from "~/lib/socials";
+import { userSocialsByClientID } from "~/lib/socials";
 import { CONSIDERED_ONLINE_DURATION_IN_MIN } from "~/lib/constant";
 
 type PlayerProps = {
@@ -20,7 +20,7 @@ type PlayerProps = {
 export default function Player({ player }: PlayerProps) {
   const { name, score, rank, clientID, guild } = player;
   const guildName = guild?.name;
-  const socials = clientSocialsByClientID.get(clientID);
+  const socials = userSocialsByClientID.get(clientID);
 
   return (
     <div className="relative flex">

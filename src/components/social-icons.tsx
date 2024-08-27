@@ -2,7 +2,8 @@ import { LuTwitch as TwitchIcon } from "react-icons/lu";
 import { FaXTwitter as XIcon } from "react-icons/fa6";
 import { LuFacebook as FacebookIcon } from "react-icons/lu";
 import { LuYoutube as YoutubeIcon } from "react-icons/lu";
-import type { ClientSocials, Social } from "~/lib/socials";
+import { AiOutlineDiscord as DiscordIcon } from "react-icons/ai";
+import type { Socials, Social } from "~/lib/socials";
 import { socialURLBySocial } from "~/lib/socials";
 import { Button } from "./ui/button";
 import { cn } from "~/lib/utils";
@@ -12,10 +13,11 @@ const socialIconBySocial = new Map<Social, React.ElementType>([
   ["x", XIcon],
   ["facebook", FacebookIcon],
   ["youtube", YoutubeIcon],
+  ["discord", DiscordIcon],
 ]);
 
 type SocialIconsProps = {
-  socials: ClientSocials;
+  socials: Socials;
   iconClassName?: string;
   listClassName?: string;
 };

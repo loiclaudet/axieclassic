@@ -1,5 +1,5 @@
 import { getProfile } from "~/data";
-import { clientSocialsByClientID } from "~/lib/socials";
+import { userSocialsByClientID } from "~/lib/socials";
 
 import { RoninAddress } from "~/components/ronin-address";
 import { ColoredName } from "~/components/colored-name";
@@ -10,7 +10,7 @@ type ProfileProps = {
 };
 
 export const Profile = async ({ clientID }: ProfileProps) => {
-  const socials = clientSocialsByClientID.get(clientID);
+  const socials = userSocialsByClientID.get(clientID);
 
   const profile = await getProfile(clientID);
   if ("error" in profile) {

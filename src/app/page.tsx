@@ -56,17 +56,19 @@ export default async function ArenaPage() {
                       >
                         <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
                         <div className="group cursor-pointer rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
-                          <a
+                          {/* <a
                             href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-1"
-                          >
+                          > */}
+                          <div className="flex items-center justify-center gap-1">
                             <span className="group-hover:underline">
                               Season Championship qualified
                             </span>
                             <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" />
-                          </a>
+                          </div>
+                          {/* </a> */}
                         </div>
                         <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
                       </li>
