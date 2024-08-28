@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { getProfile } from "~/data";
 import { userSocialsByClientID } from "~/lib/socials";
-
+import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { RoninAddress } from "~/components/ronin-address";
 import { ColoredName } from "~/components/colored-name";
 import { SocialIcons } from "~/components/social-icons";
@@ -17,7 +18,6 @@ export const Profile = async ({ clientID }: ProfileProps) => {
     return <p className="flex-grow text-center">{profile.message}</p>;
   }
   const { name, guild } = profile;
-  const guildName = guild?.name;
 
   return (
     <section className="mb-6 flex flex-col items-center justify-center gap-3 self-stretch border-b border-b-neutral-separator-dark bg-neutral-aside-dark p-3 md:sticky md:top-0 md:z-10 md:bg-neutral-aside-dark/70 md:backdrop-blur-md">
@@ -30,10 +30,14 @@ export const Profile = async ({ clientID }: ProfileProps) => {
         </div>
       </div>
       {socials && <SocialIcons socials={socials} />}
-      {guildName && (
-        <p className="text-center text-sm text-neutral-icon-dark">
-          {guildName}
-        </p>
+      {guild && (
+        <Link
+          className="group inline-flex items-center gap-1 transition-colors hover:text-neutral-100 hover:underline"
+          href={`/guilds/${guild.id}`}
+        >
+          <p className="text-center text-sm hover:underline">{guild.name}</p>
+          <ExternalLinkIcon className="h-3 w-3 text-neutral-100 transition-all group-hover:scale-125" />
+        </Link>
       )}
     </section>
   );

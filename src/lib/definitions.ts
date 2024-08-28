@@ -198,7 +198,7 @@ export type GuilUsersResponse = {
 
 export type GuildUser = {
   clientID: string;
-  role: string;
+  role: "member" | "intern" | "commander" | "owner";
   contributionPoints: number;
   guildPoints: number;
   joinedAt: string;
