@@ -28,7 +28,7 @@ export default async function ArenaPage() {
       />
       <main className="flex flex-col items-start lg:w-[987px]">
         <div className="flex flex-col border-r border-r-neutral-separator-dark">
-          <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12  md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
+          <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12 md:border-b md:border-b-neutral-separator-dark md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
             <Suspense fallback={<SeasonSkeleton />}>
               <Season />
             </Suspense>
@@ -39,7 +39,7 @@ export default async function ArenaPage() {
               <p className="text-lg text-neutral-100">{players.message}</p>
             </div>
           ) : (
-            <ul className="flex flex-col md:border-t md:border-t-neutral-separator-dark">
+            <ul className="flex flex-col">
               {players.map((player, index) => {
                 return (
                   <>
@@ -55,7 +55,7 @@ export default async function ArenaPage() {
                         className="flex items-center justify-center gap-3 py-2"
                       >
                         <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
-                        <div className="group cursor-pointer rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
+                        <div className="group cursor-default rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
                           {/* <a
                             href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
                             target="_blank"
@@ -63,10 +63,9 @@ export default async function ArenaPage() {
                             className="flex items-center justify-center gap-1"
                           > */}
                           <div className="flex items-center justify-center gap-1">
-                            <span className="group-hover:underline">
-                              Season Championship qualified
-                            </span>
-                            <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" />
+                            {/* <span className="group-hover:underline"> */}
+                            <span>Season Championship qualified</span>
+                            {/* <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" /> */}
                           </div>
                           {/* </a> */}
                         </div>

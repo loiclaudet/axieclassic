@@ -1,10 +1,9 @@
-// import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { getGuildsLeaderboard } from "~/data/guild";
 import type { RankedGuild } from "~/lib/definitions";
 import emojiFlags from "emoji-flags";
-import { TbHexagonLetterP as GuildPointIcon } from "react-icons/tb";
-// import { LuUsers as UsersIcon } from "react-icons/lu";
+import { TbHexagonLetterG as GuildPointIcon } from "react-icons/tb";
 import { SocialIcons } from "~/components/social-icons";
 import { guildSocialsByGuildID } from "~/lib/socials";
 
@@ -20,7 +19,7 @@ export const Guilds = async () => {
   }
 
   return (
-    <ul className="flex flex-col border-t border-t-neutral-separator-dark md:min-w-[768px] md:border-r md:border-r-neutral-separator-dark">
+    <ul className="flex flex-col md:min-w-[768px] md:border-r md:border-r-neutral-separator-dark">
       {guilds.map((guild) => (
         <li
           key={guild.id}
@@ -35,6 +34,7 @@ export const Guilds = async () => {
 
 const Guild = ({ guild }: { guild: RankedGuild }) => {
   const { name, avatar, rank, totalGuildPoints, countryCode, id } = guild;
+  const country = emojiFlags.countryCode(countryCode);
   const socials = guildSocialsByGuildID.get(id);
   return (
     <div className="relative flex">
@@ -56,30 +56,31 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
       </div>
       <div className="flex flex-1 flex-col border-l border-dashed border-neutral-separator-dark md:flex-row">
         <div className="flex items-center gap-4 px-4 py-2">
-          <div className="h-14 w-14 md:h-20 md:w-20">
-            <Image
-              src={
-                avatar === "custom"
-                  ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/custom-guild-avatar/${id}.png`
-                  : avatar === "default"
-                    ? `/guild-avatars/avatar_20.png`
-                    : `/guild-avatars/${avatar}.png`
-              }
-              width={80}
-              height={80}
-              objectFit="contain"
-              alt={name}
-            />
-          </div>
+          <Link prefetch={false} href={`/guilds/${id}`}>
+            <div className="h-14 w-14 transition-transform hover:scale-105 md:h-[75px] md:w-[75px] ">
+              <Image
+                src={
+                  avatar === "custom"
+                    ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/custom-guild-avatar/${id}.png`
+                    : avatar === "default"
+                      ? `/guild-avatars/avatar_20.png`
+                      : `/guild-avatars/${avatar}.png`
+                }
+                width={75}
+                height={75}
+                alt={name}
+              />
+            </div>
+          </Link>
           <div className="flex flex-col gap-1 md:gap-2">
-            {/* <Link prefetch={false} href={`/guilds/${id}`}> */}
-            <h2 className="text-base leading-5 text-neutral-100 md:line-clamp-2 md:text-xl">
-              {name}
-            </h2>
-            {/* </Link> */}
+            <Link prefetch={false} href={`/guilds/${id}`}>
+              <h2 className="text-base leading-5 text-neutral-100 hover:underline md:line-clamp-2 md:text-xl">
+                {name}
+              </h2>
+            </Link>
             <div className="flex gap-2">
-              <span className="text-xl">
-                {emojiFlags.countryCode(countryCode).emoji}
+              <span title={country.name} className="cursor-default text-xl">
+                {country.emoji}
               </span>
               {socials && (
                 <SocialIcons

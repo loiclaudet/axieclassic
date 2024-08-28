@@ -1,17 +1,13 @@
 import { Suspense } from "react";
 import { PiStarFourBold as StarIcon } from "react-icons/pi";
-import Image from "next/image";
+import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import Link from "next/link";
-import { pipe } from "fp-ts/lib/function";
 import type { Player } from "~/lib/definitions";
 import { TeamSkeleton } from "~/components/skeletons";
 import { ColoredName } from "~/components/colored-name";
-import { BlinkingGreenDot } from "~/components/blinking-dot";
 import { SocialIcons } from "~/components/social-icons";
-import { Fighters } from "~/components/fighters";
-import { getArenaBattles } from "~/data";
 import { userSocialsByClientID } from "~/lib/socials";
-import { CONSIDERED_ONLINE_DURATION_IN_MIN } from "~/lib/constant";
+import { Team } from "~/components/team";
 
 type PlayerProps = {
   player: Player;
@@ -19,7 +15,6 @@ type PlayerProps = {
 
 export default function Player({ player }: PlayerProps) {
   const { name, score, rank, clientID, guild } = player;
-  const guildName = guild?.name;
   const socials = userSocialsByClientID.get(clientID);
 
   return (
@@ -52,7 +47,17 @@ export default function Player({ player }: PlayerProps) {
               socials={socials}
             />
           )}
-          <p className="text-sm text-neutral-icon-dark">{guildName}</p>
+          {guild && (
+            <Link
+              className="group inline-flex items-center gap-1 transition-colors hover:text-neutral-100 hover:underline"
+              href={`/guilds/${guild.id}`}
+            >
+              <p className="text-center text-sm hover:underline">
+                {guild.name}
+              </p>
+              <ExternalLinkIcon className="h-3 w-3 text-neutral-100 transition-all group-hover:scale-125" />
+            </Link>
+          )}
         </div>
         <Suspense fallback={<TeamSkeleton />}>
           <Team clientID={clientID} />
@@ -61,81 +66,3 @@ export default function Player({ player }: PlayerProps) {
     </div>
   );
 }
-
-type TeamProps = {
-  clientID: string;
-};
-
-async function Team({ clientID }: TeamProps) {
-  const battles = await getArenaBattles(clientID, { limit: 1 });
-
-  if ("error" in battles) {
-    return (
-      <div className="flex flex-1 flex-col items-center">
-        <div className="hidden flex-1 items-center gap-6 md:flex">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Image
-              key={i}
-              className="opacity-50"
-              src={`/body-normal.png`}
-              width={130}
-              height={68}
-              alt="placeholder"
-            />
-          ))}
-        </div>
-        <div className="flex gap-6 self-center md:hidden">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <Image
-              key={i}
-              className="opacity-50"
-              src={`/body-normal.png`}
-              width={82}
-              height={110}
-              alt="placeholder"
-            />
-          ))}
-        </div>
-        <p className="w-full pb-2 pl-4 pt-1 text-xs md:text-center">
-          ⚠ Error fetching battle data, please reload the page.
-        </p>
-      </div>
-    );
-  }
-
-  const lastBattle = battles.items[0];
-
-  if (!lastBattle) {
-    return <p className="flex-grow text-center">no battles</p>;
-  }
-
-  const playedRecently = pipe(
-    lastBattle.createdAt,
-    getRelativeTimeStamp,
-    isLessThan(CONSIDERED_ONLINE_DURATION_IN_MIN * 60 * 1000),
-  );
-
-  const lastBattleFighterIDs = lastBattle.team.find(
-    (team) => team.owner === clientID,
-  )?.fighterIDs;
-
-  if (!lastBattleFighterIDs) {
-    return <p>no team</p>;
-  }
-
-  return (
-    <>
-      {playedRecently && (
-        <div className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10">
-          <BlinkingGreenDot />
-        </div>
-      )}
-      <Fighters fighterIDs={lastBattleFighterIDs} />
-    </>
-  );
-}
-
-const getRelativeTimeStamp = (dateString: string) =>
-  Date.now() - Date.parse(dateString);
-
-const isLessThan = (threshold: number) => (n: number) => n < threshold;
