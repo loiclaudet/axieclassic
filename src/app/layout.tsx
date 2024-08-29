@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
@@ -24,10 +25,28 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Axie Classic",
   description: "Axie classic leaderboards and stats",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  authors: [
+    {
+      name: "0xlodz",
+      url: "https://x.com/0xlodz",
+    },
+  ],
+  openGraph: {
+    title: "Axie Classic",
+    description: "Axie classic leaderboards and stats.",
+    images: [
+      {
+        url: "/opengraph-axie-classic.png",
+        width: 200,
+        height: 200,
+        alt: "about axie classic",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
