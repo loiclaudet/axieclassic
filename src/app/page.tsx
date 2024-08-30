@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { TbSwords as SwordsIcon } from "react-icons/tb";
 import { TbArrowBigUpLineFilled as ArrowUpIcon } from "react-icons/tb";
-import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { getPlayers } from "~/data";
 import { SEASON_CHAMPIONSHIP_QUALIFIED } from "~/lib/constant";
 import { Header } from "~/app/header";
@@ -56,18 +55,9 @@ export default async function ArenaPage() {
                       >
                         <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
                         <div className="group cursor-default rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
-                          {/* <a
-                            href="https://blog.axieinfinity.com/i/146870946/s-season-championship"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-1"
-                          > */}
                           <div className="flex items-center justify-center gap-1">
-                            {/* <span className="group-hover:underline"> */}
                             <span>Season Championship qualified</span>
-                            {/* <ExternalLinkIcon className="h-4 w-4 transition-all group-hover:scale-110" /> */}
                           </div>
-                          {/* </a> */}
                         </div>
                         <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
                       </li>

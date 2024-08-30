@@ -16,6 +16,10 @@ export const getGuild = async (guildId: string): Promise<Guild | APIError> => {
       headers: {
         "Content-Type": "application/json",
       },
+
+      next: {
+        revalidate: 3600 * 24, // 1 day
+      },
     },
   );
 
@@ -41,6 +45,9 @@ export const getGuildUsers = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+      },
+      next: {
+        revalidate: 300, // 5 minutes
       },
     },
   );

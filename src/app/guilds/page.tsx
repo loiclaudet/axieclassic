@@ -5,6 +5,8 @@ import { Season } from "~/components/season";
 import { Header } from "~/app/header";
 import { GiSwordsEmblem as GuildIcon } from "react-icons/gi";
 
+export const revalidate = 1800; // 30 minutes
+
 export default function GuildsPage() {
   return (
     <>
