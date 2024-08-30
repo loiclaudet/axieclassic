@@ -133,9 +133,7 @@ const GuildMember = ({
           </div>
         </div>
         <Suspense fallback={<TeamSkeleton />}>
-          <div className="scale-95 md:scale-100">
-            <Team clientID={clientID} />
-          </div>
+          <Team clientID={clientID} />
         </Suspense>
       </div>
     </div>
