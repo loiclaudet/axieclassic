@@ -60,8 +60,8 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
             <div className="h-14 w-14 transition-transform hover:scale-105 md:h-[75px] md:w-[75px] ">
               <Image
                 src={
-                  avatar === "custom"
-                    ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/custom-guild-avatar/${id}.png`
+                  avatar.startsWith("custom")
+                    ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/${avatar}`
                     : avatar === "default"
                       ? `/guild-avatars/avatar_20.png`
                       : `/guild-avatars/${avatar}.png`

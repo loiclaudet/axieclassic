@@ -179,6 +179,7 @@ export type Guild = {
   id: string;
   name: string;
   avatar: string;
+  banner: string;
   description: string;
   ownerID: string;
   countryCode: string;
