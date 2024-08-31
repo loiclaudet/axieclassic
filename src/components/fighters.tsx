@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { FighterIDs } from "~/lib/definitions";
 import { cn } from "~/lib/utils";
 
@@ -18,12 +19,16 @@ export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
       >
         <div className="duration-400 overflow-hidden transition-transform ease-in hover:scale-110">
           <Link href={`/find-similar/${fighterID}`} prefetch={false}>
-            <div
-              className="h-[82px] w-[110px] scale-90 bg-no-repeat md:h-[112px] md:w-[150px]"
+            <Image
+              src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
+              alt={`Axie ${fighterID}`}
+              width={150}
+              height={112}
+              className="h-[82px] w-[110px] scale-90 object-cover md:h-[112px] md:w-[150px]"
               style={{
-                backgroundImage: `url(https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png)`,
-                backgroundSize: "140%",
-                backgroundPosition: "40% 20%",
+                objectPosition: "40% 20%",
+                objectFit: "cover",
+                transform: "scale(1.4)",
               }}
             />
           </Link>

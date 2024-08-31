@@ -80,14 +80,20 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
         </div>
       </div>
       <div className="flex flex-col items-center md:flex-row">
-        <div
-          className={`h-[150px] w-[200px] scale-x-[-1] transform bg-no-repeat`}
-          style={{
-            backgroundImage: `url(https://axiecdn.axieinfinity.com/axies/${axieId}/axie/axie-full-transparent.png)`,
-            backgroundSize: "130%",
-            backgroundPosition: "40% 20%",
-          }}
-        />
+        <div className="h-[150px] w-[200px] scale-x-[-1] transform overflow-hidden">
+          <Image
+            src={`https://axiecdn.axieinfinity.com/axies/${axieId}/axie/axie-full-transparent.png`}
+            alt={`Axie ${axieId}`}
+            width={200}
+            height={150}
+            className="h-[150px] w-[200px] object-cover"
+            style={{
+              objectPosition: "40% 20%",
+              objectFit: "cover",
+              transform: "scale(1.3)",
+            }}
+          />
+        </div>
         <div className="flex flex-col gap-2">
           <p className="text-xl">Preserve stast?</p>
           <div className="grid grid-cols-2 gap-4">
