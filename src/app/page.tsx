@@ -46,7 +46,7 @@ export default async function ArenaPage() {
                       className="relative border-b border-b-neutral-separator-dark bg-neutral-aside-dark"
                       key={player.clientID}
                     >
-                      <Player player={player} />
+                      <Player player={player} imagePriority={index <= 5} />
                     </li>
                     {index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
                       <li

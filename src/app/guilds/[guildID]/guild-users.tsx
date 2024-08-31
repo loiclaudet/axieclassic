@@ -45,7 +45,7 @@ export const GuildUsers = async ({ guildID }: GuildUsersProps) => {
     <ul className="flex flex-col md:border-t md:border-t-neutral-separator-dark">
       {guildUsers
         .sort((a, b) => b.guildPoints - a.guildPoints)
-        .map((user) => {
+        .map((user, index) => {
           const memberName =
             flattenedProfiles.find(
               (profile) => profile.clientID === user.clientID,
@@ -61,6 +61,7 @@ export const GuildUsers = async ({ guildID }: GuildUsersProps) => {
                 contributionPoints={user.contributionPoints}
                 guildPoints={user.guildPoints}
                 role={user.role}
+                imagePriority={index <= 5}
               />
             </li>
           );
@@ -74,6 +75,7 @@ type GuildMemberProps = Pick<
   "clientID" | "contributionPoints" | "guildPoints" | "role"
 > & {
   name: string;
+  imagePriority?: boolean;
 };
 
 const GuildMember = ({
@@ -82,6 +84,7 @@ const GuildMember = ({
   contributionPoints,
   guildPoints,
   role,
+  imagePriority = false,
 }: GuildMemberProps) => {
   const socials = userSocialsByClientID.get(clientID);
 
@@ -133,7 +136,7 @@ const GuildMember = ({
           </div>
         </div>
         <Suspense fallback={<TeamSkeleton />}>
-          <Team clientID={clientID} />
+          <Team imagePriority={imagePriority} clientID={clientID} />
         </Suspense>
       </div>
     </div>

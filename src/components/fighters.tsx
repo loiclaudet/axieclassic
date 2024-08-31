@@ -6,8 +6,13 @@ import { cn } from "~/lib/utils";
 type FightersProps = {
   fighterIDs: FighterIDs;
   lookRight?: boolean;
+  imagePriority?: boolean;
 };
-export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
+export const Fighters = ({
+  fighterIDs,
+  lookRight = false,
+  imagePriority = false,
+}: FightersProps) => (
   <ul className="flex items-center">
     {fighterIDs.map((fighterID) => (
       <li
@@ -20,6 +25,7 @@ export const Fighters = ({ fighterIDs, lookRight = false }: FightersProps) => (
         <div className="duration-400 overflow-hidden transition-transform ease-in hover:scale-110">
           <Link href={`/find-similar/${fighterID}`} prefetch={false}>
             <Image
+              priority={imagePriority}
               src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
               alt={`Axie ${fighterID}`}
               width={150}

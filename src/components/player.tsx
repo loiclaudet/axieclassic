@@ -11,9 +11,10 @@ import { Team } from "~/components/team";
 
 type PlayerProps = {
   player: Player;
+  imagePriority?: boolean;
 };
 
-export default function Player({ player }: PlayerProps) {
+export default function Player({ player, imagePriority }: PlayerProps) {
   const { name, score, rank, clientID, guild } = player;
   const socials = userSocialsByClientID.get(clientID);
 
@@ -60,7 +61,7 @@ export default function Player({ player }: PlayerProps) {
           )}
         </div>
         <Suspense fallback={<TeamSkeleton />}>
-          <Team clientID={clientID} />
+          <Team imagePriority={imagePriority} clientID={clientID} />
         </Suspense>
       </div>
     </div>

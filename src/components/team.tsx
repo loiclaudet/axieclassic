@@ -7,9 +7,10 @@ import { CONSIDERED_ONLINE_DURATION_IN_MIN } from "~/lib/constant";
 
 type TeamProps = {
   clientID: string;
+  imagePriority?: boolean;
 };
 
-export async function Team({ clientID }: TeamProps) {
+export async function Team({ clientID, imagePriority = false }: TeamProps) {
   const battles = await getArenaBattles(clientID, { limit: 1 });
 
   if ("error" in battles) {
@@ -73,7 +74,10 @@ export async function Team({ clientID }: TeamProps) {
           <BlinkingGreenDot />
         </div>
       )}
-      <Fighters fighterIDs={lastBattleFighterIDs} />
+      <Fighters
+        fighterIDs={lastBattleFighterIDs}
+        imagePriority={imagePriority}
+      />
     </>
   );
 }
