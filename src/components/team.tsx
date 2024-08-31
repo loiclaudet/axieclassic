@@ -19,7 +19,7 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
         <div className="hidden flex-1 items-center gap-6 md:flex">
           {Array.from({ length: 3 }).map((_, i) => (
             <Image
-              key={i}
+              key={`placeholder-md-${i}`}
               className="opacity-50"
               src={`/body-normal.png`}
               width={130}
@@ -31,7 +31,7 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
         <div className="flex gap-6 self-center md:hidden">
           {Array.from({ length: 3 }).map((_, i) => (
             <Image
-              key={i}
+              key={`placeholder-sm-${i}`}
               className="opacity-50"
               src={`/body-normal.png`}
               width={82}
