@@ -34,7 +34,8 @@ export const Fighters = ({
               style={{
                 objectPosition: "40% 20%",
                 objectFit: "cover",
-                transform: "scale(1.4)",
+                scale: "1.4",
+                translate: "0 8%",
               }}
             />
           </Link>
