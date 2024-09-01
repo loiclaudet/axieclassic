@@ -113,6 +113,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
         <a
           target="_blank"
           rel="noreferrer"
+          aria-label="find on marketplace"
           href={createFindSimilarAxieUrl(
             axie,
             Object.keys(preservedStats).filter(

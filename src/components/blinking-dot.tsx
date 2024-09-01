@@ -12,7 +12,10 @@ export const BlinkingGreenDot = () => {
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger>
-          <CircleIcon className="h-2 w-2 animate-pulse cursor-help select-none text-seafoam-green-700 md:h-2.5 md:w-2.5" />
+          <CircleIcon
+            aria-label={`active less than ${CONSIDERED_ONLINE_DURATION_IN_MIN}min ago`}
+            className="h-2 w-2 animate-pulse cursor-help select-none text-seafoam-green-700 md:h-2.5 md:w-2.5"
+          />
         </TooltipTrigger>
         <TooltipContent
           side="right"

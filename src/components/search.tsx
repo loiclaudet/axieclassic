@@ -80,6 +80,7 @@ export const Search = () => {
       <Button
         type="submit"
         size="icon"
+        aria-label="search"
         disabled={isLoading}
         className="flex-shrink-0 -translate-y-px rounded-md bg-neutral-aside-dark"
       >

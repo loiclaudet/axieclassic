@@ -23,7 +23,7 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
               className="opacity-50"
               src={`/body-normal.png`}
               width={130}
-              height={68}
+              height={82}
               alt="placeholder"
             />
           ))}
@@ -34,8 +34,8 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
               key={`placeholder-sm-${i}`}
               className="opacity-50"
               src={`/body-normal.png`}
-              width={82}
-              height={110}
+              width={110}
+              height={68}
               alt="placeholder"
             />
           ))}
