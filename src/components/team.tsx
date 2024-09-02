@@ -16,14 +16,14 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
   if ("error" in battles) {
     return (
       <div className="flex flex-1 flex-col items-center">
-        <div className="hidden flex-1 items-center gap-6 md:flex">
+        <div className="hidden flex-1 items-center gap-8 md:flex">
           {Array.from({ length: 3 }).map((_, i) => (
             <Image
               key={`placeholder-md-${i}`}
               className="opacity-50"
               src={`/body-normal.png`}
-              width={130}
-              height={82}
+              width={110}
+              height={95}
               alt="placeholder"
             />
           ))}
@@ -34,8 +34,8 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
               key={`placeholder-sm-${i}`}
               className="opacity-50"
               src={`/body-normal.png`}
-              width={110}
-              height={68}
+              width={80}
+              height={69}
               alt="placeholder"
             />
           ))}

@@ -14,8 +14,8 @@ export const TeamSkeleton = ({ width }: TeamSkeletonProps) => (
         <div className="hidden md:block">
           <Skeleton
             borderRadius={12}
-            height={width ? width * 0.75 : 100}
-            width={width ?? 135}
+            width={width ?? 110}
+            height={width ? width * 0.75 : 95}
             baseColor="hsl(227 12% 15%)"
             highlightColor="hsl(227 8% 23%)"
           />
@@ -23,8 +23,8 @@ export const TeamSkeleton = ({ width }: TeamSkeletonProps) => (
         <div className="md:hidden">
           <Skeleton
             borderRadius={12}
-            height={width ? width * 0.75 : 60}
             width={width ?? 80}
+            height={width ? width * 0.75 : 69}
             baseColor="hsl(227 12% 15%)"
             highlightColor="hsl(227 8% 23%)"
           />
