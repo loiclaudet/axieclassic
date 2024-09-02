@@ -34,6 +34,29 @@ export const TeamSkeleton = ({ width }: TeamSkeletonProps) => (
   </div>
 );
 
+export const ProfileRankSkeleton = () => {
+  return (
+    <SkeletonTheme
+      baseColor="hsl(227 12% 15%)"
+      highlightColor="hsl(227 8% 23%)"
+    >
+      <section className="flex items-center justify-around gap-3 self-stretch bg-neutral-aside-dark p-3 md:flex-1 md:basis-1/2 md:bg-neutral-aside-dark/70 md:backdrop-blur-md">
+        <div className="flex flex-col items-center justify-center">
+          <Skeleton width={100} height={16} />
+          <Skeleton width={100} height={16} />
+        </div>
+        <div className="flex items-center justify-center">
+          <Skeleton width={100} height={100} />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <Skeleton width={100} height={16} />
+          <Skeleton width={100} height={16} />
+        </div>
+      </section>
+    </SkeletonTheme>
+  );
+};
+
 export const ProfileSkeleton = () => {
   return (
     <SkeletonTheme

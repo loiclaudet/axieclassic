@@ -4,19 +4,18 @@ import type {
   Battles,
   APIError,
   GuildSeason,
-  ClientID,
-  ProfilesResponse,
   Profile,
   RankedUser,
   Player,
   BattleWithProfiles,
   AxieDetailsResponse,
   Axie,
+  ProfilesResponse,
 } from "~/lib/definitions";
 import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
 import { MAXIMUM_PLAYERS_API_LIMIT } from "~/lib/constant";
-import { chunk } from "src/lib/utils";
+import { getProfiles } from "~/data/profile";
 
 export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   try {
@@ -170,30 +169,6 @@ export async function getTop100RankedUsers(): Promise<RankedUser[] | APIError> {
 
   const data = (await response.json()) as RankedUsersResponse;
   return data.items;
-}
-
-export async function getProfiles(
-  profileClientIDs: ClientID[],
-): Promise<Profile[] | APIError> {
-  const endpoint = chunk(profileClientIDs, MAXIMUM_PLAYERS_API_LIMIT).flatMap(
-    createProfilesEndpoint,
-  )[0]!;
-
-  const profiles = await fetchProfiles(endpoint);
-  return profiles;
-}
-
-async function fetchProfiles(profilesEndpoint: string) {
-  const response = await fetch(profilesEndpoint);
-  const data = (await response.json()) as ProfilesResponse;
-  return data.items;
-}
-
-function createProfilesEndpoint(clientIDs: ClientID[]): string {
-  return (
-    "https://axie-classic.skymavis.com/v1/players/profile?" +
-    clientIDs.map((p) => "clientIDs=" + p).join("&")
-  );
 }
 
 export async function getProfile(

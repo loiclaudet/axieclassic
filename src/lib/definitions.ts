@@ -105,6 +105,13 @@ export type Profile = {
   lastChangedUsingReferral: null;
 };
 
+export type ProfileRank = {
+  clientID: ClientID;
+  rank: number;
+  score: number;
+  tier: Tier;
+};
+
 export type ProfilesResponse = {
   items: Profile[];
 };

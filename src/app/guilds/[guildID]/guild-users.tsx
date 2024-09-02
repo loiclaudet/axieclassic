@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { TeamSkeleton } from "~/components/skeletons";
 import { Team } from "~/components/team";
-import { getProfiles } from "~/data";
+import { getProfiles } from "~/data/profile";
 import { getGuildUsers } from "~/data/guild";
 import type { GuildUser } from "~/lib/definitions";
 import { TbHexagonLetterG as GuildPointIcon } from "react-icons/tb";

@@ -5,8 +5,10 @@ import { TbSwords as SwordsIcon } from "react-icons/tb";
 import { Header } from "~/app/header";
 import { Battles } from "~/app/profile/[clientID]/battles";
 import { Profile } from "~/app/profile/[clientID]/profile";
+import { ProfileRank } from "~/app/profile/[clientID]/profile-rank";
 import {
   BattlesSkeleton,
+  ProfileRankSkeleton,
   ProfileSkeleton,
   RoninAddressSkeleton,
 } from "~/components/skeletons";
@@ -34,9 +36,14 @@ export default function Page({ params }: { params: { clientID: string } }) {
         </Button>
       </Header>
       <main className="flex w-full flex-col items-center border-r border-r-neutral-separator-dark md:w-auto lg:w-[987px]">
-        <Suspense fallback={<ProfileSkeleton />}>
-          <Profile clientID={clientID} />
-        </Suspense>
+        <div className="mb-6 flex w-full flex-col border-b border-b-neutral-separator-dark md:flex-row">
+          <Suspense fallback={<ProfileSkeleton />}>
+            <Profile clientID={clientID} />
+          </Suspense>
+          <Suspense fallback={<ProfileRankSkeleton />}>
+            <ProfileRank clientID={clientID} />
+          </Suspense>
+        </div>
         <h3 className="mb-2 flex items-center gap-2">
           <SwordsIcon className="h-5 w-5" />
           Battle logs
