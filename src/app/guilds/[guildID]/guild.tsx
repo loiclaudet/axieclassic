@@ -45,8 +45,8 @@ export const Guild = async ({ id }: GuildProps) => {
         <div className="relative h-32 w-32">
           <Image
             src={
-              avatar === "custom"
-                ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/custom-guild-avatar/${id}.png`
+              avatar.startsWith("custom")
+                ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/${avatar}`
                 : avatar === "default"
                   ? `/guild-avatars/avatar_20.png`
                   : `/guild-avatars/${avatar}.png`
@@ -56,7 +56,7 @@ export const Guild = async ({ id }: GuildProps) => {
             alt={name}
           />
           <span
-            className="absolute bottom-0 right-4 text-2xl leading-none md:-bottom-2.5 md:right-2 md:text-3xl"
+            className="absolute bottom-0 right-4 cursor-default text-2xl leading-none md:-bottom-2.5 md:right-2 md:text-3xl"
             title={country.name}
           >
             {country.emoji}
