@@ -12,9 +12,7 @@ export const Season = async () => {
   const { season, endTime, startTime } = guildSeason;
 
   const hasStarted = new Date(startTime).getTime() < new Date().getTime();
-  // temporarily fix for season 4 wrong end time api response
-  const customEndTime = season > 4 ? endTime : "2024-08-11T09:00:00.000Z";
-  const timeLeft = calculateTimeLeft(customEndTime);
+  const timeLeft = calculateTimeLeft(endTime);
 
   if (!hasStarted || !timeLeft) {
     return (
@@ -30,9 +28,9 @@ export const Season = async () => {
         Season {season}
       </h2>
       <div className="flex flex-col justify-center text-[10px] text-neutral-100 md:text-xs">
-        <Countdown endTime={customEndTime} />
+        <Countdown endTime={endTime} />
         <span className="italic leading-tight">
-          {formatDate(new Date(customEndTime))}
+          {formatDate(new Date(endTime))}
         </span>
       </div>
     </div>
