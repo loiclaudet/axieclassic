@@ -61,7 +61,7 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
               <Image
                 src={
                   avatar.startsWith("custom")
-                    ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/${avatar}`
+                    ? `https://cdn.skymavis.com/mavisx/dlc-central/remote-config/classic-m/custom-guild-avatar/${id}.png`
                     : avatar === "default"
                       ? `/guild-avatars/avatar_20.png`
                       : `/guild-avatars/${avatar}.png`
