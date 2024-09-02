@@ -24,6 +24,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://axieclassic.com"),
   title: "Axie Classic",
   description: "Axie classic leaderboards and stats",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -39,8 +40,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/opengraph-axie-classic.png",
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         alt: "about axie classic",
       },
     ],
