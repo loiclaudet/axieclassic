@@ -10,7 +10,7 @@ export const ColoredName = ({ name, colored }: ColoredNameProps) => {
 
 function coloredNameToHtmlString(name: string, colored?: boolean): string {
   const enclosingSpan = "</span>";
-  const re = new RegExp("<(color=)?(#(?:[0-9a-fA-F]{3}){1,2})[^>]*>", "g");
+  const re = new RegExp("<(color=)?(#(?:[0-9a-zA-Z]{3}){1,2})[^>]*>", "g");
   const count = (name.match(re) ?? []).length;
 
   return (
