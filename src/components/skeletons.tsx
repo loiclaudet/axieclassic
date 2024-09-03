@@ -1,7 +1,6 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { BATTLE_LIMIT } from "~/lib/constant";
-import { DashedLine } from "./ui/dashed-line";
 
 type TeamSkeletonProps = {
   width?: number;
@@ -88,8 +87,6 @@ export const BattleSkeleton = () => (
           </p>
           <TeamSkeleton width={120} />
         </div>
-        <DashedLine className="md:hidden" />
-        <DashedLine className="hidden md:block" direction="vertical" />
         <div className="flex items-center justify-center px-4 py-1 md:flex-col md:gap-2 md:p-2">
           <div className="flex items-center gap-2 md:flex-col">
             <div className="rounded-full px-1.5 py-0.5 text-xs">
@@ -107,8 +104,6 @@ export const BattleSkeleton = () => (
           {/* replay button */}
           <Skeleton width={70} height={16} />
         </div>
-        <DashedLine className="hidden md:block" direction="vertical" />
-        <DashedLine className="md:hidden" />
         <div>
           <p className="flex items-center gap-1 pb-0 pl-4 pt-2">
             <Skeleton width={120} height={16} />

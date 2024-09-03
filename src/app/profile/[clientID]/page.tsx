@@ -36,7 +36,7 @@ export default function Page({ params }: { params: { clientID: string } }) {
         </Button>
       </Header>
       <main className="flex w-full flex-col items-center border-r border-r-neutral-separator-dark md:w-auto lg:w-[987px]">
-        <div className="mb-6 flex w-full flex-col border-b border-b-neutral-separator-dark md:flex-row">
+        <div className="mb-6 flex w-full flex-col border-b border-b-neutral-separator-dark md:sticky md:top-0 md:z-10 md:flex-row">
           <Suspense fallback={<ProfileSkeleton />}>
             <Profile clientID={clientID} />
           </Suspense>

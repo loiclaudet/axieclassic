@@ -5,7 +5,6 @@ import type { Battle, BattleWithProfiles } from "~/lib/definitions";
 import { BATTLE_LIMIT } from "~/lib/constant";
 import { getProfileBattles } from "~/data";
 import { Fighters } from "~/components/fighters";
-import { DashedLine } from "~/components/ui/dashed-line";
 import { BattleDetails } from "~/components/battle-details";
 import { ColoredName } from "~/components/colored-name";
 import { Button } from "~/components/ui/button";
@@ -92,23 +91,19 @@ async function Battle({ battle }: BattleProps) {
   return (
     <div className="flex border-y border-b border-y-neutral-separator-dark">
       <div className="flex w-full flex-col md:w-auto md:flex-row">
-        <div className="self-center md:self-auto">
+        <div className="self-center border-b border-dashed border-b-neutral-separator-dark md:border-b-0 md:border-r md:border-r-neutral-separator-dark">
           <p className="pl-4 pt-2 text-sm">
             <ColoredName name={clientProfile.name} />
           </p>
           <Fighters lookRight fighterIDs={playerFighterIDs} />
         </div>
-        <DashedLine className="md:hidden" />
-        <DashedLine className="hidden md:block" direction="vertical" />
         <BattleDetails
           pvpType={pvpType}
           durationFromNow={durationFromNow}
           status={isDraw ? "draw" : isVictory ? "victory" : "defeat"}
           uuid={uuid}
         />
-        <DashedLine className="hidden md:block" direction="vertical" />
-        <DashedLine className="md:hidden" />
-        <div className="self-center md:self-auto">
+        <div className="self-center border-t border-dashed border-t-neutral-separator-dark md:self-auto md:border-l md:border-t-0 md:border-l-neutral-separator-dark">
           <Link
             className="group mr-2 inline-flex items-center gap-1 pb-0 pl-4 pt-2 transition-colors hover:text-neutral-100 hover:underline"
             prefetch={false}
