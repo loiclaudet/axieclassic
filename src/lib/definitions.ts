@@ -81,6 +81,17 @@ export type GuildSeason = {
   startTime: string;
   endTime: string;
   rewards: Reward[];
+  bonus: Bonus[];
+};
+
+type Bonus = {
+  guildPointsFrom: number;
+  counter: number;
+  reward: {
+    id: Currency;
+    amount: number;
+    maxAmount: number;
+  };
 };
 
 type Currency = "maxs_in";

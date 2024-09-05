@@ -182,3 +182,12 @@ export const FindSimilarSkeleton = () => (
     </div>
   </SkeletonTheme>
 );
+
+export const GuildRewardSkeleton = () => (
+  <SkeletonTheme baseColor="hsl(227 12% 15%)" highlightColor="hsl(227 8% 23%)">
+    <div className="flex items-baseline gap-1">
+      <Skeleton width={24} height={24} />
+      <Skeleton width={100} height={20} />
+    </div>
+  </SkeletonTheme>
+);
