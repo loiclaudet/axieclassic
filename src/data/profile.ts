@@ -32,6 +32,29 @@ function createProfilesEndpoint(clientIDs: ClientID[]): string {
   );
 }
 
+export async function getProfile(
+  clientID: string,
+): Promise<Profile | APIError> {
+  try {
+    const response = await fetch(
+      `https://axie-classic.skymavis.com/v1/players/profile?clientIDs=${clientID}`,
+    );
+
+    const data = (await response.json()) as ProfilesResponse;
+    if (data?.items?.length) {
+      return data.items[0]!;
+    }
+    throw new Error("Profile not found.");
+  } catch (error) {
+    console.error(error);
+    return {
+      error: true,
+      status: 500,
+      message: "Error fetching profile.",
+    };
+  }
+}
+
 export async function getProfileRank(
   clientID: ClientID,
 ): Promise<ProfileRank | APIError> {

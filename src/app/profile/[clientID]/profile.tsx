@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProfile } from "~/data";
+import { getProfile } from "~/data/profile";
 import { userSocialsByClientID } from "~/lib/socials";
 import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { RoninAddress } from "~/components/ronin-address";

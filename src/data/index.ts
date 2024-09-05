@@ -10,7 +10,6 @@ import type {
   BattleWithProfiles,
   AxieDetailsResponse,
   Axie,
-  ProfilesResponse,
 } from "~/lib/definitions";
 import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
@@ -169,29 +168,6 @@ export async function getTop100RankedUsers(): Promise<RankedUser[] | APIError> {
 
   const data = (await response.json()) as RankedUsersResponse;
   return data.items;
-}
-
-export async function getProfile(
-  clientID: string,
-): Promise<Profile | APIError> {
-  try {
-    const response = await fetch(
-      `https://axie-classic.skymavis.com/v1/players/profile?clientIDs=${clientID}`,
-    );
-
-    const data = (await response.json()) as ProfilesResponse;
-    if (data?.items?.length) {
-      return data.items[0]!;
-    }
-    throw new Error("Profile not found.");
-  } catch (error) {
-    console.error(error);
-    return {
-      error: true,
-      status: 500,
-      message: "Error fetching profile.",
-    };
-  }
 }
 
 export const getAxie = async (axieId: string): Promise<Axie | APIError> => {
