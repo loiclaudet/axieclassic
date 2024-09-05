@@ -50,7 +50,7 @@ export const Navigation = ({
             </Link>
           </Button>
         </li>
-        <li className="relative" key="guilds">
+        <li key="guilds">
           <Button
             asChild
             size={buttonSize}
@@ -72,11 +72,6 @@ export const Navigation = ({
               </span>
             </Link>
           </Button>
-          <div
-            className={`absolute bottom-1/2 right-1.5 hidden translate-y-1/2 rounded-full bg-peach-800/30 px-1.5 py-px text-[9px] text-peach-200 md:block`}
-          >
-            beta
-          </div>
         </li>
         <li key="learn">
           <Button
