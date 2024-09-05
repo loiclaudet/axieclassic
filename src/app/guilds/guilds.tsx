@@ -75,7 +75,7 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
               />
             </div>
           </Link>
-          <div className="flex flex-col gap-1 md:gap-2">
+          <div className="flex flex-1 flex-col gap-1 md:gap-2">
             <Link prefetch={false} href={`/guilds/${id}`}>
               <h2 className="text-base leading-5 text-neutral-100 hover:underline md:line-clamp-2 md:text-xl">
                 {name}
@@ -121,11 +121,17 @@ const GuildReward = async ({
   if (axsReward === 0) return null;
 
   return (
-    <div className="flex flex-1 items-center justify-end gap-1">
-      <span className="text-xl font-medium">
+    <div className="flex flex-col items-center justify-end md:flex-row md:gap-1">
+      <span className="text-base font-normal md:text-xl md:font-medium">
         {Intl.NumberFormat().format(axsReward)}
       </span>
-      <Image src="/axs.png" width={24} height={24} alt="AXS" />
+      <Image
+        className="-order-1 h-4 w-4 md:h-6 md:w-6"
+        src="/axs.png"
+        width={24}
+        height={24}
+        alt="AXS"
+      />
     </div>
   );
 };
