@@ -96,6 +96,13 @@ export const userSocialsByClientID = new Map<ClientID, Socials>([
       x: "ifelicianoh",
     },
   ],
+  [
+    "0x04c6960000338778482932f146f6abcf0014c219",
+    {
+      twitch: "lebaker",
+      x: "lebakerrOK",
+    },
+  ],
 ]);
 
 export const socialURLBySocial = new Map<Social, SocialURL>([
