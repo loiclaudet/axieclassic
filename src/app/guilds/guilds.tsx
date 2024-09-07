@@ -116,7 +116,7 @@ const GuildReward = async ({
   }
   const axsRankReward = getGuildAXSRankReward(rank, guildSeason);
   const axsBonusReward = getGuildAXSBonusReward(guildPoints, guildSeason);
-  const axsReward = axsRankReward + axsBonusReward;
+  const axsReward = Math.floor(axsRankReward + axsBonusReward);
 
   if (axsReward === 0) return null;
 
