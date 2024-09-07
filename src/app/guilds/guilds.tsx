@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getGuildsLeaderboard } from "~/data/guild";
-import type { GuildSeason, RankedGuild } from "~/lib/definitions";
+import type { RankedGuild } from "~/lib/definitions";
 import emojiFlags from "emoji-flags";
 import { TbHexagonLetterG as GuildPointIcon } from "react-icons/tb";
 import { SocialIcons } from "~/components/social-icons";
 import { guildSocialsByGuildID } from "~/lib/socials";
-import { getGuildSeason } from "~/data";
 import { Suspense } from "react";
 import { GuildRewardSkeleton } from "~/components/skeletons";
+import { GuildReward } from "./guild-rewards";
 
 export const Guilds = async () => {
   const guilds = await getGuildsLeaderboard();
@@ -102,59 +102,3 @@ const Guild = ({ guild }: { guild: RankedGuild }) => {
     </div>
   );
 };
-
-const GuildReward = async ({
-  guildPoints,
-  rank,
-}: {
-  guildPoints: number;
-  rank: number;
-}) => {
-  const guildSeason = await getGuildSeason();
-  if ("error" in guildSeason) {
-    return <div>{guildSeason.message}</div>;
-  }
-  const axsRankReward = getGuildAXSRankReward(rank, guildSeason);
-  const axsBonusReward = getGuildAXSBonusReward(guildPoints, guildSeason);
-  const axsReward = Math.floor(axsRankReward + axsBonusReward);
-
-  if (axsReward === 0) return null;
-
-  return (
-    <div className="flex flex-col items-center justify-end md:flex-row md:gap-1">
-      <span className="text-base font-normal md:text-xl md:font-medium">
-        {Intl.NumberFormat().format(axsReward)}
-      </span>
-      <Image
-        className="-order-1 h-4 w-4 md:h-6 md:w-6"
-        src="/axs.png"
-        width={24}
-        height={24}
-        alt="AXS"
-      />
-    </div>
-  );
-};
-
-const getGuildAXSRankReward = (
-  rank: number,
-  guildSeason: GuildSeason,
-): number => {
-  const { rewards: guildRewards } = guildSeason;
-  const reward = guildRewards.find((r) => r.rank === rank);
-  return axsByMaxs(reward?.amount ?? 0);
-};
-
-const getGuildAXSBonusReward = (
-  guildPoints: number,
-  guildSeason: GuildSeason,
-): number => {
-  const { bonus: guildBonuses } = guildSeason;
-  const bonus = guildBonuses
-    .filter((b) => b.reward.id === "maxs_in")
-    .sort((a, b) => b.guildPointsFrom - a.guildPointsFrom)
-    .find((b) => guildPoints >= b.guildPointsFrom);
-  return axsByMaxs(bonus?.reward.amount ?? 0);
-};
-
-const axsByMaxs = (maxsIn: number) => maxsIn * 0.001;
