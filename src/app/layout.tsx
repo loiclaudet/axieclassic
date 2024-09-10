@@ -6,6 +6,8 @@ import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { PHProvider } from "./providers";
 import { Navigation } from "~/components/navigation";
+import { ContactAndSupport } from "~/components/contact-and-support";
+import { Toaster } from "~/components/ui/sonner";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -63,12 +65,14 @@ export default function RootLayout({
         >
           <PostHogPageView />
           <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row">
-            <aside className="sticky top-0 hidden h-screen w-[167px] flex-col items-stretch justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
+            <aside className="sticky top-0 hidden h-screen flex-col items-stretch justify-between justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
               <Navigation />
+              <ContactAndSupport />
             </aside>
             {children}
           </div>
           {modal}
+          <Toaster position="bottom-center" />
         </body>
       </PHProvider>
     </html>
