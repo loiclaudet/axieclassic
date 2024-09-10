@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Navigation } from "~/components/navigation";
+import { ContactAndSupport } from "~/components/contact-and-support";
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ export const MobileMenu = () => {
           centered
           onNavigate={() => setIsOpen((s) => !s)}
         />
+        <ContactAndSupport />
       </DialogContent>
     </Dialog>
   );
