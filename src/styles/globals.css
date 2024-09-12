@@ -1,9 +1,203 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer popover;
 
 :root {
   touch-action: pan-x pan-y;
   height: 100%;
   --radix-tooltip-content-available-width: 180px;
+}
+
+@layer popover {
+  :root {
+    --list: 180px;
+    --speed: 0.3s;
+    --power-1-in: linear(
+      0 0%,
+      0.0027 3.64%,
+      0.0106 7.29%,
+      0.0425 14.58%,
+      0.0957 21.87%,
+      0.1701 29.16%,
+      0.2477 35.19%,
+      0.3401 41.23%,
+      0.5982 55.18%,
+      0.7044 61.56%,
+      0.7987 68.28%,
+      0.875 75%,
+      0.9297 81.25%,
+      0.9687 87.5%,
+      0.9922 93.75%,
+      1 100%
+    );
+    --elastic: linear(
+      0 0%,
+      -0.0055 4.83%,
+      -0.0317 15.58%,
+      -0.0351 20.24%,
+      -0.031 23.11%,
+      -0.0216 25.78%,
+      -0.0065 28.32%,
+      0.0143 30.74%,
+      0.0478 33.58%,
+      0.0907 36.32%,
+      0.2048 41.53%,
+      0.3517 46.27%,
+      0.6096 52.68%,
+      0.7371 56.42%,
+      0.8583 61.09%,
+      0.9466 66.02%,
+      0.9811 68.81%,
+      1.0068 71.72%,
+      1.0241 74.79%,
+      1.0334 78.07%,
+      1.0326 83.83%,
+      1.0053 95.23%,
+      1 100%
+    );
+  }
+
+  /* Handles the CTA button */
+  [popovertarget="status"] {
+    position: absolute;
+    width: 44px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 0;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    cursor: pointer;
+    anchor-name: --anchor;
+    inset: unset;
+    margin: 0;
+    top: calc(100vh - 2rem - 44px);
+    left: 2rem;
+
+    svg {
+      width: 50%;
+    }
+  }
+
+  /* Popover styling */
+  #status {
+    /* default anchor to use */
+    position-anchor: --anchor;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: anchor-size(height);
+    width: anchor-size(width);
+    inset: unset;
+    left: anchor(left);
+    bottom: anchor(bottom);
+    overflow: visible;
+    font-family: monospace;
+    line-height: 1;
+  }
+
+  /* Animation stuff... */
+  /* Popover uses a display transition of 2x on the speed */
+  /* Use a container query to get some translation in */
+  #status {
+    transition-property: display, overlay;
+    transition-duration: calc(var(--speed) * 3);
+    transition-behavior: allow-discrete;
+    width: anchor-size(width);
+    height: anchor-size(height);
+    bottom: anchor(bottom);
+    background: var(--bg);
+    border-radius: 50%;
+    container-type: size;
+    pointer-events: none;
+  }
+  .filtered,
+  .unfiltered {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .filtered {
+    filter: url(#goo);
+  }
+
+  /* Both blobs do the same thing, cover the popover area */
+  .blob {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  .unfiltered .content,
+  .filtered .content {
+    transition-property: display, overlay, width, height, translate,
+      border-radius;
+    transition-duration: var(--speed), var(--speed), var(--speed), var(--speed),
+      calc(var(--speed) * 2), var(--speed);
+    transition-delay: 0s, 0s, 0s, 0s, calc(var(--speed) * 0.25), 0s;
+    transition-timing-function: var(--power-1-in), var(--power-1-in),
+      var(--power-1-in), var(--power-1-in), var(--elastic), var(--power-1-in);
+    transition-duration: var(--speed);
+    transition-behavior: allow-discrete;
+
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  #status:popover-open .unfiltered .content,
+  #status:popover-open .filtered .content {
+    transition-delay: 0s, 0s, calc(var(--speed) * 0.575),
+      calc(var(--speed) * 0.575), 0s, calc(var(--speed) * 0.575);
+    transition-timing-function: var(--power-1-in);
+    border-radius: var(--radius, 0px);
+    width: var(--list);
+    height: calc(5lh + 3.5rem);
+    translate: 0 calc(100cqh * -1 - 1.2rem);
+    pointer-events: auto;
+
+    @starting-style {
+      translate: 0 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .unfiltered {
+    z-index: 10;
+  }
+
+  .unfiltered .content {
+    --radius: 18px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .bubbled {
+    transition-property: display, opacity, translate;
+    transition-duration: var(--speed);
+    transition-delay: 0s;
+    transition-timing-function: var(--power-1-in);
+    transition-behavior: allow-discrete;
+    opacity: 0;
+    translate: 0 1lh;
+  }
+
+  #status:popover-open * {
+    transition-delay: 0s, calc(var(--speed) * 0.575), calc(var(--speed) * 0.575);
+    opacity: 1;
+    translate: 0 0;
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 1lh;
+    }
+  }
 }

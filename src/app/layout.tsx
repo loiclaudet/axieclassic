@@ -8,6 +8,7 @@ import { PHProvider } from "./providers";
 import { Navigation } from "~/components/navigation";
 import { ContactAndSupport } from "~/components/contact-and-support";
 import { Toaster } from "~/components/ui/sonner";
+import { Popover } from "~/components/popover";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -67,7 +68,9 @@ export default function RootLayout({
           <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row">
             <aside className="sticky top-0 hidden h-screen flex-col items-stretch justify-between justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
               <Navigation />
-              <ContactAndSupport />
+              <Popover>
+                <ContactAndSupport />
+              </Popover>
             </aside>
             {children}
           </div>

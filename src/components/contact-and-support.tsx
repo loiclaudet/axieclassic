@@ -21,13 +21,13 @@ export const ContactAndSupport = () => {
       </div>,
       {
         dismissible: true,
-        duration: 2000,
+        duration: 2500,
       },
     );
   };
 
   return (
-    <div className="flex flex-col items-center gap-6 md:items-start md:gap-2 md:p-3">
+    <div className="md:bubbled flex flex-col items-center gap-6 md:items-start md:gap-2 md:p-3">
       <div className="flex items-center">
         <div className="flex flex-col items-center md:items-start">
           <p className="text-lg text-neutral-icon-dark md:text-sm">
