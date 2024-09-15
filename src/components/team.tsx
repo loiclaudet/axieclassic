@@ -11,7 +11,7 @@ type TeamProps = {
 };
 
 export async function Team({ clientID, imagePriority = false }: TeamProps) {
-  const battles = await getArenaBattles(clientID, { limit: 1 });
+  const battles = await getArenaBattles(clientID, { limit: 10 });
 
   if ("error" in battles) {
     return (
@@ -47,19 +47,25 @@ export async function Team({ clientID, imagePriority = false }: TeamProps) {
     );
   }
 
-  const lastBattle = battles.items[0];
+  const lastArenaBattle = battles.items.find(
+    (battle) => battle.pvpType === "arena",
+  );
+  const lastRelevantBattle =
+    lastArenaBattle ??
+    battles.items.find((battle) => battle.pvpType === "tournament") ??
+    battles.items[0];
 
-  if (!lastBattle) {
+  if (!lastRelevantBattle) {
     return <p className="flex-grow text-center">no battles</p>;
   }
 
   const playedRecently = pipe(
-    lastBattle.createdAt,
+    lastRelevantBattle.createdAt,
     getRelativeTimeStamp,
     isLessThan(CONSIDERED_ONLINE_DURATION_IN_MIN * 60 * 1000),
   );
 
-  const lastBattleFighterIDs = lastBattle.team.find(
+  const lastBattleFighterIDs = lastRelevantBattle.team.find(
     (team) => team.owner === clientID,
   )?.fighterIDs;
 
