@@ -215,9 +215,11 @@ export type GuilUsersResponse = {
   items: GuildUser[];
 };
 
+export type GuildUserRole = "member" | "intern" | "commander" | "owner";
+
 export type GuildUser = {
   clientID: string;
-  role: "member" | "intern" | "commander" | "owner";
+  role: GuildUserRole;
   contributionPoints: number;
   guildPoints: number;
   joinedAt: string;

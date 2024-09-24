@@ -3,7 +3,7 @@ import { TeamSkeleton } from "~/components/skeletons";
 import { Team } from "~/components/team";
 import { getProfiles } from "~/data/profile";
 import { getGuildUsers } from "~/data/guild";
-import type { GuildUser } from "~/lib/definitions";
+import type { GuildUser, GuildUserRole } from "~/lib/definitions";
 import { TbHexagonLetterG as GuildPointIcon } from "react-icons/tb";
 import { LuDog as AxieIcon } from "react-icons/lu";
 import { FaArrowRight as ArrowRightIcon } from "react-icons/fa6";
@@ -119,13 +119,7 @@ const GuildMember = ({
             </h2>
           </Link>
           <div className="flex items-center gap-2 md:gap-4">
-            {role === "owner" && (
-              <span
-                className={`rounded-full bg-rose-800 px-1.5 py-px text-[9px] font-medium text-rose-200`}
-              >
-                owner
-              </span>
-            )}
+            <Role role={role} />
             {socials && (
               <SocialIcons
                 iconClassName="h-6 w-6 rounded-lg px-1 py-0.5"
@@ -141,4 +135,29 @@ const GuildMember = ({
       </div>
     </div>
   );
+};
+
+const Role = ({ role }: { role: GuildUserRole }) => {
+  switch (role) {
+    case "owner":
+      return (
+        <span
+          className={`rounded-full bg-rose-800 px-1.5 py-px text-[11px] font-medium text-rose-200`}
+        >
+          owner
+        </span>
+      );
+    case "commander":
+      return (
+        <span
+          className={`rounded-full bg-blue-800 px-1.5 py-px text-[11px] font-medium text-blue-200`}
+        >
+          commander
+        </span>
+      );
+    case "member":
+    case "intern":
+    default:
+      return null;
+  }
 };
