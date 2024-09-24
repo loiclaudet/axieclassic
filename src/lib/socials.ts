@@ -109,6 +109,13 @@ export const userSocialsByClientID = new Map<ClientID, Socials>([
       x: "Joco_Ignacio",
     },
   ],
+  [
+    "0xeb18c3deacca6e6df234df95ae469c197c8e38b1",
+    {
+      x: "bluebirdaxie",
+      youtube: "@bluebirdaxie",
+    },
+  ],
 ]);
 
 export const socialURLBySocial = new Map<Social, SocialURL>([
