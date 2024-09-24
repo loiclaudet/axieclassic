@@ -37,6 +37,12 @@ export const guildSocialsByGuildID = new Map<GuildID, Socials>([
       discord: "KFEWGQ34Cr",
     },
   ],
+  [
+    "TRCi1nBT", //Sapegato guild
+    {
+      discord: "CN4eAFsucQ",
+    },
+  ],
 ]);
 
 export const userSocialsByClientID = new Map<ClientID, Socials>([
