@@ -15,6 +15,7 @@ import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
 import { MAXIMUM_PLAYERS_API_LIMIT } from "~/lib/constant";
 import { getProfiles } from "~/data/profile";
+import { sleep } from "~/lib/utils";
 
 export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   try {
@@ -38,7 +39,7 @@ export async function getProfileBattles(
   options: APIOptions = {},
 ): Promise<BattleWithProfiles[] | APIError> {
   try {
-    const battles = (await fetchBattles(clientId, options)).items;
+    const battles = (await fetchBattlesWithBackoff(clientId, options)).items;
 
     const opponentsIDs = battles.map((battle) => {
       const opponentTeam = battle.team.find((t) => t.owner !== clientId)!;
@@ -82,7 +83,7 @@ export async function getArenaBattles(
   options: APIOptions = {},
 ): Promise<Battles | APIError> {
   const run = async () => {
-    const battles = await fetchBattles(clientId, options);
+    const battles = await fetchBattlesWithBackoff(clientId, options);
 
     return battles;
   };
@@ -102,6 +103,24 @@ export async function getArenaBattles(
       status: 500,
       message: "Error fetching battles.",
     };
+  }
+}
+
+async function fetchBattlesWithBackoff(
+  clientId: string,
+  options: APIOptions = {},
+  retries = 3,
+): Promise<Battles> {
+  try {
+    return await fetchBattles(clientId, options);
+  } catch (error) {
+    if (retries > 0) {
+      const delay = Math.pow(2, 4 - retries) * 1000;
+      await sleep(delay);
+      return await fetchBattlesWithBackoff(clientId, options, retries - 1);
+    }
+
+    throw error;
   }
 }
 
