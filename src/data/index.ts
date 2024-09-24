@@ -136,7 +136,6 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
         "Content-Type": "application/json",
         "X-API-Key": getNextAPIKey(),
       },
-      cache: "no-store",
     },
   );
   if (!response.ok) {
