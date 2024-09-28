@@ -2,14 +2,16 @@ import { FindSimilarAxie } from "~/components/find-similiar-axie";
 import { getAxie } from "~/data";
 
 export type FindSimilarProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export const FindSimilarAxieContent = async ({ params }: FindSimilarProps) => {
-  const axie = await getAxie(params.id);
+  const axieId = (await params).id;
+  const axie = await getAxie(axieId);
+
   if ("error" in axie) {
     return <p>{axie.message}</p>;
   }
 
-  return <FindSimilarAxie axieId={params.id} axie={axie} />;
+  return <FindSimilarAxie axieId={axieId} axie={axie} />;
 };

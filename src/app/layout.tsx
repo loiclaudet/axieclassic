@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
 
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { PHProvider } from "./providers";
@@ -9,10 +8,7 @@ import { Navigation } from "~/components/navigation";
 import { ContactAndSupport } from "~/components/contact-and-support";
 import { Toaster } from "~/components/ui/sonner";
 import { Popover } from "~/components/popover";
-
-const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
-  ssr: false,
-});
+import { PostHogWrapper } from "./posthog-wrapper";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -51,6 +47,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const fetchCache = "default-cache";
+
 export default function RootLayout({
   children,
   modal,
@@ -64,7 +62,7 @@ export default function RootLayout({
         <body
           className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
-          <PostHogPageView />
+          <PostHogWrapper />
           <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row">
             <aside className="sticky top-0 hidden h-screen flex-col items-stretch justify-between justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
               <Navigation />

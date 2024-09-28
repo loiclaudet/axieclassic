@@ -12,10 +12,9 @@ const config = {
     },
   },
   experimental: {
-    staleTimes: {
-      dynamic: 0,
-    },
+    ppr: true,
   },
+
   images: {
     unoptimized: true,
     remotePatterns: [

@@ -6,11 +6,11 @@ import { Button } from "~/components/ui/button";
 import { FaArrowLeft as ArrowLeftIcon } from "react-icons/fa6";
 
 type GuildPageProps = {
-  params: { guildID: string };
+  params: Promise<{ guildID: string }>;
 };
 
-export default function GuildPage({ params }: GuildPageProps) {
-  const guildId = params.guildID;
+export default async function GuildPage({ params }: GuildPageProps) {
+  const guildId = (await params).guildID;
 
   return (
     <>
