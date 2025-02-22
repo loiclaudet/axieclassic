@@ -172,7 +172,7 @@ export async function getPlayers(): Promise<Player[] | APIError> {
     return {
       error: true,
       status: 500,
-      message: "Error fetching players.",
+      message: "Arena leaderboard is unavailable during the off-season.",
     };
   }
 }

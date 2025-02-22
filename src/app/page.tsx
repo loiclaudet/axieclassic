@@ -8,6 +8,8 @@ import Player from "~/components/player";
 import { Search } from "~/components/search";
 import { Season } from "~/components/season";
 import { SeasonSkeleton } from "~/components/skeletons";
+import Link from "next/link";
+import Image from "next/image";
 
 export const revalidate = 180; // 3 minutes
 
@@ -34,8 +36,23 @@ export default async function ArenaPage() {
             <Search />
           </div>
           {isError ? (
-            <div className="flex h-96 items-center justify-center">
-              <p className="text-lg text-neutral-100">{players.message}</p>
+            <div className="flex h-[calc(100dvh-68px)] w-full flex-col items-center gap-2 lg:w-[768px]">
+              <p className="mt-6 max-w-[300px] text-balance text-center text-lg text-neutral-100 sm:max-w-full">
+                {players.message}
+              </p>
+              <Image
+                src="/olek-fails.png"
+                width={200}
+                height={200}
+                alt="error retrieving arena leaderboard"
+              />
+              <p className="max-w-[300px] text-balance text-center text-lg text-neutral-100 sm:max-w-full">
+                Check out the teams from{" "}
+                <Link href="/guilds" className="underline">
+                  Top Guilds
+                </Link>
+                .
+              </p>
             </div>
           ) : (
             <ul className="flex flex-col">
