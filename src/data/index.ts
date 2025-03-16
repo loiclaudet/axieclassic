@@ -190,7 +190,7 @@ export async function getTop100RankedUsers(): Promise<RankedUser[] | APIError> {
 
 export const getAxie = async (axieId: string): Promise<Axie | APIError> => {
   const response = await fetch(
-    "https://graphql-gateway.axieinfinity.com/graphql",
+    "https://api-gateway.skymavis.com/graphql/axie-marketplace",
     {
       method: "POST",
       headers: {
