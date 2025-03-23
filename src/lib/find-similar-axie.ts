@@ -24,7 +24,7 @@ const partsQueryBuilder = (parts: AxiePart[]): string => {
     .filter((part) => !filterParts.includes(part.type))
     .map((part) => {
       for (const group of groupedPartIds) {
-        if (group.includes(part.id)) {
+        if (group.includes(removeLevel2Suffix(part.id))) {
           return group.map(partsQueryParamsByPartId).join("&");
         }
       }
@@ -33,6 +33,9 @@ const partsQueryBuilder = (parts: AxiePart[]): string => {
     })
     .join("&");
 };
+
+const removeLevel2Suffix = (part: string) =>
+  part.endsWith("2") ? part.slice(0, -2) : part;
 
 const partsQueryParamsByPartId = (part: string) =>
   `parts=${part}&parts=${part.endsWith("2") ? part.slice(0, -2) : `${part}-2`}`;
@@ -64,4 +67,20 @@ const groupedPartIds = [
   ["tail-omatsuri", "tail-granmas-fan"],
   ["horn-umaibo", "horn-little-branch"],
   ["back-origami", "back-cupid"],
+  ["horn-rose-bud", "horn-piranhaplant", "horn-piranhaplant-shiny"],
+  ["horn-trump", "horn-unholy-terror", "horn-unholy-terror-shiny"],
+  ["horn-cerastes", "horn-killah-clamp", "horn-killah-clamp-shiny"],
+  ["horn-antenna", "horn-dark-antenna", "horn-dark-antenna-shiny"],
+  ["tail-rice", "tail-angry-grain", "tail-angry-grain-shiny"],
+  ["tail-the-last-one", "tail-evil-eye", "tail-evil-eye-shiny"],
+  ["tail-twin-tail", "tail-earwig", "tail-earwig-shiny"],
+  ["tail-nimo", "tail-bloodfin", "tail-bloodfin-shiny"],
+  ["mouth-catfish", "mouth-bottom-dweller", "mouth-bottom-dweller-shiny"],
+  ["mouth-goda", "mouth-dark-kiss", "mouth-dark-kiss-shiny"],
+  ["mouth-peace-maker", "mouth-doombringer", "mouth-doombringer-shiny"],
+  ["mouth-pincer", "mouth-poisonous-pincer", "mouth-poisonous-pincer-shiny"],
+  ["back-goldfish", "back-tendrils", "back-tendrils-shiny"],
+  ["back-bidens", "back-petalworts", "back-petalworts-shiny"],
+  ["back-furball", "back-shrunken-skulls", "back-shrunken-skulls-shiny"],
+  ["back-green-thorns", "back-nightmare-wings", "back-nightmare-wings-shiny"],
 ];

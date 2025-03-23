@@ -72,12 +72,21 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
               >
                 <div className="flex max-w-[180px] flex-col gap-2">
                   <p>Eyes, ears and body are not considered for the search.</p>
-                  <p>Summer, japanese and winter parts are included.</p>
+                  <p>
+                    Summer, japanese, christmas and nightmare parts are
+                    included.
+                  </p>
                 </div>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
+        <p className="flex items-center gap-2 pt-6 text-sm text-neutral-100">
+          <span className="rounded-full border-2 border-red-500 bg-neutral-bg-dark px-1.5 py-0.5 font-semibold text-red-500">
+            New
+          </span>
+          <span> nigthmare parts added to the search!</span>
+        </p>
       </div>
       <div className="flex flex-col items-center md:flex-row">
         <div className="h-[150px] w-[200px] scale-x-[-1] transform overflow-hidden">
