@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   authors: [
     {
-      name: "0xlodz",
-      url: "https://x.com/0xlodz",
+      name: "larnakid",
+      url: "https://x.com/larnakid",
     },
   ],
   openGraph: {
