@@ -55,12 +55,6 @@ export const userSocialsByClientID = new Map<ClientID, Socials>([
     },
   ],
   [
-    "0x89b091cca4c2d9d05fa2c0a074b34ce5897068f9", // Atelo
-    {
-      x: "AteloAxie",
-    },
-  ],
-  [
     "0xb7db839a370ed01f174a6e33317ef65f583841b6",
     {
       x: "ThunderRoyale",
