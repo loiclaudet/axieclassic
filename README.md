@@ -1,29 +1,179 @@
-# Create T3 App
+# Axie Classic Leaderboard & Stats
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A modern web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories. Built with Next.js and the T3 Stack.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Arena Leaderboard**: Real-time ranking of top players with detailed stats
+- **Player Profiles**: Individual player statistics, battle histories, and performance metrics
+- **Guild Rankings**: Track guild performance and member statistics
+- **Battle History**: Detailed battle records with opponent information
+- **Find Similar Axies**: Search and compare axie builds and stats
+- **Season Championship**: Track qualification status for top 16 players
+- **Responsive Design**: Optimized for desktop and mobile devices
+- **Real-time Updates**: Data refreshes every 3 minutes
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+This project is built with the [T3 Stack](https://create.t3.gg/):
 
-## Learn More
+- [Next.js 14](https://nextjs.org) - React framework with App Router
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [Radix UI](https://www.radix-ui.com/) - Accessible UI components
+- [Lucide React](https://lucide.dev/) - Icons
+- [PostHog](https://posthog.com/) - Analytics
+- [Ronin Name Service](https://roninbuilders.com/) - ENS for Ronin addresses
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Prerequisites
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+Before you begin, ensure you have the following installed:
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [pnpm](https://pnpm.io/) (version 9 or higher)
 
-## How do I deploy this?
+## Getting Started
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 1. Clone the repository
+
+```bash
+git clone git@github.com:loiclaudet/axieclassic.git
+cd axieclassic
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Environment Setup
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# API Keys for Axie Classic API
+X_API_KEY_1=your_api_key_1
+X_API_KEY_2=your_api_key_2
+X_API_KEY_3=your_api_key_3
+X_API_KEY_4=your_api_key_4
+
+# PostHog Analytics (optional)
+NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
+NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+```
+
+**Note**:
+In order to deal with the rate limits, you'll need to obtain several API keys from the Axie Classic API, by creating an account on the [Ronin Chain Developer Console](https://developers.roninchain.com/console/applications/).
+The trick is to create 4 applications, and then you can use the API keys from each application.
+
+You'll also need to create a PostHog account, and get the API key from the PostHog dashboard.
+
+### 4. Run the development server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+### 5. Build for production
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── guilds/            # Guild-related pages
+│   ├── profile/           # Player profile pages
+│   └── find-similar/      # Axie comparison pages
+├── components/            # Reusable React components
+│   ├── ui/               # Base UI components
+│   └── ...               # Feature-specific components
+├── data/                 # Data fetching functions
+├── lib/                  # Utilities and configurations
+├── hook/                 # Custom React hooks
+└── styles/               # Global styles
+```
+
+## Key Features Implementation
+
+### Arena Leaderboard
+
+- Fetches top 50 players from the Axie Classic API
+- Displays rank, player info, stats, and current season data
+- Highlights season championship qualifiers (top 16)
+
+### Player Profiles
+
+- Individual player statistics and battle history
+- Recent battles with opponent details
+- Performance metrics and rankings
+
+### Guild System
+
+- Guild rankings and member statistics
+- Guild rewards and season information
+- Member battle histories
+
+### API Integration
+
+- Rate-limited API queue system
+- Multiple API key rotation
+- Error handling and retry logic
+- Real-time data updates
+
+## Development Guidelines
+
+### Code Style
+
+- Use TypeScript for type safety
+- Follow the existing component structure
+- Use Tailwind CSS for styling
+- Implement proper error handling
+
+### API Usage
+
+- Respect rate limits (5 requests per second)
+- Use the API queue system for requests
+- Implement proper error handling and retries
+- Cache data appropriately
+
+### Adding New Features
+
+1. Create components in the appropriate directory
+2. Add data fetching functions in `src/data/`
+3. Update navigation if needed
+4. Add proper TypeScript types
+5. Test on both desktop and mobile
+
+## Deployment
+
+The application can be deployed to various platforms:
+
+- **Vercel** (recommended): Connect your GitHub repository
+- **Netlify**: Build command: `pnpm build`, Publish directory: `.next`
+- **Docker**: Use the provided Dockerfile
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## Support
+
+For questions or support:
+
+Join the Axie Infinity Discord, and ask for help in the #tools-api-etc channel.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
