@@ -13,7 +13,6 @@ export const env = createEnv({
     X_API_KEY_3: z.string(),
     X_API_KEY_4: z.string(),
     X_API_KEY_DEV: z.string(),
-    BEARER_TOKEN: z.string(),
   },
 
   /**
@@ -37,7 +36,6 @@ export const env = createEnv({
     X_API_KEY_3: process.env.X_API_KEY_3,
     X_API_KEY_4: process.env.X_API_KEY_4,
     X_API_KEY_DEV: process.env.X_API_KEY_DEV,
-    BEARER_TOKEN: process.env.BEARER_TOKEN,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
