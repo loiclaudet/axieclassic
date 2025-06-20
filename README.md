@@ -1,6 +1,14 @@
 # Axie Classic Leaderboard & Stats
 
-A modern web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories. Built with Next.js and the T3 Stack.
+A modern, mobile-friendly, web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories.
+
+
+<img width="1329" alt="image" src="https://github.com/user-attachments/assets/70d9392d-cd1b-4ef8-b766-1518cc6f3021" />
+
+<img width="1015" alt="image" src="https://github.com/user-attachments/assets/97e18814-ffaa-4116-a829-abd7a96ed2cd" />
+
+<img width="1236" alt="image" src="https://github.com/user-attachments/assets/16a21e63-8d09-4142-a907-9ffb8356fc31" />
+
 
 ## Features
 
