@@ -1,6 +1,6 @@
 # Axie Classic Leaderboard & Stats
 
-A modern, mobile-friendly, web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories.
+A web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories.
 
 
 <img width="1329" alt="image" src="https://github.com/user-attachments/assets/70d9392d-cd1b-4ef8-b766-1518cc6f3021" />
@@ -45,7 +45,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone git@github.com:loiclaudet/axieclassic.git
+git clone git@github.com:larnakid/axieclassic.git
 cd axieclassic
 ```
 
@@ -75,7 +75,7 @@ NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
 In order to deal with the rate limits, you'll need to obtain several API keys from the Axie Classic API, by creating an account on the [Ronin Chain Developer Console](https://developers.roninchain.com/console/applications/).
 The trick is to create 4 applications, and then you can use the API keys from each application.
 
-You'll also need to create a PostHog account, and get the API key from the PostHog dashboard.
+You'll also need to create a PostHog account and get the API key from the PostHog dashboard.
 
 ### 4. Run the development server
 
@@ -180,7 +180,7 @@ The application can be deployed to various platforms:
 
 For questions or support:
 
-Join the Axie Infinity Discord, and ask for help in the #tools-api-etc channel.
+Join the Axie Infinity Discord and ask for help in the #tools-api-etc channel.
 
 ## License
 
