@@ -17,4 +17,4 @@ export const CONSIDERED_ONLINE_DURATION_IN_MIN = 10;
 
 export const LUNACIAN_CODE = "LODZ";
 
-export const X_USERNAME = "larnakid";
+export const X_USERNAME = "loiclaudet";

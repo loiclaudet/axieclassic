@@ -2,13 +2,11 @@
 
 A web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories.
 
-
 <img width="1329" alt="image" src="https://github.com/user-attachments/assets/70d9392d-cd1b-4ef8-b766-1518cc6f3021" />
 
 <img width="1015" alt="image" src="https://github.com/user-attachments/assets/97e18814-ffaa-4116-a829-abd7a96ed2cd" />
 
 <img width="1236" alt="image" src="https://github.com/user-attachments/assets/16a21e63-8d09-4142-a907-9ffb8356fc31" />
-
 
 ## Features
 
@@ -45,7 +43,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone git@github.com:larnakid/axieclassic.git
+git clone git@github.com:loiclaudet/axieclassic.git
 cd axieclassic
 ```
 
