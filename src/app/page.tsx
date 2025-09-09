@@ -48,7 +48,7 @@ export default async function ArenaPage() {
               />
               <p className="max-w-[300px] text-balance text-center text-lg text-neutral-100 sm:max-w-full">
                 Check out the teams from{" "}
-                <Link href="/guilds" className="underline">
+                <Link href="/guilds" prefetch={false} className="underline">
                   Top Guilds
                 </Link>
                 .

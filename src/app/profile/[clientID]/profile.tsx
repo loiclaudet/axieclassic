@@ -34,6 +34,7 @@ export const Profile = async ({ clientID }: ProfileProps) => {
         <Link
           className="group inline-flex items-center gap-1 transition-colors hover:text-neutral-100 hover:underline"
           href={`/guilds/${guild.id}`}
+          prefetch={false}
         >
           <p className="text-center text-sm hover:underline">{guild.name}</p>
           <ExternalLinkIcon className="h-3 w-3 text-neutral-100 transition-all group-hover:scale-125" />

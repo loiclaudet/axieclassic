@@ -52,6 +52,7 @@ export default function Player({ player, imagePriority }: PlayerProps) {
             <Link
               className="group inline-flex items-center gap-1 transition-colors hover:text-neutral-100 hover:underline"
               href={`/guilds/${guild.id}`}
+              prefetch={false}
             >
               <p className="text-center text-sm hover:underline">
                 {guild.name}
