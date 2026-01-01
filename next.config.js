@@ -38,6 +38,10 @@ const config = {
         source: "/ingest/:path*",
         destination: "https://us.i.posthog.com/:path*",
       },
+      {
+        source: "/axie-images/:path*",
+        destination: "https://axiecdn.axieinfinity.com/:path*",
+      },
     ];
   },
   // This is required to support PostHog trailing slash API requests

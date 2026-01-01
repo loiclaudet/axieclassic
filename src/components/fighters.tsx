@@ -26,7 +26,7 @@ export const Fighters = ({
           <Link href={`/find-similar/${fighterID}`} prefetch={false}>
             <Image
               priority={imagePriority}
-              src={`https://axiecdn.axieinfinity.com/axies/${fighterID}/axie/axie-full-transparent.png`}
+              src={`/axie-images/axies/${fighterID}/axie/axie-full-transparent.png`}
               alt={`Axie ${fighterID}`}
               width={150}
               height={112}
