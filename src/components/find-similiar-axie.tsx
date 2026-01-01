@@ -91,7 +91,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
       <div className="flex flex-col items-center md:flex-row">
         <div className="h-[150px] w-[200px] scale-x-[-1] transform overflow-hidden">
           <Image
-            src={`https://axiecdn.axieinfinity.com/axies/${axieId}/axie/axie-full-transparent.png`}
+            src={`/axie-images/axies/${axieId}/axie/axie-full-transparent.png`}
             alt={`Axie ${axieId}`}
             width={200}
             height={150}
