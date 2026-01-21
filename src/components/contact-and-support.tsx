@@ -1,31 +1,33 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
-import { useCopyToClipboard } from "~/hook/copy-to-clipboard"; // Assuming you have this hook
-import { X_USERNAME } from "~/lib/constant";
+import { useCopyToClipboard } from "~/hook/copy-to-clipboard";
+import { X_USERNAME, DONATION_ADDRESS } from "~/lib/constant";
 import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { toast } from "sonner";
 import Image from "next/image";
-
-const DONATION_ADDRESS = "0xca8cd32bbe1dd2a0210c63047634b378ba2abfa1";
 
 export const ContactAndSupport = () => {
   const [, copyToClipboard] = useCopyToClipboard();
 
   const handleCopyAddress = async () => {
-    await copyToClipboard(DONATION_ADDRESS);
-    toast(
-      <div className="flex w-full items-center gap-4">
-        <Image src="/love.webp" alt="thanks" width={40} height={40} />
-        <p className="text-2xl font-bold text-neutral-separator-dark">
-          thank you!
-        </p>
-      </div>,
-      {
-        dismissible: true,
-        duration: 2500,
-      },
-    );
+    const success = await copyToClipboard(DONATION_ADDRESS);
+    if (success) {
+      toast(
+        <div className="flex w-full items-center gap-4">
+          <Image src="/love.webp" alt="thanks" width={40} height={40} />
+          <p className="text-2xl font-bold text-neutral-separator-dark">
+            thank you!
+          </p>
+        </div>,
+        {
+          dismissible: true,
+          duration: 2500,
+        },
+      );
+    } else {
+      toast.error("Failed to copy address");
+    }
   };
 
   return (

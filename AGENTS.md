@@ -57,7 +57,7 @@ This project uses `pnpm` as the package manager.
 
 ### Naming Conventions
 
-- **Files:** `kebab-case.tsx` or `kebab-case.ts` (e.g., `mobile-menu.tsx`, `apiQueue.ts`).
+- **Files:** `kebab-case.tsx` or `kebab-case.ts` (e.g., `mobile-menu.tsx`, `api-queue.ts`).
 - **Components:** `PascalCase` (e.g., `Player`, `BattleDetails`).
 - **Functions/Variables:** `camelCase`.
 - **Types:** `PascalCase`.
