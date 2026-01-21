@@ -2,16 +2,18 @@
 
 import { Button } from "~/components/ui/button";
 import { useCopyToClipboard } from "~/hook/copy-to-clipboard"; // Assuming you have this hook
-import { LUNACIAN_CODE, X_USERNAME } from "~/lib/constant";
+import { X_USERNAME } from "~/lib/constant";
 import { LuExternalLink as ExternalLinkIcon } from "react-icons/lu";
 import { toast } from "sonner";
 import Image from "next/image";
 
+const DONATION_ADDRESS = "0xca8cd32bbe1dd2a0210c63047634b378ba2abfa1";
+
 export const ContactAndSupport = () => {
   const [, copyToClipboard] = useCopyToClipboard();
 
-  const handleCopyCode = async () => {
-    await copyToClipboard(LUNACIAN_CODE);
+  const handleCopyAddress = async () => {
+    await copyToClipboard(DONATION_ADDRESS);
     toast(
       <div className="flex w-full items-center gap-4">
         <Image src="/love.webp" alt="thanks" width={40} height={40} />
@@ -51,13 +53,13 @@ export const ContactAndSupport = () => {
           want to support me?
         </p>
         <p className="flex items-center text-xl text-neutral-100 md:text-sm">
-          use code{" "}
+          donate to{" "}
           <Button
             size="sm"
             className="ml-1.5 px-1.5 py-px text-xl md:text-sm"
-            onClick={handleCopyCode}
+            onClick={handleCopyAddress}
           >
-            {LUNACIAN_CODE}
+            {DONATION_ADDRESS.slice(0, 6)}...{DONATION_ADDRESS.slice(-4)}
           </Button>
         </p>
       </div>
