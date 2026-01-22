@@ -15,6 +15,6 @@ export const SEASON_CHAMPIONSHIP_QUALIFIED = 16;
 
 export const CONSIDERED_ONLINE_DURATION_IN_MIN = 10;
 
-export const LUNACIAN_CODE = "LODZ";
+export const DONATION_ADDRESS = "0xca8cd32bbe1dd2a0210c63047634b378ba2abfa1";
 
 export const X_USERNAME = "loiclaudet";
