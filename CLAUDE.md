@@ -37,9 +37,9 @@ pnpm lint     # Run ESLint
 The app fetches data from Axie Classic/Sky Mavis APIs with a rate-limited queue system:
 
 1. **Rate limiting**: 5 requests/second per API key, managed via `p-queue` in `src/lib/apiQueue.ts`
-2. **Key rotation**: Multiple API keys (4 in production) rotate via `src/lib/apiKeys.ts`
+2. **Key rotation**: Multiple API keys (3 in production: `X_API_KEY`, `X_API_KEY_2`, `X_API_KEY_3`; 1 in development: `X_API_KEY_DEV`) rotate via `src/lib/apiKeys.ts`
 3. **Retry logic**: Exponential backoff (2^n seconds) with 3 retries in `src/data/index.ts`
-4. **Caching**: 180-second revalidation for most data
+4. **Caching**: Variable revalidation (home page: 180s, guild pages: 1800s, profile pages: 0/no caching)
 
 API endpoints used:
 - `https://axie-classic.skymavis.com/v1/` - Leaderboard, seasons
@@ -47,7 +47,7 @@ API endpoints used:
 - `https://api-gateway.skymavis.com/graphql/axie-marketplace` - Axie details
 
 ### Data Flow
-```
+```text
 API Endpoints → Rate-limited Queue (p-queue) → Data Functions (src/data/) → Server Components → Client Hydration
 ```
 
@@ -63,12 +63,17 @@ All API response types are defined in `src/lib/definitions.ts`. Key types:
 ### Environment Variables
 
 Required in `.env.local`:
-```
-X_API_KEY_1=...  # Obtain from Ronin Developer Console
-X_API_KEY_2=...  # Create 4 applications to get 4 keys
+```bash
+# Production (create 3 applications in Ronin Developer Console)
+X_API_KEY=...
+X_API_KEY_2=...
 X_API_KEY_3=...
-X_API_KEY_4=...
-NEXT_PUBLIC_POSTHOG_KEY=...  # Optional analytics
+
+# Development
+X_API_KEY_DEV=...
+
+# Optional analytics
+NEXT_PUBLIC_POSTHOG_KEY=...
 NEXT_PUBLIC_POSTHOG_HOST=...
 ```
 
