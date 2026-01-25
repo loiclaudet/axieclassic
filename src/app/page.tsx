@@ -8,6 +8,8 @@ import Player from "~/components/player";
 import { Search } from "~/components/search";
 import { Season } from "~/components/season";
 import { SeasonSkeleton } from "~/components/skeletons";
+import { RewardsProvider } from "~/components/rewards-context";
+import { RewardsToggle } from "~/components/rewards-toggle";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,7 +20,7 @@ export default async function ArenaPage() {
   const isError = "error" in players;
 
   return (
-    <>
+    <RewardsProvider>
       <Header
         heading={
           <div className="flex items-center gap-2 text-neutral-100">
@@ -30,9 +32,12 @@ export default async function ArenaPage() {
       <main className="flex flex-col items-start lg:w-[987px]">
         <div className="flex w-full flex-col border-r border-r-neutral-separator-dark sm:w-auto">
           <div className="flex flex-col gap-4 px-4 py-4 md:sticky md:top-0 md:z-10 md:flex-row md:gap-12 md:border-b md:border-b-neutral-separator-dark md:bg-neutral-bg-dark/70 md:backdrop-blur-md">
-            <Suspense fallback={<SeasonSkeleton />}>
-              <Season />
-            </Suspense>
+            <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
+              <Suspense fallback={<SeasonSkeleton />}>
+                <Season />
+              </Suspense>
+              <RewardsToggle />
+            </div>
             <Search />
           </div>
           {isError ? (
@@ -86,6 +91,6 @@ export default async function ArenaPage() {
           )}
         </div>
       </main>
-    </>
+    </RewardsProvider>
   );
 }

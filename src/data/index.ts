@@ -10,6 +10,7 @@ import type {
   BattleWithProfiles,
   AxieDetailsResponse,
   Axie,
+  Reward,
 } from "~/lib/definitions";
 import { apiQueue } from "~/lib/apiQueue";
 import { getNextAPIKey } from "~/lib/apiKeys";
@@ -149,10 +150,25 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
 
 export async function getPlayers(): Promise<Player[] | APIError> {
   try {
-    const rankedUsers = ((await getTop100RankedUsers()) as RankedUser[]).slice(
+    const [rankedUsersResult, guildSeasonResult] = await Promise.all([
+      getTop100RankedUsers(),
+      getGuildSeason(),
+    ]);
+
+    if ("error" in guildSeasonResult) {
+      throw new Error("Failed to fetch guild season");
+    }
+
+    const rankedUsers = (rankedUsersResult as RankedUser[]).slice(
       0,
       MAXIMUM_PLAYERS_API_LIMIT,
     );
+
+    // Create a map of rank -> reward amount from guild season rewards
+    const rewardsByRank = new Map<number, number>();
+    guildSeasonResult.rewards.forEach((reward: Reward) => {
+      rewardsByRank.set(reward.rank, reward.amount);
+    });
 
     const profiles = (await getProfiles(
       rankedUsers.map((user) => user.clientID),
@@ -163,6 +179,7 @@ export async function getPlayers(): Promise<Player[] | APIError> {
       return {
         ...profile,
         ...user,
+        reward: rewardsByRank.get(user.rank) ?? 0,
       };
     });
 

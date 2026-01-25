@@ -8,6 +8,7 @@ import { ColoredName } from "~/components/colored-name";
 import { SocialIcons } from "~/components/social-icons";
 import { userSocialsByClientID } from "~/lib/socials";
 import { Team } from "~/components/team";
+import { PlayerReward } from "~/components/player-reward";
 
 type PlayerProps = {
   player: Player;
@@ -15,17 +16,18 @@ type PlayerProps = {
 };
 
 export default function Player({ player, imagePriority }: PlayerProps) {
-  const { name, score, rank, clientID, guild } = player;
+  const { name, score, rank, clientID, guild, reward } = player;
   const socials = userSocialsByClientID.get(clientID);
 
   return (
     <div className="relative flex">
       <div className="flex w-12 shrink-0 flex-col md:w-20">
-        <div className="flex basis-1/2 items-center justify-center border-b border-dashed border-neutral-separator-dark">
+        <div className="flex basis-1/2 flex-col items-center justify-center border-b border-dashed border-neutral-separator-dark">
           <div className="flex items-baseline text-neutral-100">
             <span className="text-xs">#</span>
             <span className="text-xl font-bold">{rank}</span>
           </div>
+          <PlayerReward reward={reward} />
         </div>
         <div className="flex basis-1/2 items-center justify-center">
           <div className="flex flex-col items-center justify-center text-neutral-100">

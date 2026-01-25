@@ -40,6 +40,7 @@ export type RankedUser = {
   rank: number;
   score: number;
   tier: Tier;
+  reward: number;
 };
 
 export type Player = RankedUser & Profile;
@@ -96,7 +97,7 @@ type Bonus = {
 
 type Currency = "maxs_in";
 
-type Reward = {
+export type Reward = {
   rank: number;
   currency: Currency;
   amount: number;
