@@ -81,12 +81,6 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
             </Tooltip>
           </TooltipProvider>
         </div>
-        <p className="flex items-center gap-2 pt-6 text-sm text-neutral-100">
-          <span className="rounded-full border-2 border-red-500 bg-neutral-bg-dark px-1.5 py-0.5 font-semibold text-red-500">
-            New
-          </span>
-          <span> nigthmare parts added to the search!</span>
-        </p>
       </div>
       <div className="flex flex-col items-center md:flex-row">
         <div className="h-[150px] w-[200px] scale-x-[-1] transform overflow-hidden">
@@ -104,7 +98,7 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-xl">Preserve stast?</p>
+          <p className="text-xl">Preserve stats?</p>
           <div className="grid grid-cols-2 gap-4">
             {Object.entries(axie.stats).map(([stat, value]) => (
               <StatsSelector
