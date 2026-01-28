@@ -18,6 +18,24 @@ import { MAXIMUM_PLAYERS_API_LIMIT } from "~/lib/constant";
 import { getProfiles } from "~/data/profile";
 import { sleep } from "~/lib/utils";
 
+function getSeasonRewardsOverride(
+  season: number,
+  rank: number,
+): number | undefined {
+  if (season !== 142) return undefined;
+
+  if (rank === 1) return 2_500_000;
+  if (rank === 2) return 2_000_000;
+  if (rank === 3) return 1_750_000;
+  if (rank >= 4 && rank <= 10) return 750_000;
+  if (rank >= 11 && rank <= 25) return 500_000;
+  if (rank >= 26 && rank <= 50) return 400_000;
+  if (rank >= 51 && rank <= 75) return 340_000;
+  if (rank >= 76 && rank <= 100) return 300_000;
+
+  return undefined;
+}
+
 export async function getGuildSeason(): Promise<GuildSeason | APIError> {
   try {
     const response = await fetch(
@@ -179,7 +197,10 @@ export async function getPlayers(): Promise<Player[] | APIError> {
       return {
         ...profile,
         ...user,
-        reward: rewardsByRank.get(user.rank) ?? 0,
+        reward:
+          getSeasonRewardsOverride(guildSeasonResult.season, user.rank) ??
+          rewardsByRank.get(user.rank) ??
+          0,
       };
     });
 
