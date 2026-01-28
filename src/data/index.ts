@@ -166,7 +166,9 @@ async function fetchBattles(clientId: string, options: APIOptions = {}) {
   return data;
 }
 
-export async function getPlayers(): Promise<Player[] | APIError> {
+export async function getPlayers(
+  page: 1 | 2 = 1,
+): Promise<Player[] | APIError> {
   try {
     const [rankedUsersResult, guildSeasonResult] = await Promise.all([
       getTop100RankedUsers(),
@@ -177,9 +179,10 @@ export async function getPlayers(): Promise<Player[] | APIError> {
       throw new Error("Failed to fetch guild season");
     }
 
-    const rankedUsers = (rankedUsersResult as RankedUser[]).slice(
-      0,
-      MAXIMUM_PLAYERS_API_LIMIT,
+    const allRankedUsers = rankedUsersResult as RankedUser[];
+    const rankedUsers = allRankedUsers.slice(
+      (page - 1) * MAXIMUM_PLAYERS_API_LIMIT,
+      page * MAXIMUM_PLAYERS_API_LIMIT,
     );
 
     // Create a map of rank -> reward amount from guild season rewards
