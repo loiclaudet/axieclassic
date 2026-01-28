@@ -10,13 +10,19 @@ import { Season } from "~/components/season";
 import { SeasonSkeleton } from "~/components/skeletons";
 import { RewardsProvider } from "~/components/rewards-context";
 import { RewardsToggle } from "~/components/rewards-toggle";
+import { LeaderboardPagination } from "~/components/leaderboard-pagination";
 import Link from "next/link";
 import Image from "next/image";
 
 export const revalidate = 180; // 3 minutes
 
-export default async function ArenaPage() {
-  const players = await getPlayers();
+export default async function ArenaPage({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
+  const page: 1 | 2 = searchParams.page === "2" ? 2 : 1;
+  const players = await getPlayers(page);
   const isError = "error" in players;
 
   return (
@@ -39,6 +45,7 @@ export default async function ArenaPage() {
               <RewardsToggle />
             </div>
             <Search />
+            <LeaderboardPagination currentPage={page} />
           </div>
           {isError ? (
             <div className="flex h-[calc(100dvh-68px)] w-full flex-col items-center gap-2 lg:w-[768px]">
@@ -70,20 +77,21 @@ export default async function ArenaPage() {
                     >
                       <Player player={player} imagePriority={index <= 5} />
                     </li>
-                    {index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
-                      <li
-                        key="season-championship-qualified"
-                        className="flex items-center justify-center gap-3 py-2"
-                      >
-                        <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
-                        <div className="group cursor-default rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
-                          <div className="flex items-center justify-center gap-1">
-                            <span>Season Championship qualified</span>
+                    {page === 1 &&
+                      index + 1 === SEASON_CHAMPIONSHIP_QUALIFIED && (
+                        <li
+                          key="season-championship-qualified"
+                          className="flex items-center justify-center gap-3 py-2"
+                        >
+                          <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                          <div className="group cursor-default rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
+                            <div className="flex items-center justify-center gap-1">
+                              <span>Season Championship qualified</span>
+                            </div>
                           </div>
-                        </div>
-                        <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
-                      </li>
-                    )}
+                          <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
+                        </li>
+                      )}
                   </>
                 );
               })}
