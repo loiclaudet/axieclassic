@@ -60,3 +60,6 @@ export const chunk = <T>(arr: T[], size: number): T[][] =>
 
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Convert API season number to official Axie Classic season number */
+export const getDisplaySeason = (apiSeason: number) => apiSeason - 129;
