@@ -84,11 +84,14 @@ export default async function ArenaPage({
                           className="flex items-center justify-center gap-3 py-2"
                         >
                           <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
-                          <div className="group cursor-default rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500">
-                            <div className="flex items-center justify-center gap-1">
-                              <span>Season Championship qualified</span>
-                            </div>
-                          </div>
+                          <a
+                            href="https://x.com/AxieInfinity/status/2014250336668782599"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full px-1.5 py-0.5 text-sm font-medium text-seafoam-green-500 hover:underline"
+                          >
+                            Season Championship invitational
+                          </a>
                           <ArrowUpIcon className="h-5 w-5 text-seafoam-green-500" />
                         </li>
                       )}
