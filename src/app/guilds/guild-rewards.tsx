@@ -15,7 +15,7 @@ export const GuildReward = async ({
   }
   const axsRankReward = getGuildAXSRankReward(rank, guildSeason);
   const axsBonusReward = getGuildAXSBonusReward(guildPoints, guildSeason);
-  const axsReward = Math.round((axsRankReward + axsBonusReward) / 10) * 10;
+  const axsReward = Math.floor((axsRankReward + axsBonusReward) / 10) * 10;
 
   if (axsReward === 0) return null;
 
