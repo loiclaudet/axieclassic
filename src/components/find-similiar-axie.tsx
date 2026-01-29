@@ -2,7 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { Axie, AxieClass, Stat } from "~/lib/definitions";
-import { createFindSimilarAxieUrl } from "~/lib/find-similar-axie";
+import {
+  createFindSimilarAxieUrl,
+  type AuctionType,
+} from "~/lib/find-similar-axie";
 import { HiMiniMagnifyingGlass as MagnifyingGlassIcon } from "react-icons/hi2";
 import { LuInfo as InfoIcon } from "react-icons/lu";
 import { Button } from "~/components/ui/button";
@@ -21,6 +24,15 @@ type FindSimilarAxieProps = {
 
 export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
   const [openTooltip, setOpenTooltip] = useState(false);
+  const [auctionTypes, setAuctionTypes] = useState<{
+    Sale: boolean;
+    NotForSale: boolean;
+  }>({ Sale: true, NotForSale: false });
+
+  const handleToggleAuctionType = (type: AuctionType) => {
+    setAuctionTypes((prev) => ({ ...prev, [type]: !prev[type] }));
+  };
+
   const [preservedStats, setPreservedStats] = useState<{
     [key in Stat]: boolean;
   }>({
@@ -97,18 +109,39 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
             }}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-xl">Preserve stats?</p>
-          <div className="grid grid-cols-2 gap-4">
-            {Object.entries(axie.stats).map(([stat, value]) => (
-              <StatsSelector
-                key={stat}
-                selected={preservedStats[stat as Stat]}
-                onToggle={() => handlePreserveStat(stat as Stat)}
-                stat={stat as Stat}
-                value={value}
-              />
-            ))}
+        <div className="flex flex-col gap-4 md:flex-row md:gap-8">
+          <div className="flex flex-col gap-2">
+            <p className="text-xl">Preserve stats?</p>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(axie.stats).map(([stat, value]) => (
+                <StatsSelector
+                  key={stat}
+                  selected={preservedStats[stat as Stat]}
+                  onToggle={() => handlePreserveStat(stat as Stat)}
+                  stat={stat as Stat}
+                  value={value}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <p className="text-xl">Status</p>
+            <div className="flex flex-col gap-2">
+              <label className="flex cursor-pointer items-center gap-2">
+                <Checkbox
+                  checked={auctionTypes.Sale}
+                  onCheckedChange={() => handleToggleAuctionType("Sale")}
+                />
+                <span className="text-lg">For sale</span>
+              </label>
+              <label className="flex cursor-pointer items-center gap-2">
+                <Checkbox
+                  checked={auctionTypes.NotForSale}
+                  onCheckedChange={() => handleToggleAuctionType("NotForSale")}
+                />
+                <span className="text-lg">Not for sale</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -122,6 +155,9 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
             Object.keys(preservedStats).filter(
               (stat) => preservedStats[stat as Stat],
             ) as Stat[],
+            (
+              Object.keys(auctionTypes) as AuctionType[]
+            ).filter((type) => auctionTypes[type]),
           )}
         >
           <MagnifyingGlassIcon className="h-5 w-5" />

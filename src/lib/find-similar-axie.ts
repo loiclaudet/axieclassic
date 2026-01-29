@@ -1,12 +1,18 @@
 import type { Axie, AxiePart, AxieStats, Stat } from "./definitions";
 
+export type AuctionType = "Sale" | "NotForSale";
+
 export const createFindSimilarAxieUrl = (
   axie: Axie,
   preservedStats?: Stat[],
+  auctionTypes: AuctionType[] = ["Sale"],
 ): string => {
   const baseURL = "https://app.axieinfinity.com/marketplace/axies/";
+  const auctionParams = auctionTypes
+    .map((t) => `auctionTypes=${t}`)
+    .join("&");
 
-  return `${baseURL}?auctionTypes=Sale&sort=PriceAsc&classes=${axie.class}&${partsQueryBuilder(axie.parts)}&${preservedStats ? statsQueryBuilder(axie.stats, preservedStats) : ""}`;
+  return `${baseURL}?${auctionParams}&sort=PriceAsc&classes=${axie.class}&${partsQueryBuilder(axie.parts)}&${preservedStats ? statsQueryBuilder(axie.stats, preservedStats) : ""}`;
 };
 
 const statsQueryBuilder = (
