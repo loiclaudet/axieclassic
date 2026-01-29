@@ -2,7 +2,8 @@
 
 A web application for tracking Axie Infinity Classic arena leaderboards, player statistics, guild rankings, and battle histories.
 
-<img width="1329" alt="image" src="https://github.com/user-attachments/assets/70d9392d-cd1b-4ef8-b766-1518cc6f3021" />
+<img width="1041" height="925" alt="image" src="https://github.com/user-attachments/assets/c034750f-e414-4f3a-90fa-d667b28a2401" />
+
 
 <img width="1015" alt="image" src="https://github.com/user-attachments/assets/97e18814-ffaa-4116-a829-abd7a96ed2cd" />
 
