@@ -132,14 +132,14 @@ export const FindSimilarAxie = ({ axie, axieId }: FindSimilarAxieProps) => {
                   checked={auctionTypes.Sale}
                   onCheckedChange={() => handleToggleAuctionType("Sale")}
                 />
-                <span className="text-lg">For sale</span>
+                <span className="text-sm">For sale</span>
               </label>
               <label className="flex cursor-pointer items-center gap-2">
                 <Checkbox
                   checked={auctionTypes.NotForSale}
                   onCheckedChange={() => handleToggleAuctionType("NotForSale")}
                 />
-                <span className="text-lg">Not for sale</span>
+                <span className="text-sm">Not for sale</span>
               </label>
             </div>
           </div>
