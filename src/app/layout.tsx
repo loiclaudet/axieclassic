@@ -9,6 +9,7 @@ import { Navigation } from "~/components/navigation";
 import { ContactAndSupport } from "~/components/contact-and-support";
 import { Toaster } from "~/components/ui/sonner";
 import { Popover } from "~/components/popover";
+import { FollowBanner } from "~/components/follow-banner";
 
 const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
   ssr: false,
@@ -65,14 +66,17 @@ export default function RootLayout({
           className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
           <PostHogPageView />
-          <div className="flex w-full max-w-screen-xl flex-col md:w-auto md:flex-row">
-            <aside className="sticky top-0 hidden h-screen flex-col items-stretch justify-between justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
-              <Navigation />
-              <Popover>
-                <ContactAndSupport />
-              </Popover>
-            </aside>
-            {children}
+          <div className="flex w-full max-w-screen-xl flex-col">
+            <FollowBanner />
+            <div className="flex flex-1 flex-col md:w-auto md:flex-row">
+              <aside className="sticky top-0 hidden h-screen flex-col items-stretch justify-between justify-self-start border-r border-neutral-separator-dark bg-neutral-bg-dark p-4 text-white md:flex">
+                <Navigation />
+                <Popover>
+                  <ContactAndSupport />
+                </Popover>
+              </aside>
+              {children}
+            </div>
           </div>
           {modal}
           <Toaster position="bottom-center" />
