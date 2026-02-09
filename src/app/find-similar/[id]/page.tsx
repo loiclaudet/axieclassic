@@ -1,14 +1,16 @@
 import { Suspense } from "react";
-import {
-  FindSimilarAxieContent,
-  type FindSimilarProps,
-} from "~/components/find-similar-axie-content";
+import { FindSimilarAxieContent } from "~/components/find-similar-axie-content";
 import { FindSimilarSkeleton } from "~/components/skeletons";
 
-export default function FindSimilarPage({ params }: FindSimilarProps) {
+export default async function FindSimilarPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = await params;
   return (
     <Suspense fallback={<FindSimilarSkeleton />}>
-      <FindSimilarAxieContent params={params} />
+      <FindSimilarAxieContent params={resolvedParams} />
     </Suspense>
   );
 }

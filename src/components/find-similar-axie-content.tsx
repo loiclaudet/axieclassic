@@ -6,10 +6,11 @@ export type FindSimilarProps = {
 };
 
 export const FindSimilarAxieContent = async ({ params }: FindSimilarProps) => {
-  const axie = await getAxie(params.id);
+  const { id } = params;
+  const axie = await getAxie(id);
   if ("error" in axie) {
     return <p>{axie.message}</p>;
   }
 
-  return <FindSimilarAxie axieId={params.id} axie={axie} />;
+  return <FindSimilarAxie axieId={id} axie={axie} />;
 };

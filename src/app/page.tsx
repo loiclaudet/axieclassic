@@ -19,9 +19,10 @@ export const revalidate = 180; // 3 minutes
 export default async function ArenaPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const page: 1 | 2 = searchParams.page === "2" ? 2 : 1;
+  const { page: pageParam } = await searchParams;
+  const page: 1 | 2 = pageParam === "2" ? 2 : 1;
   const players = await getPlayers(page);
   const isError = "error" in players;
 

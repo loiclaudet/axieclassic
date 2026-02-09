@@ -17,8 +17,12 @@ import { RoninAddress } from "~/components/ronin-address";
 
 export const revalidate = 0;
 
-export default function Page({ params }: { params: { clientID: string } }) {
-  const { clientID } = params;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ clientID: string }>;
+}) {
+  const { clientID } = await params;
 
   return (
     <>
