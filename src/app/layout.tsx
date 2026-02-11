@@ -1,19 +1,16 @@
 import "~/styles/globals.css";
 
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import type { Viewport } from "next";
 import { Work_Sans } from "next/font/google";
 import { PHProvider } from "./providers";
+import PostHogPageView from "./PostHogPageView";
 import { Navigation } from "~/components/navigation";
 import { ContactAndSupport } from "~/components/contact-and-support";
 import { Toaster } from "~/components/ui/sonner";
 import { Popover } from "~/components/popover";
 import { FollowBanner } from "~/components/follow-banner";
-
-const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
-  ssr: false,
-});
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -65,7 +62,9 @@ export default function RootLayout({
         <body
           className={`relative flex min-h-dvh w-full justify-center font-sans tracking-tight ${workSans.variable} overscroll-y-none bg-neutral-bg-dark text-neutral-400`}
         >
-          <PostHogPageView />
+          <Suspense>
+            <PostHogPageView />
+          </Suspense>
           <div className="flex w-full max-w-screen-xl flex-col">
             <FollowBanner />
             <div className="flex flex-1 flex-col md:w-auto md:flex-row">
